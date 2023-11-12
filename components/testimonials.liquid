@@ -1,0 +1,52 @@
+<div id="testimonials-{{ component.id }}" class="py-5" style="background-color: {{ component.options.background }};">
+  <div class="container text-center testimonials">
+      <h2 class="block-header text-center">{{ component.options.title }}</h2>
+    <div id="testimonials-slide-{{ component.id }}" class="owl-carousel">
+      {% for testimony in component.subcomponents.testimonials %}
+        {% render 'components/testimony', testimony: testimony %}
+      {% else %}
+        {% render 'placeholder_testimonials' %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  #testimonials-{{ component.id }} h2 {
+    color: {{ component.options.background | color_contrast: '#FFFFFF', '#090909' }}!important;
+  }
+  #testimonials-{{ component.id }} .testimonial-container {
+    background-color: {{ component.options.background_quote }}!important;
+    color: {{ component.options.background_quote | color_contrast: '#FFFFFF', '#090909' }}!important;
+  }
+  #testimonials-{{ component.id }} .testimonial-container blockquote {
+    color: {{ component.options.background_quote | color_contrast: '#FFFFFF', '#090909' }}!important;
+  }
+  #testimonials-{{ component.id }} .testimonial-container .testimonial-author {
+    color: {{ component.options.background_quote | color_contrast: '#FFFFFF', '#090909' }}a1!important;
+  }
+</style>
+
+<script>
+var autoHeight = $('#testimonials-slide-{{ component.id }} .item').length != 1;
+
+$('#testimonials-slide-{{ component.id }}').owlCarousel({
+  items: 1,
+  autoHeight:autoHeight,
+  loop: false,
+  rewind: true,
+  dots: true,
+  margin:30,
+  nav: false,
+  autoHeight: true,
+  autoplay: {% if component.options.autoplay %}true{% else %}false{% endif %},
+  {% if component.options.autoplay %}autoplayTimeout: {{ component.options.speed }},{% endif %}
+  autoplayHoverPause:{% if component.options.pause %}true,{% else %}false,{% endif %}
+  navText: ["<i class='ph ph-caret-left'></i>", "<i class='ph ph-caret-right'></i>"],
+  responsive : {
+    575 : {
+      items: {{ component.options.grid }},
+    }
+  }
+})
+</script>

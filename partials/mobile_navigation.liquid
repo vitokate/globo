@@ -1,0 +1,127 @@
+<!-- Navigation Mobile -->
+<div class="mobilenav d-lg-none trsn">
+  <div class="menu-header">
+    <div class="item item-1 trsn">
+      <span>
+        <i class="ph ph-magnifying-glass"></i>
+      </span>
+      <div class="search-form-mobile">
+      <div class="jumpseller-autocomplete" data-input-wrapper-prefix="d-none" data-input-wrapper="w-100" data-panel="force-top-fixed popover" data-input="no-outline">
+        <form id="search_mini_form_mobile" class="navbar-form form-inline trsn" method="get" action="{{ search.url_send }}">
+          <input type="text" value="{{ search.query }}" name="q" class="form-text" onFocus="javascript:this.value=''" placeholder="{% t 'Search for products' %}" />
+        </form>
+      </div>
+      </div>
+    </div>
+    <div class="nav-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="menu-top"></div>
+  <div class="mobilenav-inner">
+    <ul class="menu-mobile trsn">
+      {% for item in menu.main.items %}
+        {% render 'mobile_menu', item: item %}
+      {% endfor %}
+      <li>
+        {% if store.customers_enabled %}
+          <div
+            class="login"
+            {% if template == "customer_account" %}
+              class="active"
+            {% endif %}
+          >
+            <a
+              href="{% if customer %}{{ customer_account_url }}{% else %}{{ customer_login_url }}{% endif %}"
+              id="login-link-2"
+              class="trsn nav-link"
+              title="{% if customer %}{% t "See my Details" %}{% else %}{% t "Login / Sign up" %}{{ store.name }}{% endif %}"
+            >
+              <i class="ph ph-user"></i>
+              <span class="customer-name">
+                {% if customer %}{{ customer.name }}{% else %}{% t "Login / Sign up" %}{% endif %}
+              </span>
+            </a>
+          </div>
+        {% endif %}
+      </li>
+   	{% if languages.size > 1 %}
+		<div class="sidebar-menu">
+			<span class="sidebar-menu__title">{% t "Languages" %}</span>
+
+			<ul class="sidebar-menu__list">
+				{% for language in languages %}
+				<li class="sidebar-menu__item sidebar-menu__item--lang">
+					<a href="{{ language.url }}" class="sidebar-menu__link sidebar-menu__link--lang{% if forloop.first %} sidebar-menu__link--active{% endif %}" title="{% t 'Change to' %} {{ language.name }}">{{ language.name }}{% if forloop.first %} <i class="ph ph-check"></i>{% endif %}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+    {% endif %}
+    {% if store.currencies_codes.size > 1 %}
+    <div id="sidebar-currencies" class="sidebar-menu">
+			<span class="sidebar-menu__title">{% t "Currencies" %}</span>
+
+			<ul class="sidebar-menu__list">
+				{% for currency in store.currencies_codes %}
+				<li class="sidebar-menu__item sidebar-menu__item--currency">
+					<a href="#" class="sidebar-menu__link sidebar-menu__link--currency" onclick="Jumpseller.setClientCurrency('{{ currency }}');" title="{{ currency }}">{{ currency }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
+    {% if social.instagram.url != blank or social.facebook.url != blank or social.twitter.url != blank or social.youtube.url != blank or social.tiktok.url != blank or social.pinterest.url != blank %}
+    <div class="sidebar-menu pb-3">
+			<span class="sidebar-menu__title">{% t "Follow Us" %}</span>
+			<ul class="sidebar-menu__list">
+				{% if social.instagram.url != blank %}
+				<li class="sidebar-menu__item sidebar-menu__item--social">
+					<a href="{{ social.instagram.url }}" class="sidebar-menu__link sidebar-menu__link--social" title="{% t 'Follow us on' %} Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+				</li>
+				{% endif %}
+				{% if social.facebook.url != blank %}
+				<li class="sidebar-menu__item sidebar-menu__item--social">
+					<a href="{{ social.facebook.url }}" class="sidebar-menu__link sidebar-menu__link--social" title="{% t 'Follow us on' %} Facebook" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+				</li>
+				{% endif %}
+				{% if social.twitter.url != blank %}
+				<li class="sidebar-menu__item sidebar-menu__item--social">
+					<a href="{{ social.twitter.url }}" class="sidebar-menu__link sidebar-menu__link--social" title="{% t 'Follow us on' %} 𝕏" target="_blank"><i class="fa-brands fa-x-ttitter"></i></a>
+				</li>
+				{% endif %}
+				{% if social.youtube.url != blank %}
+				<li class="sidebar-menu__item sidebar-menu__item--social">
+					<a href="{{ social.youtube.url }}" class="sidebar-menu__link sidebar-menu__link--social" title="{% t 'Follow us on' %} Youtube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+				</li>
+				{% endif %}
+				{% if social.tiktok.url != blank %}
+				<li class="sidebar-menu__item sidebar-menu__item--social">
+					<a href="{{ social.tiktok.url }}" class="sidebar-menu__link sidebar-menu__link--social" title="{% t 'Follow us on' %} Tiktok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+				</li>
+				{% endif %}
+				{% if social.pinterest.url != blank %}
+				<li class="sidebar-menu__item sidebar-menu__item--social">
+					<a href="{{ social.pinterest.url }}" class="sidebar-menu__link sidebar-menu__link--social" title="{% t 'Follow us on' %} Pinterest" target="_blank"><i class="fa-brands fa-pinterest"></i></a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+    {% endif %}
+      <li>
+        {% if customer %}
+          <div class="cart">
+            <a title="{% t 'Logout' %}" href="{{ customer.logout_url }}" class="nav-link">
+              <i class="ph ph-sign-out"></i>
+              <span>{% t 'Logout' %}</span>
+            </a>
+          </div>
+        {% endif %}
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="nav-bg-opacity"></div>

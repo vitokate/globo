@@ -1,0 +1,231 @@
+{{ index_for_top_components }}
+
+<div class="container customer my-5">
+  <div class="row pt-lg-0 pt-5">
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="block-header">{% t 'Contact' %}</h2>
+          <div class="contact_info">
+            {% if customer.name != blank %}
+            <p>
+              <strong class="d-block">{% t "Name" %}</strong>
+              {{ customer.name }}
+            </p>
+            {% endif %}
+            <p>
+              <strong class="d-block">{% t "Email" %}</strong>
+              {{ customer.email }}
+            </p>
+            {% if customer.phone != blank %}
+            <p>
+              <strong class="d-block">{% t "Phone" %}</strong>
+              {{ customer.phone }}
+            </p>
+            {% endif %}
+            <a href="{{ customer.edit_url }}" class="btn btn-secondary btn-sm" title="{% t 'Edit' %}"><i class="ph ph-note-pencil"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMER SHIPPING ADDRESS -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="block-header">{% t "Shipping Address" %}</h2>
+          <a class="add" href="{{ customer.add_shipping_address_url }}"><i class="ph ph-plus"></i> {% t 'Add' %}</a>
+          {% for shipping_address in customer.shipping_addresses %}
+          <div class="shipping_address">
+            <p class="address">{{ shipping_address.formatted }}</p>
+            <a class="btn btn-secondary btn-sm" href="{{ shipping_address.edit_url }}" title="{% t 'Edit' %}" alt="{% t 'Edit' %}"><i class="ph ph-note-pencil"></i></a>
+            {% if shipping_address.default == false %}
+            <a class="btn btn-secondary btn-sm" href="{{ shipping_address.set_primary_url }}" title="{% t 'Make Primary' %}" alt="{% t 'Make Primary' %}"><i class="ph ph-star"></i></a>
+            {% endif %}
+            <a class="btn btn-secondary btn-sm" href="{{ shipping_address.delete_url }}" title="{% t 'Delete' %}" alt="{% t 'Delete' %}"><i class="ph ph-x"></i></a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- CUSTOMER BILLING ADDRESS -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="block-header">{% t "Billing Address" %}</h2>
+          <a class="add" href="{{ customer.add_billing_address_url }}"><i class="ph ph-plus"></i> {% t 'Add' %}</a>
+          {% for billing_address in customer.billing_addresses %}
+          <div class="billing_address">
+            <p class="address">{{ billing_address.formatted }}</p>
+            <a class="btn btn-secondary btn-sm" href="{{ billing_address.edit_url }}" title="{% t 'Edit' %}" alt="{% t 'Edit' %}"><i class="ph ph-note-pencil"></i></a>
+            {% if billing_address.default == false %}
+            <a class="btn btn-secondary btn-sm" href="{{ billing_address.set_primary_url }}" title="{% t 'Make Primary' %}" alt="{% t 'Make Primary' %}"><i class="ph ph-star"></i></a>
+            {% endif %}
+            <a class="btn btn-secondary btn-sm" href="{{ billing_address.delete_url }}" title="{% t 'Delete' %}" alt="{% t 'Delete' %}"><i class="ph ph-x"></i></a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-8">
+      <div id="customer-summary">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="block-header">{% t "Previous Sales" %}</h2>
+            {% for customer_order in customer.orders %}
+            <div class="orders">
+              <div class="orders_header">
+                <h5>{% t 'Order' %}: #{{ customer_order.id }}</h5>
+                <a class="collapsed" data-toggle="collapse" href="#collapse{{ customer_order.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <span class="show">{% t "View Order Details" %}</span>
+                  <span class="hide">{% t "Hide Order Details" %}</span>
+                </a>
+              </div>
+              <div class="collapse orders_body" id="collapse{{ customer_order.id }}">
+                <div class="row justify-content-between">
+                  <div class="col-lg-10 col-sm-8">
+                    <div class="orders_item">
+                      <label>{% t "Status" %}: </label>
+                      <span class="label radius {{ customer_order.status_id | downcase | replace: ' ', '-' }}">
+                        {{ customer_order.status }}
+                      </span>
+                    </div>
+                    <div class="orders_item">
+                      <label>{% t "Order Date" %}: </label> {{ customer_order.date }}
+                    </div>
+                    <div class="orders_item inline">
+                      <label>{% t 'Order Total' %}: </label> {{ customer_order.total | price }}
+                    </div>
+                    {% if customer_order.tracking_number != empty %}
+                    <div class="orders_item">
+                      <label>{% t "Tracking number" %}: </label>
+                      {% if customer_order.tracking_url == empty %}
+                      {{ customer_order.tracking_number }}
+                      {% else %}
+                      <a class="tracking_number" title="{% t 'Tracking number' %}" target="_blank" href="{{ customer_order.tracking_url }}">{{ customer_order.tracking_number }}</a>
+                      {% endif %}
+                      <br/>
+                      {% if customer_order.tracking_company != empty and customer_order.tracking_company != 'other' %}
+                      <label>{% t "Tracking company" %}: </label>
+                      {{ customer_order.tracking_company }}
+                      {% endif %}
+                    </div>
+                    {% endif %}
+                    {% if customer_order.invoices != empty %}
+                    <div class="orders_item invoices">
+                      <label>{% t "Invoices" %}:</label>
+                      {% for invoice in customer_order.invoices %}
+                      <br><a class="order_invoice" title="{% t 'Invoice' %}" target="_blank" href="{{ invoice }}">{% t 'Invoice' %} {{ forloop.index }}</a>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="col-lg-2 col-sm-4 text-right">
+                    <a href="{{ customer_order.duplicate_url }}" target="_blank" class="reorder-btn btn btn-sm btn-primary d-block w-100 mt-sm-0 mt-3">{% t "Reorder" %}</a>
+                  </div>
+                </div>
+                <hr>
+                <div class="orders_item">
+                  <h4>{% t "The order" %} #{{ customer_order.id }} {% t "contains the following items" %}:</h4>
+                  <div class="row">
+                    <div class="col-7 col-sm-9">
+                      {% t 'Product Details' %}
+                    </div>
+                    <div class="col-5 col-sm-3 pl-0 text-right">
+                      {% t 'Price' %}
+                    </div>
+                  </div>
+                  {% for ordered_product in customer_order.products %}
+                  {% if ordered_product.exists? %}
+                  <div class="ordered_product">
+                    <div class="row">
+                      <div class="col-7 col-sm-9">
+                        {% if ordered_product.options != empty %}
+                        <h5>{{ ordered_product.qty }} x {{ ordered_product.name }}</h5>
+                        <div class="clearfix"></div>
+                        {% for option in ordered_product.options %}
+                        <small><strong>{{ option.name }}:</strong> {{ option.value }}   </small>
+                        {% endfor %}
+                        {% else %}
+                        <h5>{{ ordered_product.qty }} x {{ ordered_product.name }}</h5>
+                        {% endif %}
+                        {% if ordered_product.digital %}
+                        <div class="mt-3">{% t "Digital Product" %}:</div>
+                        {% for digital_product in ordered_product.digital_products %}
+                        <a class="product_digital" href="{{ digital_product['url'] }}" target="_blank">{{ digital_product['name'] }}</a><br>
+                        {% endfor %}
+                        {% endif %}
+                      </div>
+                      <div class="col-5 col-sm-3 pl-0 text-right">
+                        <h5 class="orders_currency"> {{ ordered_product.price | price }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="ordered_product">
+                    <div class="row">
+                      <div class="col-7 col-sm-9">
+                        {% if ordered_product.options != empty %}
+                        <small style="color:#ff0000">{% t 'This product is not available' %}</small>
+                        <h5>{{ ordered_product.qty }} x {{ ordered_product.name }}</h5>
+                        <div class="clearfix"></div>
+                        {% for option in ordered_product.options %}
+                        <small><strong>{{ option.name }}:</strong> {{ option.value }}   </small>
+                        {% endfor %}
+                        {% else %}
+                        <small style="color:#ff0000">{% t 'This product is not available' %}</small>
+                        <h5>{{ ordered_product.qty }} x {{ ordered_product.name }}</h5>
+                        {% endif %}
+                      </div>
+                      <div class="col-5 col-sm-3 pl-0 text-right">
+                        <h5 class="orders_currency">{{ ordered_product.price | price }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="order_amounts">
+                  {% if customer_order.shipping > 0 %}
+                  <div class="orders_item text-right">
+                    <label>{% t 'Shipping' %}: </label>
+                    {{ customer_order.shipping | price }}
+                  </div>
+                  {% endif %}
+                  <div class="orders_item text-right">
+                    <label>{% t 'Subtotal' %}: </label>
+                    <div class="orders_currency inline">
+                      {{ customer_order.subtotal | price }}
+                    </div>
+                  </div>
+                  {% if customer_order.discount > 0 %}
+                  <div class="orders_item text-right">
+                    <label>{% t 'Discounts' %}: </label>
+                    <div class="orders_currency inline">
+                      {{ customer_order.discount | price }}
+                    </div>
+                  </div>
+                  {% endif %}
+                  <div class="orders_item text-right">
+                    <h3>
+                      <strong>{% t 'Total' %}:
+                        <div class="orders_currency inline">
+                          {{ customer_order.total | price }}
+                        </div>
+                      </strong>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            {% t "You have not made any purchases." %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{{ index_for_bottom_components }}

@@ -1,0 +1,94 @@
+{% assign footer_newsletter_form_id = 'footer_newsletter_form_' | append: footer-newsletter.id %}
+
+<div class="col-lg col-md-6 mb-lg-0 mb-4">
+    {% if footer-newsletter.options.enable_subscribe %}
+        <h5>{{ footer-newsletter.options.title }}</h5>
+        <div class="newsletter">
+            <div id="{{ footer_newsletter_form_id }}" class="footer-newsletter-form">
+                {{ newsletter_form }}
+            </div>
+        </div>
+    {% endif %}
+    {% if social.facebook.url != blank or social.twitter.url != blank or social.pinterest.url != blank or social.instagram.url != blank or social.whatsapp.url != blank %}
+        {% unless footer-newsletter.options.enable_subscribe %}
+            <h5>{{ footer-newsletter.options.title_social }}</h5>
+        {% endunless -%}
+        <ul class="list-inline my-3">
+            {% if footer-newsletter.options.enable_subscribe %}
+                <li class="list-inline-item">
+                    <strong>{{ footer-newsletter.options.title_social }}</strong>
+                </li>
+            {% endif %}
+            {% if social.facebook.url != blank %}
+                <li class="list-inline-item">
+                    <a href="{{ social.facebook.url }}" title="{% t 'Go to' %} Facebook" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if social.twitter.url != blank %}
+                <li class="list-inline-item">
+                    <a href="{{ social.twitter.url }}" title="{% t 'Go to' %} 𝕏" target="_blank">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if social.pinterest.url != blank %}
+                <li class="list-inline-item">
+                    <a href="{{ social.pinterest.url }}" title="{% t 'Go to' %} Pinterest" target="_blank">
+                        <i class="fa-brands fa-pinterest"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if social.instagram.url != blank %}
+                <li class="list-inline-item">
+                    <a href="{{ social.instagram.url }}" title="{% t 'Go to' %} Instagram" target="_blank">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if social.whatsapp.url != blank %}
+                <li class="list-inline-item d-md-none">
+                    <a href="{{ social.whatsapp.url }}&text={% t 'Hello' %} {{ store.name }}!" title="WhatsApp" target="_blank">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if social.youtube.url != blank %}
+                <li class="list-inline-item">
+                    <a href="{{ social.youtube.url }}" title="Youtube" target="_blank">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </li>
+            {% endif %}
+            {% if social.tiktok.url != blank %}
+                <li class="list-inline-item">
+                    <a href="{{ social.tiktok.url }}" class="trsn" title="{% t 'Go to' %} Tiktok" target="_blank">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    {% else %}
+        <ul>
+            <li><a href="{{ store.url }}/admin/settings/general/store_info">{% t "Click here to add your social networks links" %}</a></li>
+        </ul>
+    {% endif %}
+
+    <script>
+        (function() {
+            const form = document.querySelector("#{{ footer_newsletter_form_id }} form");
+            if (!form) return;
+
+            form.classList.add('validate');
+
+            form.querySelector(".newsletter_form_group").classList.add('form-group', 'mb-0');
+
+            form.querySelector("input[name='customer[email]']").classList.add('email', 'field', 'form-control');
+            form.querySelector("input[name='customer[email]']").placeholder = {{ footer-newsletter.options.email_placeholder | json }};
+
+            form.querySelector("button").classList.add('btn', 'btn-link', 'p0');
+            form.querySelector("button").innerHTML = '<i class="ph ph-envelope"></i>';
+        })();
+    </script>
+</div>

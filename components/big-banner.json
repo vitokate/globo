@@ -1,0 +1,69 @@
+{
+  "name": "Big Banner",
+  "help": "",
+  "icon": "image",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "parallax": {
+      "name": "Add Parallax Effect",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "direction": {
+      "name": "Direction",
+      "type": "select",
+      "help": "",
+      "default": "Down",
+      "options": [
+        {
+          "Up": "Up"
+        },
+        {
+          "Right": "Right"
+        },
+        {
+          "Down": "Down"
+        }
+      ]
+    },
+    "image": {
+      "name": "Image",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "link": {
+      "name": "Link",
+      "type": "link",
+      "help": "",
+      "default": null
+    },
+    "size": {
+      "name": "Size",
+      "type": "select",
+      "help": "",
+      "default": "Container",
+      "options": [
+        {
+          "Container": "Container"
+        },
+        {
+          "Full size": "Full size"
+        }
+      ]
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

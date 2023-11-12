@@ -1,0 +1,61 @@
+<footer class="pt-5 pb-3">
+    <div class="container">
+        <div class="row text-md-left text-center justify-content-center">
+            {% if component.subcomponents.footer-about %}{% render 'components/footer-about', footer-about: component.subcomponents.footer-about %}{% endif %}
+            {% if component.subcomponents.footer-menu-1 %}{% render 'components/footer-menu-1', footer-menu-1: component.subcomponents.footer-menu-1 %}{% endif %}
+            {% if component.subcomponents.footer-menu-2 %}{% render 'components/footer-menu-2', footer-menu-2: component.subcomponents.footer-menu-2 %}{% endif %}
+            {% if component.subcomponents.footer-newsletter %}{% render 'components/footer-newsletter', footer-newsletter: component.subcomponents.footer-newsletter %}{% endif %}
+        </div>
+    </div>
+    <hr class="mb-3">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-lg-left text-center mb-lg-0 mb-3">
+                <div class="powered-by">&copy;
+                    {{ 'now' | date: "%Y" }}
+                    {{ store.name }}.
+                    <br>{% t "All Rights Reserved." %}
+                    {% if component.options.powered_by %}{{ powered_by }}{% endif %}</div>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="{{ store.url }}" title="{{ store.name }}">
+                    {% if component.options.logo['url'] != blank or store.logo != blank %}
+                        <img src="{{ component.options.logo['url'] | default: store.logo }}" alt="{{ component.options.logo['alt'] | default: store.name }}" class="navbar-brand img-fluid mx-auto p-0 pb-3"/>
+                    {% elsif template == 'home' %}
+                        <span class="text-logo mb-md-0 mb-3 d-block mx-auto">{{ store.name }}</span>
+                    {% else %}
+                        <span class="navbar-brand mb-md-0 mb-3 d-block mx-auto">{{ store.name }}</span>
+                    {% endif %}
+                </a>
+            </div>
+            {% if component.subcomponents.payment-methods %}
+            <div class="col-md-4">
+                {% render 'components/payment-methods', payment-methods: component.subcomponents.payment-methods %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</footer>
+
+<style>
+footer {
+    background-color: {{ component.options.background_color }};
+    color: {{ component.options.background_color | color_contrast: '#f1f1f1', '#090909' }};
+}
+
+footer h5,
+footer a,
+footer .text-logo,
+footer .navbar-brand {
+    color: {{ component.options.background_color | color_contrast: '#f1f1f1', '#090909' }};
+}
+
+footer h5 {
+    border-bottom: 1px solid color-mix(in srgb, {{ component.options.background_color }} 80%, {{ component.options.background_color | color_contrast: '#f1f1f1', '#090909' }}) !important;
+}
+
+footer hr {
+    border-top: 1px solid color-mix(in srgb, {{ component.options.background_color }} 80%, {{ component.options.background_color | color_contrast: '#f1f1f1', '#090909' }}) !important;
+}
+</style>

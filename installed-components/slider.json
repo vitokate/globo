@@ -1,0 +1,92 @@
+{
+  "type": "slider",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "loop": true,
+    "autoplay": true,
+    "pause": true,
+    "autoplay_speed": 3000,
+    "background_opacity": 8,
+    "title_size": 40,
+    "background_color": "#000000"
+  },
+  "children": [
+    {
+      "property": "slides",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image_desktop": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/131279804/WHITE%20NIGHT.jpg",
+          "alt": null
+        },
+        "image_mobile": {
+          "url": null,
+          "alt": null
+        },
+        "alignment": "center",
+        "title": null,
+        "title_color": "#FFFFFF",
+        "button": false,
+        "link": "acuarelas-white-nights",
+        "text_button": "COMPRAR",
+        "button_color": "#dc2d13"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "slides",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image_desktop": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132146486/uhuhu%20BANNER.jpg",
+          "alt": null
+        },
+        "image_mobile": {
+          "url": null,
+          "alt": null
+        },
+        "alignment": "center",
+        "title": null,
+        "title_color": "#FFFFFF",
+        "button": false,
+        "link": "ohuhu",
+        "text_button": "COMPRAR",
+        "button_color": "#000000"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "slides",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image_desktop": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132147198/heyda%20banner.jpg",
+          "alt": null
+        },
+        "image_mobile": {
+          "url": null,
+          "alt": null
+        },
+        "alignment": "center",
+        "title": null,
+        "title_color": "#FFFFFF",
+        "button": false,
+        "link": "heyda",
+        "text_button": "COMPRAR",
+        "button_color": "#000000"
+      },
+      "children": [
+
+      ]
+    }
+  ]
+}

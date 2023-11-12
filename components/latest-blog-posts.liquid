@@ -1,0 +1,17 @@
+{% if pages.categories.category["Post"] != blank %}
+<div id="latest-posts-{{ component.id }}" class="container py-4">
+  <div class="col-12">
+    <h2 class="block-header text-center">{{ component.options.title }}</h2>
+  </div>
+  <div class="blog_list row mb-md-5 mb-4 mx-n2 no-gutters justify-content-center">
+    {% assign limit = component.options.limit | plus: 0 %}
+    {% for blog_post in pages.categories.category["Post"].pages reversed %}
+      {% if forloop.index > limit %}{% break %}{% endif %}
+      {% render "blog_block", blog_post: blog_post %}
+    {% endfor %}
+    <div class="col-12 text-center px-2">
+      <a href="{{ store.url }}/blog" title="Blog" class="btn btn-outline-dark mt-5">{% t 'Go to Blog' %}</a>
+    </div>
+  </div>
+</div>
+{% endif %}

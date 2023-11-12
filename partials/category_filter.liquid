@@ -1,0 +1,236 @@
+<form id="filters" method="get" action="{{ current_url }}">
+  <input type="hidden" name="q" value="{{ search.query }}">
+
+  <div id="side_filters">
+    <div class="side_filters_selected mb-4">
+      {% capture selected_filters %}
+      {% for filter in filters %}
+      {% assign filter_values_sorted = filter.values | sort: "name" %}
+      {% for filter_value in filter_values_sorted %}
+      {% if filter_value.selected %}
+      <div class="badge badge-secondary">
+        {{ filter_value.name }}
+        <a href="#" class="clearFilterBtn" onclick="$('#{{ filter_value.id }}').removeAttr('checked'); $('#filters').submit();"><i class="ph ph-x"></i></a>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      {% endcapture %}
+
+      {{ selected_filters }}
+
+      {% if selected_filters != blank %}
+      <div class="clearAll small mt-2">
+        <a href="#" class="all" title="{% t 'Clear filters' %}" onclick="window.location = window.location.href.split('?')[0];">
+          {% t "Clear filters" %}
+          <i class="ph ph-broom"></i>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if category.subcategories != empty and template == 'category' %}
+    <h4>{% t "Categories" %}</h4>
+
+    <div class="filter_wrapper mb-4" data-url="categories">
+      <ul id="category_menu_new" class="category_menu_list">
+        {% for cat1 in category.subcategories %}
+        <li>
+          <a href="{{ cat1.url }}" {% if cat1.subcategories != empty %}class="category_menu_trigger_child"{% endif %}>{{ cat1.name }}
+            {% if cat1.subcategories != empty %}<i class='ph ph-caret-down'></i>{% endif %}
+          </a>
+          <ul>
+            {% for cat2 in cat1.subcategories %}
+            <li>
+              <a href="{{ cat2.url }}">{{ cat2.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <h4>{% t "Filter by" %}</h4>
+
+    {% for filter in filters %}
+    <div class="filter_wrapper  mb-3">
+      <h5>{{ filter.name }}</h5>
+      {% assign filter_values_sorted = filter.values | sort: "name" %}
+      {% if filter.type == 'option' %}
+        <ul class="category_menu_list ">
+        {% for filter_value in filter_values_sorted %}
+        <li>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input checkbox" id="{{ filter_value.id }}" name="{{ filter.id }}" value="{{ filter_value.id }}"
+                   onchange="this.form.submit()" {% if filter_value.selected %}checked{% endif %} />
+            <label class="custom-control-label name" for="{{ filter_value.id }}">{{ filter_value.name }}</label>
+            <span class="count">{{ filter_value.products_count }}</span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% elsif filter.type == 'color' %}
+      <div class="color-selector">
+        {% for filter_value in filter_values_sorted %}
+        <input type="checkbox" id="{{ filter_value.id }}" name="{{ filter.id }}" value="{{ filter_value.id }}"
+               onclick="this.form.submit()" {% if filter_value.selected %}checked{% endif %} readonly>
+        <label class="color-option" style="background-color: {{ filter_value.custom }}" title="{{ filter_value.name }}" for="{{ filter_value.id }}"></label>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    {% if template == 'category' %}
+    <div id="price_filter" class="filter_wrapper mb-3" data-url="price">
+      <h5>{% t "Price" %}</h5>
+      <div class="form-row align-items-center">
+        <div class="col-6">
+          <label class="mb-0" for="min"><small>{% t "From" %}</small></label>
+          <input id="min" placeholder="{{ category.products_min_price | price }}" class="form-control form-control-sm" name="min" type="number" min="0">
+        </div>
+        <div class="col-6">
+          <label class="mb-0" for="max"><small>{% t "To" %}</small></label>
+          <input id="max" placeholder="{{ category.products_max_price | price }}" class="form-control form-control-sm" name="max" type="number" min="0">
+        </div>
+        <div class="col-12 mt-2">
+          <small class='price_message alert alert-warning py-2 px-3 mb-2'>{% t "The maximum price cannot be lower than the minimum price" %}.</small>
+          <button class="btn btn-primary btn-block" type="submit"><i class="ph ph-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-block d-md-none">
+      {% if category.products != empty %}
+      <div class="form-group row">
+        <div class="col-12"><h5>{% t "Sort by" %}:</h5></div>
+        <div class="col-sm-12 col-md-8">
+          <div class="field-group select">
+            <select class="select form-control form-control-sm" onchange="window.location.href = this.value">
+              {% for sorting_option in category.sorting_options %}
+              <option {% if sorting_option.selected %}selected="selected"{% endif %} value="{{ sorting_option.url }}">{{ sorting_option.text }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</form>
+
+<script>
+/*
+   $(document).ready(function(){
+    $("#side_filters a.category_menu_trigger_child i" ).click(function(event){event.preventDefault();});
+
+    $(".category_menu_trigger_child i" ).click(function() {
+      $(this).parent().next('ul').slideToggle();
+      $(this).parent().toggleClass('active');
+    });
+
+    var url = new URL(location.href);
+    $("#min").val(url.searchParams.get("min"));
+    $("#max").val(url.searchParams.get("max"));
+
+    $( "#show_filters" ).click(function() {
+      $( "#side_filters" ).slideToggle( "slow", function() {
+      });
+    });
+
+    var filterQty = $('.side_filters_selected .badge-secondary').length
+    $('#show_filters .badge-light').text(filterQty);
+
+    // Show message for prices
+    function handleError(){
+      $('#price_filter .btn').attr('disabled',true)
+      $('#price_filter .price_message').css('display','block')
+    }
+    function handleSuccess(){
+      $('#price_filter .btn').attr('disabled',false)
+      $('#price_filter .price_message').css('display','none')
+    }
+    $('#min').on('blur', function() {
+      var minValue = parseInt($('#min').val());
+      var maxValue = parseInt($('#max').val());
+      if(minValue > maxValue){
+        handleError()
+      } else {
+        handleSuccess()
+      }
+    });
+    $('#max').on('blur', function() {
+      var minValue = parseInt($('#min').val());
+      var maxValue = parseInt($('#max').val());
+      if(minValue > maxValue){
+        handleError()
+      } else {
+        handleSuccess()
+      }
+    });
+  });
+  */
+  document.addEventListener('DOMContentLoaded', function() {
+  // Prevent default behavior of category_menu_trigger_child icon
+  document.querySelectorAll('#side_filters a.category_menu_trigger_child i').forEach(function(icon) {
+    icon.addEventListener('click', function(event) {
+      event.preventDefault();
+    });
+  });
+
+  // Toggle submenu and add/remove 'active' class on click
+  document.querySelectorAll('.category_menu_trigger_child i').forEach(function(icon) {
+    icon.addEventListener('click', function() {
+      var submenu = this.parentElement.nextElementSibling;
+      submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
+      this.parentElement.classList.toggle('active');
+    });
+  });
+
+  // Set min and max values from query params
+  var urlParams = new URLSearchParams(window.location.search);
+  var min = urlParams.get('min');
+  var max = urlParams.get('max');
+  document.getElementById('min').value = min;
+  document.getElementById('max').value = max;
+
+  // Toggle side_filters div on click
+  document.getElementById('show_filters').addEventListener('click', function() {
+    var sideFilters = document.getElementById('side_filters');
+    sideFilters.style.display = (sideFilters.style.display === 'block') ? 'none' : 'block';
+  });
+
+  // Update filterQty badge
+  var filterQty = document.querySelectorAll('.side_filters_selected .badge-secondary').length;
+  document.querySelector('#show_filters .badge-light').textContent = filterQty;
+
+  // Show message for prices
+  function handleError() {
+    document.querySelector('#price_filter .btn').disabled = true;
+    document.querySelector('#price_filter .price_message').style.display = 'block';
+  }
+
+  function handleSuccess() {
+    document.querySelector('#price_filter .btn').disabled = false;
+    document.querySelector('#price_filter .price_message').style.display = 'none';
+  }
+
+  // Check if min value is greater than max value on blur
+  var minInput = document.getElementById('min');
+  var maxInput = document.getElementById('max');
+  [minInput, maxInput].forEach(function(input) {
+    input.addEventListener('blur', function() {
+      var minValue = parseInt(minInput.value);
+      var maxValue = parseInt(maxInput.value);
+      if (minValue > maxValue) {
+        handleError();
+      } else {
+        handleSuccess();
+      }
+    });
+  });
+});
+</script>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js"
+  lang="{{ languages.first.locale }}"
+  xmlns="http://www.w3.org/1999/xhtml">
+  <!--<![endif]-->
+  <head>
+    <title>{{ page_title }}</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="{{ meta_description }}" />
+    <meta name="robots" content="follow, all" />
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://images.jumpseller.com">
+    <link rel="preconnect" href="https://cdnx.jumpseller.com">
+    <link rel="preconnect" href="https://assets.jumpseller.com">
+    <link rel="preconnect" href="https://files.jumpseller.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    {% render 'og_meta_tags' %}
+
+    {% if languages.size > 1 %}
+      {% for language in languages %}
+        <link rel="alternate" hreflang="{{ language.locale }}" href="{{ language.url }}" />
+      {% endfor %}
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+    <script src="//assets.jumpseller.com/public/jquery-3.4.1.min.js"></script>
+    <script src="//assets.jumpseller.com/public/jquery-sticky/1.0.2/jquery.sticky.min.js"></script>
+    {% render 'schema' %}
+    {{ favicon }}
+
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="//assets.jumpseller.com/public/phosphor-icons/2.0.0/regular/style.css">
+    <link rel="stylesheet" href="//assets.jumpseller.com/public/phosphor-icons/2.0.0/fill/style.css">
+    <link rel="stylesheet" href="//assets.jumpseller.com/public/fontawesome/6.4.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//assets.jumpseller.com/public/fontawesome/6.4.2/css/brands.min.css">
+
+    {% if options.display_cart_notification and options.disable_shopping_cart != true %}
+    <link rel="stylesheet" href="//assets.jumpseller.com/public/toastr/toastr.min.css">
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="{{ 'color_pickers.css' | asset }}" />
+    <link rel="stylesheet" type="text/css" href="{{ 'app.css' | asset }}" />
+
+    {% unless template == 'cart' or template == 'checkout' or template == 'revieworder' or template == 'success' %}
+    <script src="//assets.jumpseller.com/public/owlcarousel/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="//assets.jumpseller.com/public/owlcarousel/owl.carousel.min.css">
+    {% endunless %}
+    {% if template == 'product' %}
+    <script src="https://assets.jumpseller.com/public/owlcarousel/owl-carousel-thumbs-0.1.8.min.js" integrity="sha384-dYmEKvCGU37ZI6UyGPpkafjpDMBMEf32miA22fb7UJF1Tk82fSetAmxfwOotv0A3" crossorigin="anonymous"></script>
+    {% endif %}
+
+    <!-- Autocomplete search -->
+    {% if store.autocomplete_access %}
+      <script src="//assets.jumpseller.com/public/autocomplete/algolia-autocomplete@1.7.1.js"></script>
+      <script src="//assets.jumpseller.com/public/autocomplete/jumpseller-autocomplete@1.0.0.min.js" data-suggest-categories="false" defer="defer"></script>
+    {% endif %}
+
+    {% render 'product_block_scripts' %}
+
+    <script type="text/javascript" src="//assets.jumpseller.com/public/lazysizes/lazysizes.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js" defer integrity="sha384-dxr/mbLZR8q/pHU9ZRI8h6eFt0Z3Qdbkaa+Z4ojrMVS57zuK9EYmZAKs7kU9YG41" crossorigin="anonymous"></script>
+    <script src="//assets.jumpseller.com/public/jquery.zoom.min.js" defer></script>
+
+    {{ options.head_code }}
+  </head>
+
+  <body>
+    <!--[if lt IE 8]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Page Content -->
+    {{ content }}
+
+    <!-- Bootstrap Core -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js" integrity="sha256-4lietOiwRDBKx1goZZbRiwB06L+/bPYEGDIKZt82bgg=" crossorigin="anonymous" defer></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" defer></script>
+    <script src="//cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js" integrity="sha256-iKHE0eu0gUetTeiNYPYcZB+Ho39/1MYph+rhPazLhGQ=" crossorigin="anonymous" defer></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" defer></script>
+
+    {% render 'currency_options' %}
+
+    <script type="text/javascript" src="{{ 'main.js' | asset }}"></script>
+
+    {% if options.display_cart_notification and options.disable_shopping_cart != true %}
+      {% render 'addtocart' %}
+    {% endif %}
+
+    {% if options.store_whatsapp and social.whatsapp.url != blank %}
+      <a
+        {% if template == 'product' %}
+        href="{{ social.whatsapp.url }}&amp;text={% t 'I will like to know about this product' %}%20{{ product.name | escape }}%20{{ canonical_url }}"
+        {% else %}
+        href="{{ social.whatsapp.url }}&amp;text={% t 'Hello I want more information' %}"
+        {% endif %}
+        class="store-whatsapp"
+        title="{% t 'Send us a WhatsApp message' %}"
+        target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    {% endif %}
+
+    {% if template == 'product' and options.product_zoom_visibility %}
+    <script>
+      $(document).ready(function () {
+        $('.zoom').zoom();
+      });
+    </script>
+    {% endif %}
+
+    {{ options.body_code }}
+    {% render 'popup_age_verification' %}
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{% for placeholder in (1..4) %}
+<div class="col-12 {% if component.options.grid == 2 %}col-md-6{% elsif component.options.grid == 3 %}col-md-4{% elsif component.options.grid == 4 %}col-sm-6 col-md-3{% endif %} my-2 px-1">
+    <a href="{{ store.url }}/admin/themes/options/{{ theme.id }}" title="{% t 'Add your banners' %}">
+    <div class="banner mx-2 mb-3 trsn">
+        <img src="//assets.jumpseller.com/public/placeholder/themes/simple/banner-placeholder.png" alt="{% t 'Add your banners' %}" class="lazy">
+        <h3>{% t 'Add your banners' %}</h3>
+    </div>
+    </a>
+</div>
+{% endfor %}

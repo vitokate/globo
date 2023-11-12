@@ -1,0 +1,27 @@
+{
+  "name": "Footer About",
+  "help": "",
+  "icon": "info-circle",
+  "required": true,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "About us"
+    },
+    "footer_description": {
+      "name": "Short Store Description",
+      "type": "text",
+      "help": "",
+      "default": ""
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

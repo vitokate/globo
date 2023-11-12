@@ -1,0 +1,207 @@
+<div class="mobilenav d-lg-none trsn">
+    <div class="jumpseller-autocomplete d-none d-lg-block">
+        <form id="header_mobile-search-form" class="search-form" method="get" action="{{ search.url_send }}">
+            <input type="text" id="searchInput" autocomplete="off" value="{{ search.query }}" name="q" class="form-control" placeholder="{% t 'Search for products' %}"/>
+            <button type="submit">
+                <i class="ph ph-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+</div>
+{% if component.options.topbar %}
+    <!-- Fixed Top Bar -->
+    <div class="{% if component.options.fixed == 'Top Bar' and component.options.fixed != 'None' %}fixed-top{% endif %} nav-bar message-top {% if component.options.topbar_background_animated %}bg-gradient{% endif %} ">
+        <div class="{% if component.options.full_width %} container-fluid {% else %} container {% endif %} text-center">
+            {{ component.options.topbar_text }}
+        </div>
+    </div>
+{% endif %}
+<header>
+    <div class="{% if component.options.full_width %}container-fluid {% else %}container {% endif %} header-block trsn py-lg-4 py-0">
+        <div class="row align-items-center no-gutters">
+            <div class="col-lg-4 col-md-3 col-2">
+                <div class="jumpseller-autocomplete d-none d-lg-block">
+                    <form id="header_search-form" class="search-form" method="get" action="{{ search.url_send }}">
+                        <input type="text" id="searchInput" autocomplete="off" value="{{ search.query }}" name="q" class="form-control" placeholder="{% t 'Search for products' %}"/>
+                        <button class="search-btn" type="submit"></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-8 text-center">
+                <a href="{{ store.url }}" title="{{ store.name }}">
+                    {% if store.logo != empty %}
+                        {% if template == 'home' %}
+                            <h1 class="visually-hidden">{{ store.name }}</h1>
+                        {% endif %}
+                        <img src="{{ store.logo }}" class="navbar-brand store-image img-fluid" alt="{{ store.name }}">
+                    {% elsif template == 'home' %}
+                        <h1 class="text-logo">{{ store.name }}</h1>
+                    {% else %}
+                        <span class="text-logo">{{ store.name }}</span>
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-3 col-2">
+                <ul class="list-inline text-right header_actions m-0 px-3">
+                    {% if store.customers_enabled %}
+                        <li class="list-inline-item d-none d-lg-inline-block">
+                            <a href="{% if customer %}{{ customer_account_url }}{% else %}{{ customer_login_url }}{% endif %}" id="login-link" class="header_actions-link" title="{% if customer %}{% t 'My Account' %}{% else %}{% t 'Login' %}{% endif %}" data-toggle="tooltip" data-placement="top">
+                                <i class="ph ph-user-circle"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if customer %}
+                        <li class="list-inline-item login d-none d-lg-inline-block">
+                            <a title="{% t 'Logout' %}" href="{{ customer.logout_url }}" class="header_actions-link" data-toggle="tooltip" title="{% t 'Logout' %}" data-placement="top">
+                                <i class="ph ph-sign-out"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if store.currencies_codes.size > 1 %}
+                        <li class="list-inline-item d-none d-lg-inline-block">
+                            <div class="dropdown">
+                                <div aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="currencyMenuButton" role="button">
+                                    <div class="header_actions-link" data-toggle="tooltip" title="{% t 'Choose a Currency' %}" data-placement="top">
+                                        <i class="ph ph-currency-circle-dollar"></i>
+                                        <span id="current_currency">{{ current_currency }}</span>
+                                    </div>
+                                </div>
+                                <div aria-labelledby="currencyMenuButton" class="dropdown-menu">
+                                    {% for currency in store.currencies_codes %}
+                                        <a onclick="Jumpseller.setClientCurrency('{{ currency }}');" class="dropdown-item" title="{{ currency }}" rel="nofollow">
+                                            {{- currency -}}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                    {% if languages.size > 1 %}
+                        <li class="list-inline-item d-none d-lg-inline-block">
+                            <div class="dropdown">
+                                {% for language in languages %}
+                                    {% if languages.first.code == language.code %}
+                                        <div aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" id="langMenuButton" role="button">
+                                            <div class="header_actions-link" data-toggle="tooltip" title="{% t 'Choose a Language' %}" data-placement="top">
+                                                <i class="ph ph-globe"></i>
+                                                {{ language.code }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                <div aria-labelledby="langMenuButton" class="dropdown-menu ">
+                                    {% for language in languages %}
+                                        <a href="{{ language.url }}" class="dropdown-item" title="{{ language.name }}">{{ language.code }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+
+                    {% if options.disable_shopping_cart != true %}
+                        <li class="list-inline-item cart">
+                            <a id="cart-link" href="{{ order.url }}" title="{% t 'Shopping Cart' %}" class="header_actions-link" data-toggle="tooltip" data-placement="top">
+                                <i class="ph ph-basket"></i>
+                                <span class="cart-size">{{ order.products_count }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav
+  id="main-menu"
+  class="navbar-expand-md d-none d-lg-block{% if component.options.vertical_menu %} vertical_menu{% else %} horizontal_menu{% endif %}{% if component.options.fixed == "Menu" and component.options.fixed != "None" %} navbar-fixed{% endif %}"
+>
+  <div class="collapse navbar-collapse" id="navbarsContainer">
+    <ul class="navbar-nav {% if component.options.horizontal_alignment_menu == 'Center' %}m-auto{% endif %}">
+      {% for item in menu.main.items %}
+        {% render 'navigation_menu', item: item %}
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
+{% render "mobile_navigation" %}
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+<style>
+header {
+    background-color: {{ component.options.background }};
+    color: {{ component.options.background | color_contrast: '#f1f1f1', '#090909' }};
+}
+header a,
+header i,
+header .navbar-brand,
+.text-logo {
+    color: {{ component.options.background | color_contrast: '#f1f1f1', '#090909' }};
+}
+.cart-size {
+    background-color: {{ component.options.background | color_contrast: '#f1f1f1', '#090909' }};
+    color: {{ component.options.background }};
+}
+.tooltip-inner {
+    background-color: {{ component.options.background | color_contrast: '#f1f1f1', '#090909' }};
+    color: {{ component.options.background }};
+}
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before,
+.tooltip.bs-tooltip-top .arrow::before {
+    border-top-color: {{ component.options.background | color_contrast: '#f1f1f1', '#090909' }};
+}
+#main-menu,
+#main-menu .dropdown-menu {
+    background-color: {{ component.options.menu_background }}!important;
+}
+#main-menu li a {
+    color: {{ component.options.menu_background | color_contrast: '#f1f1f1', '#090909' }}!important;
+}
+#main-menu li.sfhover,
+#main-menu li a:hover,
+#main-menu li.sfhover > a {
+    background-color: color-mix(in srgb, {{ component.options.menu_background }} 95%, {{ component.options.menu_background | color_contrast: '#f1f1f1', '#090909' }}) !important;
+}
+.message-top {
+    background-color: {{ component.options.topbar_background }};
+    color: {{ component.options.topbar_background | color_contrast: '#f1f1f1', '#090909' }};
+}
+.bg-gradient {
+    background: linear-gradient(90deg, {{ component.options.topbar_background_1 }}, {{ component.options.topbar_background_2 }}, {{ component.options.topbar_background_3 }}, {{ component.options.topbar_background_4 }});
+    background-size: 800% 800%;
+    animation: gradient 15s ease infinite;
+}
+.bg-gradient .text-center {
+    background-color: {{ component.options.topbar_background_1 | color_contrast: '#f1f1f1', '#090909' }};
+    background-image: linear-gradient(90deg,{{ component.options.topbar_background_1 | color_contrast: '#f1f1f1', '#090909' }}, {{ component.options.topbar_background_2 | color_contrast: '#f1f1f1', '#090909' }}, {{ component.options.topbar_background_3 | color_contrast: '#f1f1f1', '#090909' }}, {{ component.options.topbar_background_4 | color_contrast: '#f1f1f1', '#090909' }}) !important;
+    background-size: 2000%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    animation: gradient 15s ease infinite;
+}
+
+.header-block .social a i, .header-block .header_actions-link i {
+    font-size: {{ component.options.icons_size }}px !important;
+}
+#main-menu li a {
+    font-size: {{ component.options.menu_font_size }}px !important;
+}
+</style>
+
+<script>
+  $(document).ready(function(){
+    $(".fixed-top").sticky({topSpacing:0});
+    $(".navbar-fixed").sticky({topSpacing:0});
+  });
+</script>

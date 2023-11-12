@@ -1,0 +1,58 @@
+{
+  "name": "Single Product",
+  "help": "",
+  "icon": "shirt",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "permalink": {
+      "name": "Product",
+      "type": "product",
+      "help": "Select a product from your store.",
+      "default": null
+    },
+    "product_alignment": {
+      "name": "Product Alignment",
+      "type": "select",
+      "help": "",
+      "default": "Left",
+      "options": [
+        {
+          "Left": "Left"
+        },
+        {
+          "Right": "Right"
+        }
+      ]
+    },
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Featured product title"
+    },
+    "text": {
+      "name": "Text",
+      "type": "text",
+      "help": "",
+      "default": ""
+    },
+    "button_text": {
+      "name": "Button label",
+      "type": "input",
+      "help": "",
+      "default": "Visit product"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

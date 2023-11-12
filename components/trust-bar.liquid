@@ -1,0 +1,51 @@
+{% capture grid_size %}{% if component.options.grid == 2 %}2{% elsif component.options.grid == 3 %}3{% elsif component.options.grid == 4 %}4{% endif %}{% endcapture %}
+<div class="trust-bar-{{ component.id }} {{ component.options.spacing }}" style="background-color: {{ component.options.background }};">
+  <div class="container">
+    <div id="trust-bar-{{ component.id }}" class="trust-bar owl-carousel">
+      {% for trust-block in component.subcomponents.trust-bar-blocks %}
+        {% render 'components/trust-block', trust-block: trust-block, icons: component.options.enable_icons %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<style>
+.trust-bar-{{ component.id }} .trust-bar_title,
+.trust-bar-{{ component.id }} .trust-bar_text {
+  color: {{ component.options.background | color_contrast: '#f1f1f1', '#090909' }}!important;
+}
+.trust-bar_icon {
+  color:{{ component.options.icons_background_color | color_contrast: '#f1f1f1', '#090909' }};
+  background: radial-gradient({{ component.options.icons_background_color }},transparent);
+  border-radius: 50%;
+}
+</style>
+<script>
+$('#trust-bar-{{ component.id }}').owlCarousel({
+  {% if component.options.loop %}
+  loop:true,
+  {% else %}
+  rewind: true,
+  {% endif %}
+  autoHeight: true,
+  nav:false,
+  navText: ["<i class='ph ph-caret-left'></i>", "<i class='ph ph-caret-right'></i>"],
+  autoplay: {% if component.options.autoplay %}true{% else %}false{% endif %},
+  {% if component.options.autoplay %}autoplayTimeout: {{ component.options.speed }},{% endif %}
+  dots: false,
+  responsive:{
+    0:{
+      items:1,
+      margin:0,
+      autoplay:true
+    },
+    600:{
+      items:2,
+      margin:30,
+      stagePadding: 30
+    },
+    1000:{
+      items:{{ grid_size }},
+    }
+  }
+})
+</script>

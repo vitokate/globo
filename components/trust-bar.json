@@ -1,0 +1,94 @@
+{
+  "name": "Trust Bar",
+  "help": "",
+  "icon": "info-circle",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "grid": {
+      "name": "Quantity of blocks per row",
+      "type": "slider",
+      "help": "Choose how many blocks will be displayed by row on desktop version.",
+      "default": 3,
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "unit": ""
+    },
+    "enable_icons": {
+      "name": "Hide icons",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "loop": {
+      "name": "Activate Loop",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "autoplay": {
+      "name": "Activate Autoplay",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "speed": {
+      "name": "Autoplay Timeout",
+      "type": "slider",
+      "help": "",
+      "default": 3000,
+      "min": 1000,
+      "max": 5000,
+      "step": 500,
+      "unit": "ms"
+    },
+    "background": {
+      "name": "Background Color",
+      "type": "color",
+      "help": "",
+      "default": "#FFFFFF"
+    },
+    "icons_background_color": {
+      "name": "Background Icons",
+      "type": "color",
+      "help": "",
+      "default": "#F4F4F4"
+    },
+    "spacing": {
+      "name": "Add Spacing on top and bottom",
+      "type": "select",
+      "help": "",
+      "default": "py-4",
+      "options": [
+        {
+          "None": "py-0"
+        },
+        {
+          "Small": "py-2"
+        },
+        {
+          "Medium": "py-4"
+        },
+        {
+          "Big": "py-5"
+        }
+      ]
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+    "trust-bar-blocks": {
+      "type": "trust-block",
+      "multiple": true
+    }
+  }
+}

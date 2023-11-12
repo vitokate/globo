@@ -1,0 +1,48 @@
+{
+  "name": "Latest Products",
+  "help": "",
+  "icon": "list-ol",
+  "required": false,
+  "max_usage": 1,
+  "templates_in": [
+    "category",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "New Arrivals"
+    },
+    "display": {
+      "name": "Choose how to display the product's gallery",
+      "type": "select",
+      "help": "",
+      "default": "slider",
+      "options": [
+        {
+          "Slider": "slider"
+        },
+        {
+          "Grid": "grid"
+        }
+      ]
+    },
+    "limit": {
+      "name": "Quantity of products to display",
+      "type": "slider",
+      "help": "",
+      "default": 8,
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "unit": ""
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

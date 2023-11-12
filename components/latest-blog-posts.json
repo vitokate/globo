@@ -1,0 +1,34 @@
+{
+  "name": "Latest Blog Posts",
+  "help": "",
+  "icon": "newspaper",
+  "required": false,
+  "max_usage": 1,
+  "templates_in": [
+    "category",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Blog"
+    },
+    "limit": {
+      "name": "Post quantity",
+      "type": "slider",
+      "help": "",
+      "default": 3,
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "unit": ""
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

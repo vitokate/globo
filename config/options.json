@@ -1,0 +1,749 @@
+{
+  "General": {
+    "help": "",
+    "icon": "cog",
+    "options": {
+      "disable_shopping_cart": {
+        "name": "Disable Shopping Features",
+        "type": "checkbox",
+        "help": "If enabled, all Shopping features will hide, like the 'Add to Cart' buttons, the 'Header Cart icon', etc.",
+        "default": false
+      },
+      "disable_prices": {
+        "name": "Disable Product Prices",
+        "type": "checkbox",
+        "help": "If enabled, all product prices will be hidden. Customers won't be able to see them.",
+        "default": false
+      },
+      "success_page_product_table": {
+        "name": "Product Table at Success Page",
+        "type": "checkbox",
+        "help": "",
+        "default": false
+      },
+      "featured_on_search": {
+        "name": "Show products when no search results",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "products_category_limit": {
+        "name": "Products per Page in Categories",
+        "type": "slider",
+        "help": "",
+        "default": 12,
+        "min": 4,
+        "max": 20,
+        "step": 2,
+        "unit": ""
+      },
+      "products_search_limit": {
+        "name": "Products per Page in Search Result",
+        "type": "slider",
+        "help": "",
+        "default": 12,
+        "min": 4,
+        "max": 20,
+        "step": 2,
+        "unit": ""
+      },
+      "cross_selling_limit": {
+        "name": "Cross-Selling products to display on the Cart Page",
+        "type": "slider",
+        "help": "How many cross-selling products will be displayed on the Cart page.",
+        "default": 9,
+        "min": 3,
+        "max": 21,
+        "step": 3,
+        "unit": ""
+      }
+    }
+  },
+  "Blog": {
+    "help": "",
+    "icon": "blog",
+    "options": {
+      "read_progress": {
+        "name": "Show read progress indicator",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "display_date": {
+        "name": "Show date on post",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "page_post_per_page": {
+        "name": "Blog Posts per Page",
+        "type": "slider",
+        "help": "",
+        "default": 9,
+        "min": 3,
+        "max": 21,
+        "step": 3,
+        "unit": ""
+      }
+    }
+  },
+  "Store Info": {
+    "help": "",
+    "icon": "store",
+    "options": {
+      "display_address": {
+        "name": "Display Main Address",
+        "type": "checkbox",
+        "help": "",
+        "default": false
+      },
+      "display_contact_email": {
+        "name": "Display Contact Email",
+        "type": "checkbox",
+        "help": "",
+        "default": false
+      },
+      "phone": {
+        "name": "Contact Phone",
+        "type": "input",
+        "help": "",
+        "default": ""
+      }
+    }
+  },
+  "Age Verification Pop Up": {
+    "help": "",
+    "icon": "window-maximize",
+    "options": {
+      "av_popup": {
+        "name": "Enable the Age Verification Pop Up",
+        "type": "checkbox",
+        "help": "If it is is enabled the Pop Up will be displayed for all your customers in all pages.",
+        "default": false
+      },
+      "av_popup_title": {
+        "name": "Title Popup",
+        "type": "input",
+        "help": "Add your question",
+        "default": "Are you 21 or older?"
+      },
+      "av_popup_content": {
+        "name": "Content",
+        "type": "text",
+        "help": "Here you can add the content of the Pop Up.",
+        "default": "You must be of legal age to view our website. Due to legal requirements you must verify your age."
+      },
+      "av_popup_button_yes": {
+        "name": "Accept button",
+        "type": "input",
+        "help": "Text for the accept button. If visitor clicks on Yes button, the popup will not be displayed again.",
+        "default": "I am over 21"
+      },
+      "av_popup_button_no": {
+        "name": "Decline button",
+        "type": "input",
+        "help": "Text for the decline button.",
+        "default": "Exit"
+      },
+      "av_popup_button_no_redirect": {
+        "name": "Redirect url",
+        "type": "link",
+        "help": "Link to redirect visitors if they click the decline button.",
+        "default": "https://jumpseller.com"
+      },
+      "av_popup_button_yes_color": {
+        "name": "Accept button color",
+        "type": "color",
+        "help": "",
+        "default": "#329B4F"
+      },
+      "av_popup_button_no_color": {
+        "name": "Reject button",
+        "type": "color",
+        "help": "",
+        "default": "#DC2D13"
+      },
+      "av_popup_background_popup_color": {
+        "name": "Popup Background color",
+        "type": "color",
+        "help": "",
+        "default": "#FFFFFF"
+      }
+    }
+  },
+  "Product Block": {
+    "help": "",
+    "icon": "archive",
+    "options": {
+      "pb_alignment": {
+        "name": "Content Alignment",
+        "type": "select",
+        "help": "",
+        "default": "text-left",
+        "options": [
+          {
+            "Left": "text-left"
+          },
+          {
+            "Center": "text-center"
+          }
+        ]
+      },
+      "pb_image_size": {
+        "name": "Images dimensions",
+        "type": "select",
+        "help": "",
+        "default": "square",
+        "options": [
+          {
+            "Square": "square"
+          },
+          {
+            "Vertical": "vertical"
+          }
+        ]
+      },
+      "show_brand": {
+        "name": "Product Brand on Product Lists",
+        "type": "checkbox",
+        "help": "",
+        "default": false
+      },
+      "show_add_to_cart": {
+        "name": "Show Add To Cart Button",
+        "type": "checkbox",
+        "help": "Display a direct 'Add to Cart' button. If the product have product options (e.g. size, color), a 'View options' button will be displayed instead.",
+        "default": false
+      },
+      "show_color_options": {
+        "name": "Show Color Options",
+        "type": "checkbox",
+        "help": "If enabled, when products have a color option, customers can preview the color and the image associated with it.",
+        "default": false
+      },
+      "product_block_2_columns": {
+        "name": "Show 2 columns in mobile version",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "from_prices": {
+        "name": "Show 'from' on prices of products with variants",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "not_available_image": {
+        "name": "Grayscale image in Not available products",
+        "type": "checkbox",
+        "help": "",
+        "default": false
+      },
+      "product_shadow": {
+        "name": "Show box shadow on hover",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "sale_tag": {
+        "name": "Promotions tag color",
+        "type": "color",
+        "help": "",
+        "default": "#F44336"
+      },
+      "sale_tag_text": {
+        "name": "Promotions Text",
+        "type": "input",
+        "help": "",
+        "default": "Sale"
+      }
+    }
+  },
+  "Product Page": {
+    "help": "",
+    "icon": "archive",
+    "options": {
+      "product_zoom_visibility": {
+        "name": "Enable Zoom image",
+        "type": "checkbox",
+        "help": "Zoom images on product page",
+        "default": true
+      },
+      "product_stock_visibility": {
+        "name": "Display Product Stock",
+        "type": "checkbox",
+        "help": "",
+        "default": false
+      },
+      "product_sku_visibility": {
+        "name": "Display Product SKU",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "related_products_visibility": {
+        "name": "Display Related Products",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "show_out_of_stock_label": {
+        "name": "Show 'Out Of Stock' Label",
+        "type": "checkbox",
+        "help": "If enabled, out of stock variants will be identified visually.",
+        "default": true
+      },
+      "related_products_limit": {
+        "name": "Max quantity of Related Products",
+        "type": "slider",
+        "help": "",
+        "default": 8,
+        "min": 4,
+        "max": 40,
+        "step": 4,
+        "unit": ""
+      },
+      "fbt_products_visibility": {
+        "name": "Display Frequently bought together",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "fbt_packs_to_show": {
+        "name": "Number of Frequently Bought Together packs to show",
+        "type": "slider",
+        "help": "",
+        "default": 4,
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": ""
+      },
+      "options_display": {
+        "name": "Product Options display",
+        "type": "select",
+        "help": "Allow to change the display of the product options between a selector with all options or a button for each option.",
+        "default": "buttons",
+        "options": [
+          {
+            "Buttons (default)": "buttons"
+          },
+          {
+            "Select": "select"
+          }
+        ]
+      }
+    }
+  },
+  "Product Reviews": {
+    "help": "",
+    "icon": "stars",
+    "options": {
+      "pp_reviews": {
+        "name": "Display product reviews",
+        "type": "checkbox",
+        "help": "If enabled, a section in the product page will be displayed, which shows customer reviews provided by your customers.",
+        "default": true
+      },
+      "pp_reviews_limit": {
+        "name": "Reviews number",
+        "type": "slider",
+        "help": "Set the number of reviews to show initially with each product.",
+        "default": 5,
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "unit": ""
+      }
+    }
+  },
+  "Colors": {
+    "help": "",
+    "icon": "tint",
+    "options": {
+      "primary_color": {
+        "name": "Primary Color",
+        "type": "color",
+        "help": "",
+        "default": "#222222"
+      },
+      "store_background": {
+        "name": "Store Background",
+        "type": "color",
+        "help": "",
+        "default": "#FFFFFF"
+      },
+      "main_button_color": {
+        "name": "Main button color",
+        "type": "color",
+        "help": "",
+        "default": "#4EC0A6"
+      },
+      "secondary_button_color": {
+        "name": "Secondary button color",
+        "type": "color",
+        "help": "",
+        "default": "#666666"
+      },
+      "link_color": {
+        "name": "Links color",
+        "type": "color",
+        "help": "",
+        "default": "#333333"
+      },
+      "link_color_hover": {
+        "name": "Links color hover",
+        "type": "color",
+        "help": "",
+        "default": "#4EC0A6"
+      },
+      "product_review_color_marked": {
+        "name": "Stars Color",
+        "type": "color",
+        "help": "",
+        "default": "#E4A400"
+      }
+    }
+  },
+  "Fonts": {
+    "help": "",
+    "icon": "font",
+    "options": {
+      "general_font": {
+        "name": "General",
+        "type": "google_font",
+        "help": "",
+        "default": "Open Sans",
+        "options": [
+          {
+            "Droid Serif": "Droid Serif"
+          },
+          {
+            "Cabin": "Cabin"
+          },
+          {
+            "Gentium Basic": "Gentium Basic"
+          },
+          {
+            "Lato": "Lato"
+          },
+          {
+            "Montserrat": "Montserrat"
+          },
+          {
+            "Noto Sans": "Noto Sans"
+          },
+          {
+            "Open Sans (by Default)": "Open Sans"
+          },
+          {
+            "Playfair Display": "Playfair Display"
+          },
+          {
+            "Quicksand": "Quicksand"
+          },
+          {
+            "Raleway": "Raleway"
+          },
+          {
+            "Roboto": "Roboto"
+          },
+          {
+            "Roboto Slab": "Roboto Slab"
+          },
+          {
+            "Roboto Condensed": "Roboto Condensed"
+          }
+        ]
+      },
+      "titles_font": {
+        "name": "Titles",
+        "type": "google_font",
+        "help": "",
+        "default": "Montserrat",
+        "options": [
+          {
+            "Abril Fatface": "Abril Fatface"
+          },
+          {
+            "Architects Daughter": "Architects Daughter"
+          },
+          {
+            "Cabin": "Cabin"
+          },
+          {
+            "Fredericka the Great": "Fredericka the Great"
+          },
+          {
+            "Glegoo": "Glegoo"
+          },
+          {
+            "Handlee": "Handlee"
+          },
+          {
+            "Josefin Slab": "Josefin Slab"
+          },
+          {
+            "Julius Sans One": "Julius Sans One"
+          },
+          {
+            "Lato": "Lato"
+          },
+          {
+            "Libre Baskerville": "Libre Baskerville"
+          },
+          {
+            "Montserrat (by Default)": "Montserrat"
+          },
+          {
+            "Open Sans": "Open Sans"
+          },
+          {
+            "Philosopher": "Philosopher"
+          },
+          {
+            "Poiret One": "Poiret One"
+          },
+          {
+            "Raleway": "Raleway"
+          },
+          {
+            "Roboto": "Roboto"
+          },
+          {
+            "Special Elite": "Special Elite"
+          }
+        ]
+      },
+      "store_name_font": {
+        "name": "Store Name",
+        "type": "google_font",
+        "help": "",
+        "default": "Montserrat",
+        "options": [
+          {
+            "Abril Fatface": "Abril Fatface"
+          },
+          {
+            "Architects Daughter": "Architects Daughter"
+          },
+          {
+            "Cabin": "Cabin"
+          },
+          {
+            "Fredericka the Great": "Fredericka the Great"
+          },
+          {
+            "Libre Baskerville": "Libre Baskerville"
+          },
+          {
+            "Montserrat (by Default)": "Montserrat"
+          },
+          {
+            "Open Sans": "Open Sans"
+          },
+          {
+            "Playfair Display": "Playfair Display"
+          },
+          {
+            "Poiret One": "Poiret One"
+          },
+          {
+            "Raleway": "Raleway"
+          },
+          {
+            "Roboto": "Roboto"
+          },
+          {
+            "Old Standard TT": "Old Standard TT"
+          },
+          {
+            "Yatra One": "Yatra One"
+          }
+        ]
+      },
+      "general_font_size": {
+        "name": "General Font Size",
+        "type": "slider",
+        "help": "",
+        "default": 16,
+        "min": 10,
+        "max": 18,
+        "step": 1,
+        "unit": "px"
+      },
+      "title_font_size": {
+        "name": "Title Font Size",
+        "type": "slider",
+        "help": "",
+        "default": 34,
+        "min": 12,
+        "max": 40,
+        "step": 1,
+        "unit": "px"
+      },
+      "block_title_font_size": {
+        "name": "Blocks Titles Font Size",
+        "type": "slider",
+        "help": "",
+        "default": 28,
+        "min": 12,
+        "max": 40,
+        "step": 1,
+        "unit": "px"
+      },
+      "store_name_font_size": {
+        "name": "Store Name Font Size",
+        "type": "slider",
+        "help": "",
+        "default": 40,
+        "min": 12,
+        "max": 40,
+        "step": 1,
+        "unit": "px"
+      }
+    }
+  },
+  "Social Networks": {
+    "help": "",
+    "icon": "share-alt",
+    "options": {
+      "facebook_button_on_products": {
+        "name": "Facebook Button on Products",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "twitter_button_on_products": {
+        "name": "𝕏 Button on Products",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "pinterest_button_on_products": {
+        "name": "Pinterest Button on Products",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "tumblr_button_on_products": {
+        "name": "Tumblr Button on Products",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      },
+      "whatsapp_button_on_products": {
+        "name": "WhatsApp Button on Products in Mobile",
+        "type": "checkbox",
+        "help": "",
+        "default": true
+      }
+    }
+  },
+  "Store WhatsApp": {
+    "help": "",
+    "icon": "comment",
+    "options": {
+      "store_whatsapp": {
+        "name": "Enable WhatsApp Button",
+        "type": "checkbox",
+        "help": "Enables a button for WhatsApp, it follows the visitors as they scroll through the website. We recommend not enabling this feature if you are gonna use a plugin or integration that will also display a button.",
+        "default": true
+      },
+      "store_whatsapp_animation": {
+        "name": "Enable Animation WhatsApp Button",
+        "type": "checkbox",
+        "help": "Enables a small animation button for WhatsApp.",
+        "default": false
+      },
+      "store_whatsapp_position": {
+        "name": "WhatsApp Button position",
+        "type": "select",
+        "help": "Select the position of the WhatsApp Button, which will always be in one of the corners of the store.",
+        "default": "bottom-right",
+        "options": [
+          {
+            "Top Right": "top-right"
+          },
+          {
+            "Top Left": "top-left"
+          },
+          {
+            "Bottom Right (default)": "bottom-right"
+          },
+          {
+            "Bottom Left": "bottom-left"
+          }
+        ]
+      },
+      "store_whatsapp_color_background": {
+        "name": "WhatsApp Button > Background color",
+        "type": "color",
+        "help": "",
+        "default": "#25D366"
+      },
+      "store_whatsapp_color_background_hover": {
+        "name": "WhatsApp Button > Background color (hover)",
+        "type": "color",
+        "help": "",
+        "default": "#128C7E"
+      }
+    }
+  },
+  "Add to Cart Notification": {
+    "help": "",
+    "icon": "shopping-cart",
+    "options": {
+      "display_cart_notification": {
+        "name": "Add to Cart Notification",
+        "type": "checkbox",
+        "help": "Display a message on the page notifying customers that the product was added to the cart. Overrides redirection options in your Checkout Preferences.",
+        "default": false
+      },
+      "cart_notification_color": {
+        "name": "Notification Color",
+        "type": "color",
+        "help": "",
+        "default": "#079C25"
+      },
+      "cart_notification_position": {
+        "name": "Notification Position",
+        "type": "select",
+        "help": "Allows selecting if the notification will be displayed at the 'top' or 'bottom' of the browser, on the right side.",
+        "default": "toast-top-right",
+        "options": [
+          {
+            "Top Right (default)": "toast-top-right"
+          },
+          {
+            "Bottom Right": "toast-bottom-right"
+          }
+        ]
+      }
+    }
+  },
+  "Other Options": {
+    "help": "",
+    "icon": "cogs",
+    "options": {
+      "new_customer_message": {
+        "name": "New Customer Message",
+        "type": "text",
+        "help": "",
+        "default": "By registering at our shop, you will make more expedite the checkout process, you can add multiple shipping addresses, view and track your orders, and more."
+      },
+      "head_code": {
+        "name": "Embed code on the end of <head>",
+        "type": "text",
+        "help": "",
+        "default": ""
+      },
+      "body_code": {
+        "name": "Embed code on the end of <body>",
+        "type": "text",
+        "help": "",
+        "default": ""
+      }
+    }
+  }
+}

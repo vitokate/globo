@@ -1,0 +1,13 @@
+<div class="item">
+  <div class="trust-bar_wrapper mb-2 mb-lg-0">
+    {% unless icons %}
+    <div class="trust-bar_icon">
+      <i class="{{ trust-block.options.icon }} fa-fw"></i>
+    </div>
+    {% endunless %}
+    <div class="pl-4 pl-md-3">
+      <div class="trust-bar_title">{{ trust-block.options.title }}</div>
+      <div class="trust-bar_text">{{ trust-block.options.text }}</div>
+    </div>
+  </div>
+</div>

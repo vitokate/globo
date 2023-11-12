@@ -1,0 +1,13 @@
+<div class="product-block text-center mb-3 p-md-3 p-2 rounded trsn">
+  {% if options.pb_image_size == "square" %}
+  <img class="w-100 lazy" src="//assets.jumpseller.com/public/placeholder/themes/simple/placeholder_square.jpg" alt="{% t 'Add your products' %}">
+  {% else %}
+  <img class="w-100 lazy" src="//assets.jumpseller.com/public/placeholder/themes/simple/placeholder_vertical.jpg" alt="{% t 'Add your products' %}">
+  {% endif %}
+  <div class="caption">
+    <a href="{{ store.url }}/admin/products/new" class="btn btn-primary d-block mt-2">
+      <span class="product-block_button-icon"><i class="ph ph-plus"></i> {% t 'Add products' %}</span>
+    </a>
+    <div class="list-price text-center mt-2">{{ 1.0 | price }}</div>
+  </div>
+</div>

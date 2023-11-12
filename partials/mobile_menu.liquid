@@ -1,0 +1,18 @@
+<li class="{% if item.dropdown %}has-dropdown{% endif %}">
+  {% if item.dropdown %}
+  <a title="{{ item.name }}" class="level-{{ item.level }} {% if item.level != 1 %} last-trigger{% else %} first-trigger{% endif %}">{{ item.name }} <i class="ph ph-caret-right"></i></a>
+  {% else %}
+  <a href="{{ item.url }}" title="{{ item.name }}"{% if item.external %} target="_blank"{% endif %}>{{ item.name }}</a>
+  {% endif %}
+
+  {% if item.dropdown %}
+  <ul class="level-{{ item.level }} dropdown">
+    <li><a title="{% t 'Back' %}" class="back-level-{{ item.level }}"><i class="ph ph-caret-double-left"></i> {% t 'Back' %}</a></li>
+    <li><a title="{{ item.name }}" class="top-category"{% if item.external %} target="_blank"{% endif %}>{{ item.name }}</a></li>
+    {% for item in item.items %}
+	{% render 'mobile_menu', item: item %}
+    {% endfor %}
+    <li><a href="{{ item.url }}" title="{{ item.name }}" class="goto">{% t 'Go to' %} <span>{{ item.name }}</span></a></li>
+  </ul>
+  {% endif %}
+</li>

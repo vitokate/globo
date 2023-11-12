@@ -1,0 +1,66 @@
+{% unless cross_selling.products_count == 0 %}
+<h2 class="block-header text-center">{% t "You might also be interested in" %}</h2>
+<div class="row mx-md-n2 mx-n1 no-gutters">
+  {% for cs_prod in cross_selling.products limit: options.cross_selling_limit %}
+  <div class="col-md-4 col-6 px-md-2 px-1 mb-3">
+    <div class="product-block p-md-3 p-2 rounded trsn h-100">
+      <a href="{{ cs_prod.url }}" class="product-image d-block {% if cs_prod.status != 'available' or cs_prod.stock == 0 and cs_prod.stock_unlimited == false %}not-available{% endif %}">
+        {% unless cs_prod.discount == 0 or options.disable_prices %}
+        <span class="badge status-tag sale">-{{ cs_prod.discount | divided_by: cs_prod.price | times: 100 | round: 0 }}&percnt;</span>
+        {% endunless %}
+        {%- capture image_size_1x %}{% if options.pb_image_size == "square" %}263x263{% else %}263x368{% endif %}{% endcapture -%}
+        {%- capture image_size_2x %}{% if options.pb_image_size == "square" %}526x526{% else %}526x736{% endif %}{% endcapture -%}
+        {% if cs_prod.variant.image != blank %}
+        <img class="w-100 mb-2" src="{{ cs_prod.variant.image | thumb: image_size_1x }}" srcset="{{ cs_prod.variant.image | thumb: image_size_1x }} 1x,{{ cs_prod.variant.image | thumb: image_size_2x }} 2x" alt="{{ cs_prod.name | escape }}" />
+        {% elsif cs_prod.images != empty %}
+        <img class="w-100 mb-2" src="{{ cs_prod.images.first | thumb: image_size_1x }}" srcset="{{ cs_prod.images.first | thumb: image_size_1x }} 1x,{{ cs_prod.images.first | thumb: image_size_2x }} 2x" alt="{{ cs_prod.name | escape }}" />
+        {% elsif options.pb_image_size == "square" %}
+        <img class="img-fluid lazyload img-portfolio img-hover mb-2" src="//assets.jumpseller.com/public/placeholder/themes/simple/placeholder_square.jpg" alt="{{ cs_prod.name | escape }}">
+        {% else %}
+        <img class="img-fluid lazyload img-portfolio img-hover mb-2" src="//assets.jumpseller.com/public/placeholder/themes/simple/placeholder_vertical.jpg" alt="{{ cs_prod.name | escape }}">
+        {% endif %}
+      </a>
+      <div class="caption">
+        <div class="brand-name trsn">
+          {% if cs_prod.brand != blank and options.show_brand %}<small class="brand">{{ cs_prod.brand }}</small>{% endif %}
+          <h4><a href="{{ cs_prod.url }}" class="d-block">{{ cs_prod.name }}</a></h4>
+          {% if cs_prod.variant != blank %}
+          {% for variant_value in cs_prod.variant.values %}
+          <small class="d-block text-muted text-capitalize small">
+            {{ variant_value.option.name }}: {{ variant_value.name }}
+          </small>
+          {% endfor %}
+          {% endif %}
+        </div>
+        {% unless options.disable_prices %}
+          <div class="list-price">
+            {% if cs_prod.discount > 0 and cs_prod.variant != blank %}
+              <span class="product-block-normal">{{ cs_prod.variant.price | minus: cs_prod.discount | price }}</span>
+              <span class="product-block-discount text-muted">{{ cs_prod.variant.price | price }}</span>
+            {% elsif cs_prod.discount > 0 %}
+              <span class="product-block-normal">{{ cs_prod.price | minus: cs_prod.discount | price }}</span>
+              <span class="product-block-discount text-muted">{{ cs_prod.price | price }}</span>
+            {% elsif cs_prod.variant != blank %}
+              <span class="product-block-list">{{ cs_prod.variant.price | price }}</span>
+            {% else %}
+              <span class="product-block-list">{{ cs_prod.price | price }}</span>
+            {% endif %}
+          </div>
+        {% endunless %}
+      </div>
+      <div class="mt-2">
+      {% if cs_prod.status == 'not-available' %}
+        <a class="btn btn-outline-dark btn-block disabled text-truncate" href="{{ cs_prod.url }}">{% t "Not Available" %}</a>
+      {% elsif options.disable_shopping_cart == false %}
+        <form id="product-form-{{ cs_prod.id }}" action="{{ cs_prod.variant.add_to_cart_url | default: cs_prod.add_to_cart_url }}" method="post" enctype="multipart/form-data" name="buy">
+          <div class="adc-form">
+            <button type="submit" class="adc btn btn-primary w-100 text-truncate" value="{% t 'Add to Cart' %}" >{% t 'Add to Cart' %}</button>
+          </div>
+        </form>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endunless %}

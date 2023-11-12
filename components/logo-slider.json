@@ -1,0 +1,68 @@
+{
+  "name": "Logo Slider",
+  "help": "",
+  "icon": "images",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Our Brands"
+    },
+    "background": {
+      "name": "Background",
+      "type": "color",
+      "help": "",
+      "default": "#FFFFFF"
+    },
+    "grid": {
+      "name": "Quantity of logos per row",
+      "type": "slider",
+      "help": "Choose how many logos will be displayed by row on desktop version.",
+      "default": 6,
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "unit": ""
+    },
+    "loop": {
+      "name": "Activate Loop",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "autoplay": {
+      "name": "Activate Autoplay",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "speed": {
+      "name": "Autoplay Speed",
+      "type": "slider",
+      "help": "",
+      "default": 3000,
+      "min": 1000,
+      "max": 5000,
+      "step": 500,
+      "unit": "ms"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+    "logos": {
+      "type": "logo",
+      "multiple": true
+    }
+  }
+}

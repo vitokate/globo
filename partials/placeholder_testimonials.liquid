@@ -1,0 +1,11 @@
+{% for placeholder in (1..3) %}
+  <div class="item">
+    <div class="testimonial-container rounded p-3">
+      <blockquote>{% t "Here is displayed the testimony, feedback or comments that a client gives you. This is helpful to build trust in your brand, and for example give first time customers more information regarding your products or any other information you think is necessary." %}</blockquote>
+      <span class="img-container border rounded-circle d-block mb-2 mx-auto">
+        <img src="https://assets.jumpseller.com/public/placeholder/themes/simple/placeholder-130x130.png" class="w-100" />
+      </span>
+      <span class="testimonial-author text-muted mt-3 d-block">{% t "Author" %}</span>
+    </div>
+  </div>
+{% endfor %}

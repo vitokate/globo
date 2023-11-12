@@ -1,0 +1,78 @@
+{
+  "name": "Slider",
+  "help": "",
+  "icon": "image",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "loop": {
+      "name": "Activate Loop",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "autoplay": {
+      "name": "Activate Autoplay",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "pause": {
+      "name": "Activate Pause on Hover",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "autoplay_speed": {
+      "name": "Autoplay Timeout",
+      "type": "slider",
+      "help": "",
+      "default": 3000,
+      "min": 1000,
+      "max": 5000,
+      "step": 500,
+      "unit": "ms"
+    },
+    "background_opacity": {
+      "name": "Slider Opacity Percentage",
+      "type": "slider",
+      "help": "",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    "title_size": {
+      "name": "Slider Titles Size",
+      "type": "slider",
+      "help": "",
+      "default": 56,
+      "min": 24,
+      "max": 64,
+      "step": 8,
+      "unit": "px"
+    },
+    "background_color": {
+      "name": "Slider Background Opacity color",
+      "type": "color",
+      "help": "",
+      "default": "#000000"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+    "slides": {
+      "type": "slide",
+      "multiple": true
+    }
+  }
+}

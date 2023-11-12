@@ -1,0 +1,23 @@
+{{ index_for_top_components }}
+
+<div class="container blog-post mt-lg-0 my-3 mb-1">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-12 pt-4">
+            <h1 class="page-header">{{ page.title }}</h1>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-12 page">
+            {% if page.images.first != blank %}
+                <img class="img-fluid" src="{{ page.images.first }}" alt="{{ page.title | escape }}"/>
+            {% endif %}
+            <div class="page-body">{{ page.body }}</div>
+        </div>
+    </div>
+</div>
+
+{{ index_for_components }}
+
+{{ index_for_bottom_components }}

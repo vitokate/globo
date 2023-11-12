@@ -1,0 +1,51 @@
+<div class="logo-slider-{{ component.id }} py-5" style="background-color: {{ component.options.background }};">
+  <div class="container">
+     <h2 class="block-header text-center">
+      {% if component.options.title %}
+      {{ component.options.title }}
+      {% else %}
+      {% t "Our Brands" %}
+      {% endif %}
+    </h2>
+    <div id="logo-slider-{{ component.id }}" class="logo-slider owl-carousel">
+      {% for logo in component.subcomponents.logos %}
+        {% render 'components/logo', logo: logo %}
+      {% else %}
+        {% render 'placeholder_logos' %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<style>
+  .logo-slider-{{ component.id }} h2 {color: {{ component.options.background | color_contrast: '#f1f1f1', '#090909' }}!important; }
+</style>
+
+<script>
+$('#logo-slider-{{ component.id }}').owlCarousel({
+  {% if component.options.loop %}
+  loop:true,
+  {% else %}
+  rewind: true,
+  {% endif %}
+  margin:30,
+  stagePadding: 30,
+  nav:true,
+  navText: ["<i class='ph ph-caret-left'></i>", "<i class='ph ph-caret-right'></i>"],
+  autoplay: {% if component.options.autoplay %}true{% else %}false{% endif %},
+  {% if component.options.autoplay %}autoplayTimeout: {{ component.options.speed }},{% endif %}
+  dots: false,
+  responsive:{
+    0:{
+      items:3,
+      margin:8,
+    },
+    600:{
+      items:4,
+      margin:15
+    },
+    1000:{
+      items:{{ component.options.grid }}
+    }
+  }
+})
+</script>

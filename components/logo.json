@@ -1,0 +1,27 @@
+{
+  "name": "Logo",
+  "help": "",
+  "icon": "image",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "image": {
+      "name": "Image",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "link": {
+      "name": "Link",
+      "type": "link",
+      "help": "",
+      "default": null
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "instagram-feed",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "title": "Instagram",
+    "limit": 12
+  },
+  "children": [
+
+  ]
+}

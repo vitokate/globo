@@ -1,0 +1,238 @@
+{% if order.products == empty %}
+{{ index_for_top_components }}
+{% render "mobile_navigation" %}
+<div class="container mt-md-0 my-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="page-header">{% t "Shopping Cart" %}</h1>
+    </div>
+    <section class="col-md-8 offset-md-2 text-center">
+      <div class="not-card">
+        <div class="card-body">
+          <p>{% t "The shopping cart is currently empty. You can go back and start adding products." %}</p>
+          <a href="/" class="btn btn-secondary " title="&larr; {% t 'Go back & Keep Shopping' %}">{% t "Go back & Keep Shopping" %}</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{{ index_for_bottom_components }}
+{% else %}
+<div class="container cart my-5">
+  <!-- Cart Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="cart-header mb-5 text-center">
+        <a href="{{ store.url }}" title="{{ store.name }}" class="logo d-block">
+          {% if store.logo != empty %}
+          <img src="{{ store.logo }}" class="store-image" alt="{{ store.name }}" />
+          {% else %}
+          <span class="navbar-brand">{{ store.name }}</span>
+          {% endif %}
+        </a>
+        <ul class="list-inline cart-steps py-3 mt-4 m-0 border-bottom border-top">
+          <li class="list-inline-item active">{% t "Cart" %}</li>
+          <li class="list-inline-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-inline-item">{% t "Checkout" %}</li>
+          <li class="list-inline-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-inline-item">{% t "Order review" %}</li>
+          <li class="list-inline-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-inline-item">{% t "Success" %}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="alert alert-warning alert-dismissible fade hidden" role="alert">
+        <span id="alert-message"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-lg-8 mb-4">
+      <h1>{% t "Shopping cart" %}</h1>
+      <form id="cart-update-form" method="post" action="{{ order.update_url }}" class="card mb-4">
+        <div class="table-responsive card-body p-0">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>{% t "Product" %}</th>
+                <th class="d-none d-sm-table-cell"></th>
+                <th class="d-none d-sm-table-cell">{% t "Qty" %}</th>
+                <th class="d-none d-sm-table-cell">{% t "Unit Price" %}</th>
+                <th class="d-none d-sm-table-cell">{% t "Subtotal" %}</th>
+                <th class="d-none d-sm-table-cell"></th>
+              </tr>
+            </thead>
+            {% for ordered_product in order.products %}
+            {% assign total_products_qty = ordered_product.qty | plus: total_products_qty %}
+            <tr class="table-tr-mobile">
+              <td class="d-flex d-sm-table-cell align-items-center">
+                <a href="{{ ordered_product.url }}" class="trsn" title="{{ ordered_product.name | escape }}">
+                  <img src="{{ ordered_product.image | thumb: '80x80' | default: '//assets.jumpseller.com/public/placeholder/themes/simple/no-image-cart.png' }}" alt="{{ ordered_product.name | escape }}" class="rounded">
+                </a>
+                <div class="d-block d-sm-none ml-2">
+                  <h3>{{ ordered_product.name }}</h3>
+                  {% for option in ordered_product.options %}
+                  <small class="d-block text-capitalize">{{ option.name }}: {{ option.value }}</small>
+                  {% endfor %}
+                </div>
+              </td>
+              <td class="product_info d-none d-sm-table-cell">
+                <h3>{{ ordered_product.name }}</h3>
+                {% for option in ordered_product.options %}
+                <small class="d-block text-capitalize">{{ option.name }}: {{ option.value }}</small>
+                {% endfor %}
+              </td>
+              <td>
+                <div class="select">
+                  <select class="select select-qty form-control" name="{{ ordered_product.id }}" title="Qty" onchange="$('#cart-update-form').submit();return false;">
+                    {% if ordered_product.stock_unlimited or ordered_product.stock > 250 %}
+                    {% assign qty_limit = 250 %}
+                    {% else %}
+                    {% assign qty_limit = ordered_product.stock %}
+                    {% endif %}
+                    {% for qty in (1..qty_limit) %}
+                    <option value="{{ qty }}" {% if ordered_product.qty == qty %}selected="selected"{% endif %}>{{ qty }}</option>
+                    {% endfor %}
+                    {% if ordered_product.qty > qty_limit %}
+                    <option value="{{ ordered_product.qty }}" selected="selected">{{ ordered_product.qty }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </td>
+              <td class="d-none d-sm-table-cell">
+                {% if ordered_product.discount > 0 %}
+                <div class="cart-product-discount">
+                  <span>
+                    {{ ordered_product.price | minus: ordered_product.discount | price }}
+                    <br>
+                    <span class="discount text-muted">({{ ordered_product.price | price }})</span>
+                  </span>
+                </div>
+                {% else %}
+                <span class="order-product-price">{{ ordered_product.price | price }}</span>
+                {% endif %}
+              </td>
+
+              <td>
+                <span class="order-product-subtotal cart-value">{{ ordered_product.discount | times: ordered_product.qty | times: '-1' | plus: ordered_product.subtotal | price }}</span>
+              </td>
+              <td> <a href="{{ ordered_product.remove_url }}" class="cart-product-remove" title="{% t 'Remove Product' %}"><i class="ph ph-trash"></i></a></td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </form>
+      {% render 'cross_selling_cart' %}
+    </div>
+
+    <!-- Cart Options -->
+    <div class="col-lg-4 sidebar">
+      {% if show_shipping_estimates %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title">{% t "Estimated shipping cost" %}</h2>
+          {{ estimate_form }}
+        </div>
+      </div>
+      {% endif %}
+      {% if coupon_form %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title">{% t "Discount code" %}</h2>
+          {{ coupon_form }}
+        </div>
+      </div>
+      {% endif %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title">{% t "Order review" %}</h2>
+          <table class="table review mb-0">
+            {% if order.subtotal != order.total %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Subtotal" %}</td>
+              <td colspan="1" class="text-right">{{ order.subtotal | price }}</td>
+            </tr>
+            {% endif %}
+
+
+            {% if order.shipping > 0 %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Shipping" %}</td>
+              <td colspan="1" class="text-right">{{ order.shipping | price }}</td>
+            </tr>
+            {% endif %}
+
+            {% if order.discount > 0 %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Discount" %}</td>
+              <td colspan="1" class="text-right">-{{ order.discount | price }}</td>
+            </tr>
+            {% endif %}
+
+            {% if order.applied_tax > 0 %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Tax" %}</td>
+              <td colspan="1" class="text-right">{{ order.applied_tax | price }}</td>
+            </tr>
+            {% endif %}
+
+            <tr class="totals key">
+              <td colspan="1" class="text-left"><strong>{% t "Total" %}</strong></td>
+              <td colspan="1" class="text-right"><strong>{{ order.total | price }}</strong></td>
+            </tr>
+
+            {% if order.remaining_for_free_shipping_message != blank %}
+              <tr class="totals">
+                <td colspan="2" class="p-0">
+                  <div class="alert alert-success p-2 m-0 mt-3">
+                    <i class="ph ph-truck"></i> {{ order.remaining_for_free_shipping_message }}
+                  </div>
+                </td>
+              </tr>
+            {% endif %}
+          </table>
+        </div>
+      </div>
+
+      <div class="cart-actions text-center">
+        {% if order.minimum_purchase.above_minimum != true %}
+          {% if order.minimum_purchase.condition_type == 'qty' %}
+            {% capture minimum %}<strong>{{ order.minimum_purchase.condition_value }}</strong>{% endcapture %}
+            {% capture at_least %}<strong>{{ order.minimum_purchase.condition_value | minus: total_products_qty }}</strong>{% endcapture %}
+            <div class="alert alert-warning">{% t "The minimum quantity of products to proceed with the purchase is %{minimum}. To continue please add at least %{at_least} product(s)", minimum: minimum, at_least: at_least %}</div>
+          {% else %}
+            {% capture minimum %}<strong class="order-product-price">{{ order.minimum_purchase.condition_value | price }}</strong>{% endcapture %}
+            {% capture at_least %}<strong class="order-product-price">{{ order.minimum_purchase.condition_value | minus: order.subtotal_with_discount | price }}</strong>{% endcapture %}
+            <div class="alert alert-warning">
+              {% t "The minimum amount to proceed with your purchase is %{minimum}. To continue please add at least %{at_least}", minimum: minimum, at_least: at_least %}
+            </div>
+          {% endif %}
+        {% else %}
+          <a href="{{ order.checkout_url }}" class="btn btn-primary btn-block" title="{% t 'Proceed to Checkout' %}" id="proceed_to_checkout">{% t 'Proceed to Checkout' %}</a>
+        {% endif %}
+        <a href="/" class="continue small mt-2 d-block" title="&larr; {% t 'Continue Shopping' %}">&larr; {% t 'Continue Shopping' %}</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+<script>
+  $(document).ready(function(){ if(window.location.href.endsWith('cart/estimate')) $('#set_shipping_button').focus(); });
+  $(document).ready(function(){ if(document.referrer.endsWith('cart/estimate')) $('#proceed_to_checkout').focus(); });
+
+  // Retrieve the message from the URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+
+    if (message != null) {
+      // Display the message in the HTML element
+      const messageElement = document.getElementById('alert-message');
+      messageElement.innerText = message;
+      messageElement.parentElement.classList.add("show");
+      messageElement.parentElement.classList.remove("hidden");
+    }
+</script>

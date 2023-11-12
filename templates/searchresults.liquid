@@ -1,0 +1,99 @@
+{{ index_for_top_components }}
+
+<div class="container mt-lg-0 my-5">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="page-header">{% t "Search Results" %}</h1>
+    </div>
+  </div>
+
+  {% if search.results == empty and filters == empty %}
+  <div class="row">
+    <section class="col-lg-6 offset-lg-3 text-center">
+      <h5 class="mb-3">{% t "There aren't any products that matches your search. Try searching again" %}</h5>
+      <div class="jumpseller-autocomplete">
+        <form id="searchpage_search-form" class="search-form" method="get" action="{{ search.url_send }}">
+          <input type="text" value="{{ search.query }}" name="q" class="form-control" onFocus="javascript:this.value=''" placeholder="{% t 'Search for products' %}" />
+          <button type="submit"><i class="ph ph-magnifying-glass"></i></button>
+        </form>
+      </div>
+    </section>
+    {% if options.featured_on_search and products.featured != empty %}
+    <div class="col-12 text-center mb-3">
+      <hr>
+      <h5 class="font-weight-bold">{% t "You might also like" %}</h5>
+    </div>
+    {% for prod in products.featured limit: 8 %}
+    <div class="col-lg-3 col-sm-6 px-2 mb-3">
+      {% render 'product_block', prod: prod %}
+    </div>
+    {% endfor %}
+    <div class="col-12 text-center">
+      <p>{% t "You do not see what you are looking for?" %} <br><a class="btn btn-secondary btn-sm mt-2" href="{{ contact.url }}">{% t "Contact Us" %}</a></p>
+    </div>
+    {% endif %}
+  </div>
+  {% else %}
+  {% paginate search.results by options.products_search_limit %}
+  <div class="row">
+    <!-- filter mobile -->
+    <div class="col-12 d-md-none text-center mb-3">
+      <span>{% t "You've searched for" %}:</span> <strong>{{ search.query }}</strong>
+    </div>
+    <div class="{% if filters != empty %}col-6{% else %}col-12{% endif %} d-md-none">
+      <div class="row justify-content-between mt-2 text-center">
+        <div class="col-12 product-qty mb-2">
+          <strong>{{ paged.total }} {% t "Product(s)" %}</strong>
+        </div>
+      </div>
+    </div>
+    {% if filters != empty %}
+    <div class="col-6 d-md-none">
+      <button id="show_filters" type="button" class="btn btn-outline-secondary btn-filter btn-block my-0 mb-3 d-md-none">
+        <i class="ph ph-sliders"></i> {% t "Filters" %} <span class="badge badge-light"></span>
+      </button>
+    </div>
+    {% endif %}
+    <!-- end filter mobile -->
+    {% if filters != empty %}
+    <div class="col-md-3">
+      {% render 'category_filter' %}
+    </div>
+    {% endif %}
+    <div class="{% if filters != empty %}col-md-9{% else %}col-12{% endif %}">
+      <div class="row justify-content-between mb-4 pb-md-2">
+        <div class="col-md-5 product-qty d-none d-md-block">
+          <strong>{{ paged.total }} {% t "Product(s)" %}</strong>
+        </div>
+        <div class="{% if filters != empty %}col-lg-6 col-md-6{% else %}col-lg-5 col-md-7{% endif %} d-none d-md-block text-right">
+          <span>{% t "You've searched for" %}:</span> <strong>{{ search.query }}</strong>
+        </div>
+      </div>
+      <div class="row mb-md-5 mb-4 mx-n2">
+        {% for prod in paged.products %}
+        <div class="{% if filters != empty %}col-lg-3{% else %}col-md-3{% endif %} {% if options.product_block_2_columns %}col-6{% else %}col-sm-6{% endif %} px-2 mb-3">
+          {% render 'product_block', prod: prod %}
+        </div>
+        {% endfor %}
+        {% if filters != empty and paged.total == 0 %}
+        <section class="col-12 text-center px-2">
+          <div class="card">
+            <div class="card-body">
+              <h5>{% t "There aren't any products available with the selected filters" %}.</h5>
+              <a href="#" class="all mt-4 btn btn-secondary" title="{% t 'Clear filters' %}" onclick="window.location = window.location.href.split('?')[0];">
+                {% t "Clear filters" %}
+                <i class="ph ph-eraser"></i>
+              </a>
+            </div>
+          </div>
+        </section>
+        {% endif %}
+        {% render 'pagination', paged: paged %}
+      </div>
+    </div>
+  </div>
+  {% endpaginate %}
+  {% endif %}
+</div>
+
+{{ index_for_bottom_components }}

@@ -1,0 +1,66 @@
+{
+  "name": "Text Block",
+  "help": "",
+  "icon": "text",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Talk about whatever you want"
+    },
+    "text": {
+      "name": "Text",
+      "type": "text",
+      "help": "",
+      "default": "You can add information about your brand, shipping methods, promotions, company description, or even describe a product."
+    },
+    "alignment": {
+      "name": "Content Alignment",
+      "type": "select",
+      "help": "",
+      "default": "text-center",
+      "options": [
+        {
+          "Left": "text-left"
+        },
+        {
+          "Center": "text-center"
+        }
+      ]
+    },
+    "spacing": {
+      "name": "Add Spacing on top and bottom",
+      "type": "select",
+      "help": "",
+      "default": "py-4",
+      "options": [
+        {
+          "None": "py-0"
+        },
+        {
+          "Small": "py-2"
+        },
+        {
+          "Medium": "py-4"
+        },
+        {
+          "Big": "py-5"
+        }
+      ]
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

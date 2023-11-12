@@ -1,0 +1,12 @@
+<div id="image-w-text-{{ component.id }} " class="image-w-text container py-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 {% if component.options.image_alignment == 'Left' %}order-md-1{% else %}order-md-2{% endif %}">
+      <img src="{{ component.options.image['url'] | default: '//assets.jumpseller.com/public/placeholder/themes/simple/placeholder_text-image.png' }}" alt="{{ component.options.image['alt'] | default: component.options.title | default: store.name }}" class="w-100 lazy" />
+    </div>
+    <div class="col-md-6 {% if component.options.image_alignment == 'Left' %}order-md-2{% else %}order-md-1{% endif %} px-3 text-sm-center text-lg-left">
+      <h4 class="py-2">{{ component.options.title }}</h4>
+      <p>{{ component.options.text }}</p>
+      <a href="{{ component.options.button_link }}" class="btn btn-primary" title="{{ component.options.title }}">{{ component.options.button_text }}</a>
+    </div>
+  </div>
+</div>

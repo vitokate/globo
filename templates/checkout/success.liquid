@@ -1,0 +1,168 @@
+<div class="container success-page cart py-md-5 py-4">
+  <!-- Page Heading -->
+  <div class="row no-gutters">
+    <div class="col-lg-8 offset-lg-2 card py-4 mb-4">
+      <div class="cart-header text-center">
+        <a href="{{ store.url }}" title="{{ store.name }}" class="logo d-block">
+          {% if store.logo != empty %}
+          <img src="{{ store.logo }}" class="store-image" alt="{{ store.name }}" />
+          {% else %}
+          <span class="navbar-brand">{{ store.name }}</span>
+          {% endif %}
+        </a>
+        <ul class="list-inline cart-steps py-3 mt-4 m-0 border-bottom border-top">
+          <li class="list-style-item">{% t "Cart" %}</li>
+          <li class="list-style-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-style-item">{% t "Checkout" %}</li>
+          <li class="list-style-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-style-item">{% t "Order review" %}</li>
+          <li class="list-style-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-style-item active">{% t "Success" %}</li>
+        </ul>
+      </div>
+      <div class="card-body border-bottom text-center">
+        {% if order.status_id == 'Pending Payment' %}
+        <div class="alert alert-warning text-center">
+          {% t "Your order is pending payment." %}
+        </div>
+        {% elsif order.status_id == 'Paid' %}
+        <div class="alert alert-success text-center">
+          {% t "Your order has been paid successfully." %}
+        </div>
+        {% endif %}
+        <h1>{% t "Thank you for buying in" %} {{ store.name }}</h1>
+        <h5>{% t "This is your order number" %}: <strong>#{{ order.id }}</strong></h5>
+        <p>{% t "An email with your order summary has been sent to" %}: <strong>{{ order.email }}</strong></p>
+        <div id="fb-messenger-card" class="card text-center mt-3">
+          <div class="card-body">
+            <strong>{% t "Receive notifications about the status of your order through Messenger" %}</strong>
+            <div id="send-to-messenger" class="fb-send-to-messenger mt-2" data-ref={{ order.id }}></div>
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters card-body">
+        {% if order.shipping_required %}
+        <div class="{% if order.payment_information != empty %}col-md-6{% else %}col-12{% endif %}">
+          <h2>{% t "Order will be Shipped to" %}:</h2>
+          <p>{{ order.shipping_address.formatted }}</p>
+        </div>
+        {% endif %}
+        {% if order.payment_information != empty %}
+        <div class="{% if order.shipping_required != empty %}col-md-6{% else %}col-12{% endif %}">
+          <h5><strong>{% t "Information for Payment" %}:</strong></h5>
+          <p>{{ order.payment_method }}<br/>{{ order.payment_information }}</p>
+        </div>
+        {% endif %}
+      </div>
+      <div class="card-body pb-0">
+        <a href="{{ store.url }}" class="btn btn-primary btn-block" title="&larr; {% t 'Go back & Keep Shopping' %}">{% t "Go back & Keep Shopping" %}</a>
+      </div>
+    </div>
+    {% if options.success_page_product_table %}
+    <div class="col-lg-8 offset-lg-2 card mb-4">
+      <!-- Review Order Table -->
+      <form id="cart-update-form" method="post" action="{{ order.update_url }}">
+        <div class="table-responsive p-3 border-bottom">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{% t "Product" %}</th>
+                <th class="d-none d-sm-table-cell"></th>
+                <th class="d-none d-sm-table-cell">{% t "Unit Price" %}</th>
+                <th>{% t "Qty" %}</th>
+                <th>{% t "Subtotal" %}</th>
+              </tr>
+            </thead>
+            {% for ordered_product in order.products %}
+            <tr>
+              <td>
+                <h3>{{ ordered_product.name }}</h3>
+                {% for option in ordered_product.options %}
+                <small>{{ option.name }}: {{ option.value }}</small><br>
+                {% endfor %}
+              </td>
+              <td class="text-center d-none d-sm-table-cell">
+                <img src="{{ ordered_product.image | resize: '120x100' | default: '//assets.jumpseller.com/public/placeholder/themes/simple/no-image-cart.png' }}" alt="{{ ordered_product.name | escape }}" class="img-fluid">
+              </td>
+              <td class="d-none d-sm-table-cell">
+                <div class="cart-product-discount">
+                  {% if ordered_product.discount > 0 %}
+                  <span>
+                    {{ ordered_product.price | minus: ordered_product.discount | price }}
+                  </span>
+                  {% else %}
+                  <span>{{ ordered_product.price | price }}</span>
+                  {% endif %}
+                </div>
+              </td>
+              <td>
+                <span>{{ ordered_product.qty }}</span>
+              </td>
+              <td>
+                <span class="order-product-subtotal">{{ ordered_product.discount | times: ordered_product.qty | times: '-1' | plus: ordered_product.subtotal | price }}</span>
+              </td>
+
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </form>
+
+      <div id="review-cart-totals" class="cart-totals p-3 border-bottom">
+        <h2 class="legend">{% t "Summary" %}</h2>
+        <table class="table table-striped">
+          {% if order.shipping_required %}
+          <tr class="totals">
+            <td colspan="1" class="text-left">{% t "Shipping" %}</td>
+            <td colspan="1" class="text-right">{{ order.shipping | price }}</td>
+          </tr>
+          {% endif %}
+
+          {% if order.applied_tax > 0 %}
+          <tr class="totals">
+            <td colspan="1" class="text-left">{% t "Tax" %}</td>
+            <td colspan="1" class="text-right">{{ order.applied_tax | price }}</td>
+          </tr>
+          {% endif %}
+
+          <tr class="totals key">
+            <td colspan="1" class="text-left">
+              <strong>{% t "Total" %}</strong>
+            </td>
+            <td colspan="1" class="text-right">
+              <strong>{{ order.total | price }}</strong>
+            </td>
+          </tr>
+
+        </table>
+      </div>
+
+      <div class="card-body">
+        {% t "Bought in:" %} <b>{{ store.name }}</b> - <b>{{ store.url }}</b>
+        {% if options.display_contact_email %}
+        {% t "If you have any question or special requirement about reimbursements or shipping please contact us at the email:" %} <b><a href="mailto:{{ store.email }}">{{ store.email }}</a></b>.
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if customer == nil and store.customers_enabled and store.customers_optional %}
+    <div class="col-lg-8 offset-lg-2 card mb-4">
+      <div class="card-body">
+        <h2>{% t "Create your Customer Account" %}</h2>
+        {{ customer_reset_password_form }}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<script>
+  function messenger() {
+    if ($( '#send-to-messenger' ).hasClass("fb_iframe_widget")){
+      $('#fb-messenger-card').slideDown();
+    } else {
+      $('#fb-messenger-card').hide();
+    }
+  }
+  setTimeout(messenger, 1000);
+</script>

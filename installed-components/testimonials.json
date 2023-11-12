@@ -1,0 +1,65 @@
+{
+  "type": "testimonials",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "title": "Testimonials",
+    "grid": 3,
+    "background": "#FFFFFF",
+    "background_quote": "#FFFFFF",
+    "autoplay": true,
+    "speed": 3000,
+    "pause": true
+  },
+  "children": [
+    {
+      "property": "testimonials",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "quote": "I am absolutely in love with the Logo Badge Half-Zip Sweater! The quality of the material is top-notch, and the design is both stylish and functional. I've received many compliments on this sweater and would highly recommend it to anyone looking for a comfortable and fashionable addition to their wardrobe.",
+        "author": "Author",
+        "image": {
+          "url": null,
+          "alt": null
+        }
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "testimonials",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "quote": "\"The Logo Badge Half-Zip Sweater is a must-have for anyone looking for a versatile and comfortable piece of clothing. The half-zip design is perfect for layering, and the sweater itself is made from high-quality material that is both soft and durable. I particularly love the logo badge, which adds a touch of elegance to the overall look.",
+        "author": "Author",
+        "image": {
+          "url": null,
+          "alt": null
+        }
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "testimonials",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "quote": "I recently purchased the Logo Badge Half-Zip Sweater, and I have to say, I am thoroughly impressed. The material is soft and comfortable, while also being warm enough to wear on chilly days. ",
+        "author": "Author",
+        "image": {
+          "url": null,
+          "alt": null
+        }
+      },
+      "children": [
+
+      ]
+    }
+  ]
+}

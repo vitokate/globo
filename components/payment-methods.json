@@ -1,0 +1,207 @@
+{
+  "name": "Payment Methods",
+  "help": "",
+  "icon": "credit-card",
+  "required": true,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "webpay_payment": {
+      "name": "Show Webpay Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "chek_payment": {
+      "name": "Show Chek Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "khipu_payment": {
+      "name": "Show Khipu Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "servipag_payment": {
+      "name": "Show Servipag Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "mach_payment": {
+      "name": "Show Mach Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "flow_payment": {
+      "name": "Show Flow Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "payzen_payment": {
+      "name": "Show Payzen Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "caja_vecina_payment": {
+      "name": "Show Caja Vecina Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "multicaja_payment": {
+      "name": "Show Multicaja Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "pse_payment": {
+      "name": "Show PSE Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "baloto_payment": {
+      "name": "Show Baloto Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "epayco_payment": {
+      "name": "Show ePayco Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "efecty_payment": {
+      "name": "Show Efecty Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "oxxo_payment": {
+      "name": "Show Oxxo Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "mercadopago_payment": {
+      "name": "Show Mercadopago Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "multibanco_payment": {
+      "name": "Show Multibanco Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "mbway_payment": {
+      "name": "Show MBWay Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "payu_payment": {
+      "name": "Show PayU Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "ideal_payment": {
+      "name": "Show iDEAL Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "skrill_payment": {
+      "name": "Show Skrill Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "stripe_payment": {
+      "name": "Show Stripe Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "apple_payment": {
+      "name": "Show Apple Pay Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "bitcoin_payment": {
+      "name": "Show Bitcoin Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "visa_payment": {
+      "name": "Show Visa Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "mastercard_payment": {
+      "name": "Show MasterCard Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "american_payment": {
+      "name": "Show American Express Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "paypal_payment": {
+      "name": "Show Paypal Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "diners_payment": {
+      "name": "Show Diners Club Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "bank_transfer_payment": {
+      "name": "Show Bank Transfer Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "manual_payment": {
+      "name": "Show Manual Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "klap_payment": {
+      "name": "Show Klap Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "klarna_payment": {
+      "name": "Show Klarna Payment",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

@@ -1,0 +1,81 @@
+{% comment %} General helper functions for product blocks {% endcomment %}
+<script>
+  // Listener for swatch clicks when product block color swatches are enabled
+  function updateCarouselFromSwatch(target) {
+    const value = $(target).val(); // product option value id
+    const block = $(target).closest('.product-block');
+    if (block.find('.product-block-carousel').length === 0) return;
+
+    // the owl-carousel library duplicates items when it is set to loop. This code updates all the duplicates inside the nearest carousel.
+    const stage = $(target).closest('.owl-carousel .owl-stage');
+    const productid = block.attr('data-productid');
+    const blocks = stage.length === 0 ? block : stage.find(`.product-block[data-productid="${productid}"]`);
+
+    // blocks.find(`.color-swatch input[value="${value}"]`).prop('checked', true);
+
+    // When we click on the same swatch option, do nothing.
+    // When there is no variant image, show the fallback product image.
+    // Use bootstrap carousel or fallback to just setting active class and toggle with css
+    blocks.each(function() {
+      const carousel = $(this).find('.product-block-carousel');
+      const variant = carousel.find(`[data-color-option-value="${value}"]`);
+      const fallback = carousel.find('.carousel-default-item');
+      const item = variant.length === 0 ? fallback : variant;
+
+      if (carousel.carousel) {
+        carousel.carousel(item.first().index());
+      } else {
+        carousel.find('.active').removeClass('active');
+        item.first().addClass('active');
+      }
+    });
+  }
+
+  // Listener for add-to-cart quantity updates, if they are shown
+  function verifyAddToCartQuantity(target) {
+    const block = $(target).closest('.product-block');
+    const input = block.find('form .product-qty input');
+    const value = +input.val();
+    const minimum = input.is('[min]') ? +input.attr('min') : 1;
+    const maximum = input.is('[max]') ? +input.attr('max') : Infinity;
+    if (maximum < minimum) return;
+    const clamped = Math.max(minimum, Math.min(value, maximum));
+    if (clamped != value) input.val(clamped);
+    input.toggleClass('maxStockQty', value != clamped);
+  }
+
+  function decrementCartFromProductBlock(target) {
+    const block = $(target).closest('.product-block');
+    const input = block.find('form .product-qty input');
+    if (block.length !== 1 || input.length !== 1) return;
+
+    const value = +input.val();
+    const minimum = input.is('[min]') ? +input.attr('min') : 1;
+    const maximum = input.is('[max]') ? +input.attr('max') : Infinity;
+    input.val(Math.max(minimum, Math.min(value - 1, maximum)));
+    input.toggleClass('maxStockQty', value - 1 > maximum);
+  }
+
+  function incrementCartFromProductBlock(target) {
+    const block = $(target).closest('.product-block');
+    const input = block.find('form .product-qty input');
+    if (block.length !== 1 || input.length !== 1) return;
+
+    const value = +input.val();
+    const minimum = input.is('[min]') ? +input.attr('min') : 1;
+    const maximum = input.is('[max]') ? +input.attr('max') : Infinity;
+    input.val(Math.max(minimum, Math.min(value + 1, maximum)));
+    input.toggleClass('maxStockQty', value + 1 > maximum);
+  }
+
+  function addToCartFromProductBlock(target) {
+    const block = $(target).closest('.product-block');
+    const input = block.find('form .product-qty input');
+    if (block.length !== 1 || input.length !== 1) return;
+
+    const id = +block.attr('data-productid');
+    const name = block.find('.product-block-name').text();
+    const qty = +input.val() || 1; // this is usually hidden, so it should be undefined or 0/1 in initial markup
+    addToCart(id, name, qty, {});
+  }
+</script>

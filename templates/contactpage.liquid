@@ -1,0 +1,48 @@
+{{ index_for_top_components }}
+
+<div class="container contact pt-lg-0 pt-5 my-5">
+    <div class="row">
+        {% if options.display_contact_email or options.phone != blank or store.address != blank and options.display_address %}
+            <section class="col-lg-3 px-3 py-3 mr-lg-2 contact-info">
+                <h2>{% t "Information" %}</h2>
+                <ul id="contact-list">
+                    {% if options.display_contact_email %}
+                        <li>
+                            <i class="ph ph-envelope-dot"></i>
+                            <a href="mailto:{{ store.email }}">{{ store.email }}</a>
+                        </li>
+                    {% endif %}
+                    {% if options.phone != blank %}
+                        <li>
+                            <i class="ph ph-phone"></i>
+                            <a href="tel:{{ options.phone | replace: ' ', '' }}">{{ options.phone }}</a>
+                        </li>
+                    {% endif %}
+                    {% if store.address != blank and options.display_address %}
+                        <li>
+                            <i class="ph ph-map-pin"></i>
+                            {{ store.address }}
+                            {{ store.street_number }}
+                            {{ store.postal }}
+                            -
+                            {{ store.city }}, {{ store.country }}.</li>
+                    {% endif %}
+                </ul>
+            </section>
+        {% endif %}
+
+        <section class="{% if options.display_contact_email or options.phone != blank or store.address != blank and options.display_address %}col-lg-8{% else %}col-12}{% endif %} mb-lg-0 mb-4 px-3 py-3 contact-form">
+            <h2 class="block-header">{% t "Contact Form" %}</h2>
+            <p>{% t "Send us a message and we will reply to you as quick as possible." %}</p>
+            {{ contact_form }}
+        </section>
+
+    </div>
+</div>
+{% if store.address != blank and options.display_address %}
+    <iframe frameborder="0" height="430" scrolling="no" src="https://maps.google.com/maps?q={{ store.address | replace: '#', '' }} {{ store.street_number }},{{ store.city }},{{ store.region }},{{ store.country }}&t=&z=15&ie=UTF8&iwloc=&output=embed" style="border:0" width="100%"></iframe>
+{% endif %}
+
+{{ index_for_components }}
+
+{{ index_for_bottom_components }}

@@ -1,0 +1,14 @@
+{
+  "type": "latest-products",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "title": "Últimos Productos",
+    "display": "grid",
+    "limit": 8
+  },
+  "children": [
+
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "name": "Header",
+  "help": "",
+  "icon": "",
+  "required": true,
+  "max_usage": 1,
+  "templates_in": [
+    "category",
+    "checkout__cart",
+    "contactpage",
+    "customer__account",
+    "customer__address",
+    "customer__details",
+    "customer__login",
+    "customer__reset_password",
+    "error",
+    "home",
+    "page",
+    "product",
+    "searchresults"
+  ],
+  "options": {
+    "full_width": {
+      "name": "Show full width header",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "fixed": {
+      "name": "Fixed Header",
+      "type": "select",
+      "help": "",
+      "default": "Top Bar",
+      "options": [
+        {
+          "Top Bar": "Top Bar"
+        },
+        {
+          "Menu": "Menu"
+        },
+        {
+          "None": "None"
+        }
+      ]
+    },
+    "icons_size": {
+      "name": "Header Icon Size",
+      "type": "slider",
+      "help": "",
+      "default": 20,
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px"
+    },
+    "menu_font_size": {
+      "name": "Menu Font Size",
+      "type": "slider",
+      "help": "",
+      "default": 16,
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    "background": {
+      "name": "Header Background Color",
+      "type": "color",
+      "help": "",
+      "default": "#FFFFFF"
+    },
+    "vertical_menu": {
+      "name": "Show Main menu vertically",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "horizontal_alignment_menu": {
+      "name": "Main Menu Alignment",
+      "type": "select",
+      "help": "",
+      "default": "Center",
+      "options": [
+        {
+          "Left": "Left"
+        },
+        {
+          "Center (by Default)": "Center"
+        }
+      ]
+    },
+    "menu_background": {
+      "name": "Menu Background Color",
+      "type": "color",
+      "help": "",
+      "default": "#FFFFFF"
+    },
+    "topbar": {
+      "name": "Display Top Bar",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "topbar_text": {
+      "name": "Top bar text",
+      "type": "text",
+      "help": "",
+      "default": "Free shipping for purchases over <b>$50</b>"
+    },
+    "topbar_background": {
+      "name": "Top Bar Background",
+      "type": "color",
+      "help": "",
+      "default": "#333333"
+    },
+    "topbar_background_animated": {
+      "name": "Display Background Animated",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "topbar_background_1": {
+      "name": "Color Gradient 1",
+      "type": "color",
+      "help": "",
+      "default": "#E8F8C4"
+    },
+    "topbar_background_2": {
+      "name": "Color Gradient 2",
+      "type": "color",
+      "help": "",
+      "default": "#BFE73C"
+    },
+    "topbar_background_3": {
+      "name": "Color Gradient 3",
+      "type": "color",
+      "help": "",
+      "default": "#BCF6CE"
+    },
+    "topbar_background_4": {
+      "name": "Color Gradient 4",
+      "type": "color",
+      "help": "",
+      "default": "#B2D7F5"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

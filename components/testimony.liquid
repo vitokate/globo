@@ -1,0 +1,15 @@
+<div class="item">
+  <div class="testimonial-container rounded p-3">
+    <blockquote>{{ testimony.options.quote }}</blockquote>
+    {% if testimony.options.author != blank %}
+    {% if testimony.options.image['url'] != blank %}
+    <span class="img-container border rounded-circle d-block mb-2 mx-auto">
+      <img src="{{ testimony.options.image['url'] | resize: '50x50' }}" class="w-100" alt="{% if testimony.options.image['alt'] != blank %}{{ testimony.options.image['alt'] }}{% elsif testimony.options.author != blank %}{{ testimony.options.author }}{% else %}{{ store.name }}{% endif %}">
+    </span>
+    {% endif %}
+    <span class="testimonial-author text-muted mt-3 d-block">
+      {{- testimony.options.author -}}
+    </span>
+    {% endif %}
+  </div>
+</div>

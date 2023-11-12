@@ -1,0 +1,80 @@
+{
+  "name": "Slide",
+  "help": "",
+  "icon": "image",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "image_desktop": {
+      "name": "Image (Desktop)",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "image_mobile": {
+      "name": "Image (Mobile)",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "alignment": {
+      "name": "Alignment",
+      "type": "select",
+      "help": "",
+      "default": "center",
+      "options": [
+        {
+          "Left": "left"
+        },
+        {
+          "Center": "center"
+        },
+        {
+          "Right": "right"
+        }
+      ]
+    },
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Slide title"
+    },
+    "title_color": {
+      "name": "Title Color",
+      "type": "color",
+      "help": "",
+      "default": "#FFFFFF"
+    },
+    "button": {
+      "name": "Show button in mobile version",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    },
+    "link": {
+      "name": "Link",
+      "type": "link",
+      "help": "",
+      "default": "/"
+    },
+    "text_button": {
+      "name": "Button Text",
+      "type": "input",
+      "help": "",
+      "default": "Button text"
+    },
+    "button_color": {
+      "name": "Button Color",
+      "type": "color",
+      "help": "",
+      "default": "#000000"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

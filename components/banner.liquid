@@ -1,0 +1,23 @@
+{% capture banner_image %}
+  {% if banner.options.image_desktop['url'] != blank and banner.options.image_mobile['url'] != blank %}
+  <picture>
+    <source media="screen and (max-width: 575px)" srcset="{{ banner.options.image_mobile['url'] }}">
+    <source media="screen and (min-width: 576px)" srcset="{{ banner.options.image_desktop['url'] }}">
+    <img src="{{ banner.options.image_desktop['url'] }}" alt="{{ banner.options.image_desktop['alt'] | default: store.name | escape }}">
+  </picture>
+  {% elsif banner.options.image_mobile['url'] != blank and banner.options.image_desktop['url'] == blank %}
+  <img src="{{ banner.options.image_mobile['url'] }}" alt="{{ banner.options.image_mobile['alt'] | default: store.name | escape }}">
+  {% elsif banner.options.image_desktop['url'] != blank and banner.options.image_mobile['url'] == blank %}
+  <img src="{{ banner.options.image_desktop['url'] }}" alt="{{ banner.options.image_desktop['alt'] | default: store.name | escape }}">
+  {% else %}
+  <img src="//assets.jumpseller.com/public/placeholder/themes/simple/banner-placeholder.png" class="w-100" alt="{{ store.name }}">
+  {% endif %}
+{% endcapture %}
+
+<div class="banner mx-2 mb-3 trsn">
+  {%- if banner.options.link != blank %}
+  <a href="{{ banner.options.link }}" title="{{ banner.options.title | default: store.name }}" class="hover-link"></a>
+  {% endif %}
+  {{ banner_image }}
+  <h3>{{ banner.options.title }}</h3>
+</div>

@@ -1,0 +1,78 @@
+{% if options.av_popup %}
+<div id="age-verification-pop-up" class="age-verification">
+  <div class="age-verification-main age-verification_main">
+    <span class="age-verification_title">{{ options.av_popup_title }}</span>
+    <span class="age-verification_text">{{ options.av_popup_content }}</span>
+    <div class="age-verification_buttons">
+      <div class="age-verification_buttons_button-yes" onclick="ageVerificationConfirm()">{{ options.av_popup_button_yes }}</div>
+      <div class="age-verification_buttons_button-no" onclick="ageVerificationFailed()">{{ options.av_popup_button_no }}</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var ageCookieName = "age-verification-verified";
+
+function ageSetCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function ageGetCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function ageVerificationHide() {
+  var ageVerificationModel = document.getElementById('age-verification-pop-up');
+  ageVerificationModel.style.display = 'none';
+}
+function ageVerificationShow() {
+  var ageVerificationModel = document.getElementById('age-verification-pop-up');
+  ageVerificationModel.style.display = 'block';
+}
+
+function ageVerificationLoad() {
+    try {
+      var agePass = ageGetCookie(ageCookieName);
+      if (agePass != "") {
+        ageVerificationHide();
+        return;
+      }
+      else {
+        ageVerificationShow();
+      }
+    }
+    catch(err) {
+      ageVerificationShow();
+    }
+}
+
+function ageVerificationConfirm() {
+  ageSetCookie(ageCookieName, "pop-up-verified", 365);
+  ageVerificationHide();
+}
+
+function ageVerificationFailed() {
+  //window.history.back();
+  window.location.replace("{{ options.av_popup_button_no_redirect }}");
+}
+
+/** Run the verification after DOM has been loaded **/
+document.addEventListener("DOMContentLoaded", function(event) {
+  ageVerificationLoad();
+});
+</script>
+{% endif %}

@@ -1,0 +1,46 @@
+{
+  "name": "Banners",
+  "help": "",
+  "icon": "th-large",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "grid": {
+      "name": "Quantity of banners per row",
+      "type": "slider",
+      "help": "Choose how many banners will be displayed by row on desktop version.",
+      "default": 4,
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "unit": ""
+    },
+    "background": {
+      "name": "Background Color",
+      "type": "color",
+      "help": "",
+      "default": "#F8F9FA"
+    },
+    "hide_on_mobile": {
+      "name": "Hide on Mobile",
+      "type": "checkbox",
+      "help": "",
+      "default": false
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+    "banners": {
+      "type": "banner",
+      "multiple": true
+    }
+  }
+}

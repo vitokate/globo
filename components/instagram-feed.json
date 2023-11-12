@@ -1,0 +1,32 @@
+{
+  "name": "Instagram Feed",
+  "help": "",
+  "icon": "camera-polaroid",
+  "required": false,
+  "max_usage": 1,
+  "templates_in": [
+    "contactpage",
+    "home"
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Instagram"
+    },
+    "limit": {
+      "name": "Number of Instagram Photos",
+      "type": "slider",
+      "help": "",
+      "default": 12,
+      "min": 6,
+      "max": 12,
+      "step": 6,
+      "unit": ""
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

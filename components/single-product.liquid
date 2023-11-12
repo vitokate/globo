@@ -1,0 +1,24 @@
+<div id="store-product-{{ component.id }} " class="image-w-text container py-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 {% if component.options.product_alignment == 'Left' %}order-md-1{% else %}order-md-2{% endif %} ">
+      {% if products.product[component.options.permalink] != blank %}
+      {% render 'product_block', prod : products.product[component.options.permalink] %}
+      {% else %}
+      <div class="main-product-image mb-2">
+        <img class="img-fluid lazyload img-portfolio img-hover" src="//assets.jumpseller.com/public/placeholder/themes/simple/placeholder_square.jpg" alt="{% t 'Select a Product' %}">
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-md-6 {% if component.options.product_alignment == 'Left' %}order-md-2{% else %}order-md-1{% endif %} px-3 text-sm-center text-lg-left">
+      <h4 class="py-2">{{ component.options.title }}</h4>
+      <p>
+        {%- if component.options.text != blank %}
+        {{ component.options.text }}
+        {%- elsif products.product[component.options.permalink].description != blank %}
+        {{ products.product[component.options.permalink].description }}
+        {% endif %}
+        </p>
+      <a href="{{ products.product[component.options.permalink].url }}" class="btn btn-primary" title="{{ component.options.button_text }}">{{ component.options.button_text }}</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+{% capture slide_image %}
+  {% if slide.options.image_desktop['url'] != blank and slide.options.image_mobile['url'] != blank %}
+  <picture>
+    <source media="screen and (max-width: 575px)" srcset="{{ slide.options.image_mobile['url'] }}">
+    <source media="screen and (min-width: 576px)" srcset="{{ slide.options.image_desktop['url'] }}">
+    <img src="{{ slide.options.image_desktop['url'] }}" alt="{{ slide.options.image_desktop['alt'] | default: slide.options.title }}">
+  </picture>
+  {% elsif slide.options.image_mobile['url'] != blank and slide.options.image_desktop['url'] == blank %}
+  <img src="{{ slide.options.image_mobile['url'] }}" alt="{{ slide.options.image_mobile['alt'] | default: slide.options.title }}">
+  {% elsif slide.options.image_desktop['url'] != blank and slide.options.image_mobile['url'] == blank %}
+  <img src="{{ slide.options.image_desktop['url'] }}" alt="{{ slide.options.image_desktop['alt'] | default: slide.options.title }}">
+  {% else %}
+  <picture>
+    <source media="screen and (max-width: 575px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/mobile-slider-3.jpg">
+    <source media="screen and (min-width: 576px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-3.jpg">
+    <img src="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-3.jpg" alt="{% t 'Welcome to' %} {{ store.name }}" class="lazy">
+  </picture>
+  {% endif %}
+{% endcapture %}
+
+<div class="item">
+  {%- if slide.options.text_button == blank and slide.options.link != blank %}
+    <a href="{{ slide.options.link }}" title="{{ slide.options.text_button }}" class="hover-link"></a>
+  {% endif -%}
+  <div class="layer" style="background-color: {{ component.options.background_color }}; opacity: {{ component.options.background_opacity }}%;"></div>
+  <div class="carousel-info {{ slide.options.alignment | downcase }}">
+    <div class="carousel-info-inner px-md-0 px-4">
+      <h2 style="color: {{ slide.options.title_color }}; font-size:{{ component.options.title_size }}px;">{{ slide.options.title }}</h2>
+      {% if slide.options.text_button != blank %}
+      <a href="{{ slide.options.link }}" class="btn mt-3 {% unless slide.options.button %}d-none{% endunless %} d-sm-inline-block" style="background-color:{{ slide.options.button_color }}; color: {{ slide.options.button_color | color_contrast: '#f1f1f1', '#090909' }};">
+        {{- slide.options.text_button -}}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+  {{ slide_image }}
+</div>

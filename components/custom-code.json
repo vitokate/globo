@@ -1,0 +1,40 @@
+{
+  "name": "Custom Code",
+  "help": "",
+  "icon": "code",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "custom_code": {
+      "name": "Custom Code",
+      "type": "text",
+      "help": "Use this for external apps or your custom design.",
+      "default": ""
+    },
+    "size": {
+      "name": "Size",
+      "type": "select",
+      "help": "",
+      "default": "Container",
+      "options": [
+        {
+          "Container": "Container"
+        },
+        {
+          "Full size": "Full size"
+        }
+      ]
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

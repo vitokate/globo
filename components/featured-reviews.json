@@ -1,0 +1,93 @@
+{
+  "name": "Featured Reviews",
+  "help": "",
+  "icon": "stars",
+  "required": false,
+  "max_usage": 1,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Featured Reviews"
+    },
+    "display": {
+      "name": "Choose how to display the featured reviews",
+      "type": "select",
+      "help": "",
+      "default": "slider",
+      "options": [
+        {
+          "Slider": "slider"
+        },
+        {
+          "Grid": "grid"
+        }
+      ]
+    },
+    "alignment": {
+      "name": "Reviews alignment",
+      "type": "select",
+      "help": "",
+      "default": "text-left",
+      "options": [
+        {
+          "Left": "text-left"
+        },
+        {
+          "Center": "text-center"
+        }
+      ]
+    },
+    "limit": {
+      "name": "Quantity of reviews to display",
+      "type": "slider",
+      "help": "",
+      "default": 8,
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "unit": ""
+    },
+    "image": {
+      "name": "Display product image",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "date": {
+      "name": "Display creation date",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "date_format": {
+      "name": "Format of the creation date",
+      "type": "select",
+      "help": "",
+      "default": "%d-%m-%Y",
+      "options": [
+        {
+          "dd-mm-yyyy": "%d-%m-%Y"
+        },
+        {
+          "mm-dd-yyyy": "%m-%d-%Y"
+        },
+        {
+          "yyyy-mm-dd": "%Y-%m-%d"
+        }
+      ]
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

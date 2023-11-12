@@ -1,0 +1,13 @@
+<div id="banners-{{ component.id }}" class="container-fluid pt-4 pb-3 {% if component.options.hide_on_mobile %}d-none  d-sm-none d-md-none d-lg-block{% endif %}" style="background-color: {{ component.options.background }};">
+  <div class="component_banners container">
+    <div class="row">
+      {% for banner in component.subcomponents.banners %}
+        <div class="col-12 {% if component.options.grid == 2 %}col-md-6{% elsif component.options.grid == 3 %}col-md-4{% elsif component.options.grid == 4 %}col-sm-6 col-md-3{% endif %} my-2 px-1">
+          {% render 'components/banner', banner: banner %}
+        </div>
+      {% else %}
+        {% render 'placeholder_banners' %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

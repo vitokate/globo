@@ -1,0 +1,10 @@
+<div class="col-md-4 mb-4 px-2 text-center">
+    <a href="{{ blog_post.url }}" title="{{ blog_post.title }}" class="mb-md-0 mb-4">
+    {% if blog_post.images == empty %}
+        <img class="img-fluid" src="//assets.jumpseller.com/public/placeholder/themes/simple/blog-placeholder.png" alt="{{ blog_post.title }}">
+    {% else %}
+        <img class="img-fluid" src="{{ blog_post.images.first | thumb: '360x250' }}" srcset="{{ blog_post.images.first | thumb: '360x250' }} 1x,{{ blog_post.images.first | thumb: '720x500' }} 2x" alt="{{ blog_post.title }}" />
+    {% endif %}
+    <h5 class="p-2 m-0">{{ blog_post.title }}</h5>
+    </a>
+</div>

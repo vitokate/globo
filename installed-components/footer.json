@@ -1,0 +1,106 @@
+{
+  "type": "footer",
+  "placement": "bottom",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "logo": {
+      "url": null,
+      "alt": null
+    },
+    "background_color": "#F9F9F9",
+    "powered_by": false
+  },
+  "children": [
+    {
+      "property": "footer-about",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "title": "About us",
+        "footer_description": "<div>\n  <h2>Librería Globo</h2>\n  <p>Compromiso y calidad para nuestros artistas.</p>\n\n  <h3>Rancagua</h3>\n  <p><strong>Dirección:</strong> Bueras #439 (Frente al Mall De La Mujer)</p>\n  <p><strong>Horario:</strong> Lunes a Viernes, 9:30 - 19:00 (Horario Continuo)</p>\n\n  <h3>Machalí</h3>\n  <p><strong>Dirección:</strong> Av. San Juan 1157, Local 25 ( Nuevo Stripcenter Unimarc )</p>\n  <p><strong>Horario:</strong> Lunes a Domingo, 10:30 - 20:30</p>\n\n  <p>Visita nuestras tiendas para una experiencia única en arte y papelería.</p>\n</div>"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "footer-menu-1",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "title": "Categories"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "footer-menu-2",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "title": "Menú"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "footer-newsletter",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "title": "Redes Sociales",
+        "enable_subscribe": false,
+        "email_placeholder": null,
+        "title_social": "Follow us!"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "payment-methods",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "webpay_payment": true,
+        "chek_payment": false,
+        "khipu_payment": false,
+        "servipag_payment": false,
+        "mach_payment": false,
+        "flow_payment": false,
+        "payzen_payment": false,
+        "caja_vecina_payment": false,
+        "multicaja_payment": false,
+        "pse_payment": false,
+        "baloto_payment": false,
+        "epayco_payment": false,
+        "efecty_payment": false,
+        "oxxo_payment": false,
+        "mercadopago_payment": false,
+        "multibanco_payment": false,
+        "mbway_payment": false,
+        "payu_payment": false,
+        "ideal_payment": false,
+        "skrill_payment": false,
+        "stripe_payment": false,
+        "apple_payment": false,
+        "bitcoin_payment": false,
+        "visa_payment": true,
+        "mastercard_payment": true,
+        "american_payment": true,
+        "paypal_payment": true,
+        "diners_payment": false,
+        "bank_transfer_payment": false,
+        "manual_payment": false,
+        "klap_payment": false,
+        "klarna_payment": false
+      },
+      "children": [
+
+      ]
+    }
+  ]
+}

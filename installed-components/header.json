@@ -1,0 +1,27 @@
+{
+  "type": "header",
+  "placement": "top",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "full_width": true,
+    "fixed": "Menu",
+    "icons_size": 20,
+    "menu_font_size": 16,
+    "background": "#FFFFFF",
+    "vertical_menu": true,
+    "horizontal_alignment_menu": "Center",
+    "menu_background": "#FFFFFF",
+    "topbar": true,
+    "topbar_text": "ENVÍOS A TODO CHILE - ENVÍO GRATIS POR COMPRAS SOBRE $80.000",
+    "topbar_background": "#333333",
+    "topbar_background_animated": false,
+    "topbar_background_1": "#E8F8C4",
+    "topbar_background_2": "#BFE73C",
+    "topbar_background_3": "#BCF6CE",
+    "topbar_background_4": "#B2D7F5"
+  },
+  "children": [
+
+  ]
+}

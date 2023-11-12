@@ -1,0 +1,18 @@
+{
+  "type": "featured-reviews",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "title": "Reseñas Clientes",
+    "display": "grid",
+    "alignment": "text-center",
+    "limit": 16,
+    "image": true,
+    "date": true,
+    "date_format": "%d-%m-%Y"
+  },
+  "children": [
+
+  ]
+}

@@ -1,0 +1,25 @@
+<div id="big-banner-{{ component.id }}" class="{% if component.options.size == 'Container' %}container{% else %}m-0{% endif %} py-0">
+<div class="col-12 {% if component.options.size == 'Full size' %}px-0{% endif %}">
+  {% if component.options.link != blank %}<a href="{{ component.options.link }}" class="d-block hover-link"></a>{% endif %}
+  <img src="{{ component.options.image['url'] | default: '//assets.jumpseller.com/public/placeholder/themes/simple/bigbanner-placeholder.png' }}" class="w-100 lazy text-center bigbanner-{{ component.id }} up" alt="{{ component.options.image['alt'] | default: store.name }}">
+</div>
+</div>
+{% if component.options.parallax %}
+<script>
+$(function() {
+  const bannerImage = document.querySelector("#big-banner-{{ component.id }}");
+  new simpleParallax(bannerImage, {
+    {% if component.options.direction == 'Right' %}
+    orientation: "right"
+    {% elsif component.options.direction == 'Up' %}
+    delay: 0.6,
+    transition: 'cubic-bezier(0,0,0,1)'
+    {% elsif component.options.direction == 'Down' %}
+    orientation: "down",
+    scale: 1.5,
+    transition: 'cubic-bezier(0,0,0,1)'
+    {% endif %}
+  });
+});
+</script>
+{% endif %}

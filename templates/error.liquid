@@ -1,0 +1,27 @@
+{{ index_for_top_components }}
+
+<div class="container mt-lg-0 my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-header">{{ error.title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <section class="col-md-8 offset-md-2 text-center">
+            <div class="alert bg-danger text-white" role="alert">
+                <p>{{ error.message }}</p>
+            </div>
+            {% if error.link == blank %}
+                <a class="btn btn-secondary" href="#" onclick="history.go(-1); return false;" title="&larr; {% t 'Go back & Keep Shopping' %}">&larr;
+                    {% t "Go back & Keep Shopping" %}</a>
+            {% else %}
+                <a href="{{ error.link }}" class="btn btn-secondary" title="&larr; {% t 'Go back & Keep Shopping' %}">&larr;
+                    {% t "Go back & Keep Shopping" %}</a>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+{{ index_for_components }}
+
+{{ index_for_bottom_components }}

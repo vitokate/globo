@@ -1,0 +1,44 @@
+{{ index_for_top_components }}
+
+<div class="container blog mt-lg-0 my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-header">{{ page.title }}</h1>
+        </div>
+        {% if page.images.first != blank %}
+            <div class="col-12 mb-4">
+                <img src="{{ page.images.first }}" class="img-fluid"/>
+            </div>
+        {% endif %}
+        <div class="col-12 page-body mb-5">{{ page.body }}</div>
+        <!-- Blog Entries Column -->
+        <div class="col-12 blog_list">
+            <div class="row mb-md-5 mb-4 mx-n2 no-gutters">
+                {% if pages.categories.category["Post"] == blank %}
+                    <section class="col-md-8 offset-md-2 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>{% t "There aren't any articles available in our blog" %}.</h5>
+                                <a href="{{ store.url }}" class="btn btn-secondary mt-3" title="&larr; {% t 'Go back & Keep Shopping' %}">&larr;
+                                    {% t "Go back & Keep Shopping" %}</a>
+                            </div>
+                        </div>
+                    </section>
+                {% else %}
+                    {% paginate pages.categories.category["Post"].pages by options.page_post_per_page %}
+                        {% for paged_page in paged.pages %}
+                            {% render "blog_block", blog_post: paged_page %}
+                        {% endfor %}
+
+                        <div class="clearfix"></div>
+                        {% render 'pagination', paged: paged %}
+                    {% endpaginate %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ index_for_components }}
+
+{{ index_for_bottom_components }}

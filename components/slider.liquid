@@ -1,0 +1,26 @@
+<div id="component_slider-{{ component.id }}" class="component_slider mb-0 mb-md-0">
+
+  <div class="slide-slider slide-slider-{{ component.id }} owl-carousel d-flex justify-content-center">
+  {% for slide in component.subcomponents.slides %}
+    {% render 'components/slide', slide: slide %}
+  {% else %}
+    {% render 'placeholder_slider' %}
+  {% endfor %}
+  </div>
+</div>
+<script>
+    var autoHeight = $('.slide-slider-{{ component.id }} .item').length != 1;
+
+    $('.slide-slider-{{ component.id }}').owlCarousel({
+      items:1,
+      loop:{% if component.options.loop and component.subcomponents.slides.size > 1 %}true{% else %}false{% endif %},
+      margin:0,
+      autoHeight:autoHeight,
+      autoplay: {% if component.options.autoplay %}true{% else %}false{% endif %},
+      {% if component.options.autoplay %}autoplayTimeout: {{ component.options.autoplay_speed }},{% endif %}
+      autoplayHoverPause:{% if component.options.pause %}true,{% else %}false,{% endif %}
+      dots: true,
+      nav:true,
+      navText: ["<i class='ph ph-caret-left'></i>", "<i class='ph ph-caret-right'></i>"]
+    })
+</script>

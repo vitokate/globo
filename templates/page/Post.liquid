@@ -1,0 +1,50 @@
+{{ index_for_top_components }}
+
+<div class="container blog blog-post mt-lg-0 my-5">
+    <div class="row">
+        <div class="col-md-10 page mx-auto">
+            <div class="row">
+                <div class="col-12 ">
+                    <h1 class="page-header">{{ page.title }}</h1>
+                </div>
+                {% if options.display_date %}
+                    <div class="col-12 text-center font-italic mb-3">{{ page.date | date: '%d %B, %Y' }}</div>
+                {% endif %}
+            </div>
+            {% if page.images == empty %}
+                <img class="img-fluid" src="//assets.jumpseller.com/public/placeholder/themes/simple/placeholder-730x400.png" alt="{{ page.title }}">
+            {% else %}
+                <img class="img-fluid" src="{{ page.images.first }}" alt="{{ page.title }}"/>
+            {% endif %}
+            <div class="page-body">{{ page.body }}</div>
+        </div>
+
+        <div class="col-md-10 mx-auto mt-5">
+            <div class="mb-4">
+                <div class="text-left">
+                    <h5>{% t 'Latest Articles' %}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for post in pages.categories.category["Post"].pages limit: 2 %}
+                        <li class="list-group-item px-0">
+                            <a href="{{ post.url }}" title="{{ post.title | escape }}">
+                                {{ post.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ index_for_components }}
+
+{% if options.read_progress %}
+    <script async src="//assets.jumpseller.com/public/readprogress/readprogress.js" type="text/javascript"></script>
+    <script async type="text/javascript">
+        scrollpup({background: "var(--primary-color)"})
+    </script>
+{% endif %}
+
+{{ index_for_bottom_components }}

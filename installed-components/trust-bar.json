@@ -1,0 +1,19 @@
+{
+  "type": "trust-bar",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "grid": 3,
+    "enable_icons": false,
+    "loop": false,
+    "autoplay": true,
+    "speed": 3000,
+    "background": "#FFFFFF",
+    "icons_background_color": "#F4F4F4",
+    "spacing": "py-4"
+  },
+  "children": [
+
+  ]
+}

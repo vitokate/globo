@@ -1,0 +1,125 @@
+/* =============================================================
+Here you will find "Color Pickers" CSS attributes. You can change them by going to your Admin Panel at Themes > Options.
+The Visual Editor will automatically replace the contents of this file (mostly colors) in the preview with new option values
+chosen by the user, allowing them to be previewed quickly.
+This file should be included unconditionally in the theme's layout template, preferably before all other stylesheets.
+Documentation: https://jumpseller.com/support/creating-a-custom-html-theme#special-variables
+
+© Copyright Simple Theme. Powered by Jumpseller
+============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family={{ options.general_font | split: "," | first | strip | url_encode }}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family={{ options.titles_font | split: "," | first | strip | url_encode }}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family={{ options.store_name_font | split: "," | first | strip | url_encode }}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+:root {
+  --store-background-color: {{ options.store_background }};
+  --store-background-color-contrast: {{ options.store_background | color_contrast: '#f1f1f1', '#090909' }};
+  --store-background-color-contrast-faint: {{ options.store_background | color_contrast: '#f1f1f1', '#090909' | color_opacity: 0.15 }};
+  --store-background-color-contrast-middle: {{ options.store_background | color_contrast: '#f1f1f1', '#090909' | color_opacity: 0.50 }};
+  --main-button-color: {{ options.main_button_color }};
+  --main-button-color-contrast: {{ options.main_button_color | color_contrast: '#f1f1f1', '#090909' }};
+  --secondary-button-color: {{ options.secondary_button_color }};
+  --secondary-button-color-contrast: {{ options.secondary_button_color | color_contrast: '#f1f1f1', '#090909' }};
+  --primary-color: {{ options.primary_color }};
+  --links-color: {{ options.link_color }};
+  --links-color-hover: {{ options.link_color_hover }};
+  --cart-notification-color: {{ options.cart_notification_color }};
+  --cart-notification-contrast: {{ options.cart_notification_color | color_contrast: '#f1f1f1', '#090909' }};
+  --cart-notification-contrast-img: url('{{ options.cart_notification_color | color_contrast: "//assets.jumpseller.com/public/placeholder/themes/simple/circle-check-light.svg", "//assets.jumpseller.com/public/placeholder/themes/simple/circle-check-dark.svg" }}');
+  --sale-tag-color: {{ options.sale_tag }};
+  --sale-tag-color-contrast: {{ options.sale_tag | color_contrast: '#f1f1f1', '#090909' }};
+  --product-review-color-marked: {{ options.product_review_color_marked }};
+  --store-whatsapp-color-background: {{ options.store_whatsapp_color_background }};
+  --store-whatsapp-color-background-contrast: {{ options.store_whatsapp_color_background | color_contrast: '#ffffff', '#222222' }};
+  --store-whatsapp-color-background-hover: {{ options.store_whatsapp_color_background_hover }};
+  --store-whatsapp-color-background-hover-contrast: {{ options.store_whatsapp_color_background_hover | color_contrast: '#ffffff', '#222222' }};
+
+  --general-font: {{ options.general_font }};
+  --general-font-size: {{ options.general_font_size }}px;
+  --titles-font: {{ options.titles_font }};
+  --title-font-size: {{ options.title_font_size }}px;
+  --store-name-font: {{ options.store_name_font }};
+  --store-name-font-size: {{ options.store_name_font_size }}px;
+  --block-title-font-size: {{ options.block_title_font_size }}px;
+
+  --av-popup-bg: {{ options.av_popup_background_popup_color }};
+  --av-popup-color: {{ options.av_popup_background_popup_color | color_contrast: "#FFFFFF", "#222222" }};
+  --av-popup-yes-bg: {{ options.av_popup_button_yes_color }};
+  --av-popup-yes-color: {{ options.av_popup_button_yes_color | color_contrast: "#FFFFFF", "#222222" }};
+  --av-popup-no-bg: {{ options.av_popup_button_no_color }};
+  --av-popup-no-color: {{ options.av_popup_button_no_color | color_contrast: "#FFFFFF", "#222222" }};
+}
+
+{% if options.not_available_image %}
+.product-block .not-available img {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+{% endif %}
+
+{% if options.product_shadow %}
+.product-block:hover {
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+}
+{% endif %}
+
+{% case options.pb_alignment %}
+{% when "text-left" %}
+.product-block {
+  text-align: left;
+}
+{% when "text-center" %}
+.product-block {
+  text-align: center !important;
+}
+.product-block .color-swatch fieldset.colors,
+.product-block .caption .product-block-rating-container {
+  justify-content: center;
+}
+{% endcase %}
+
+{% if options.store_whatsapp_animation %}
+.store-whatsapp {
+  right: 20px;
+  bottom: 90px;
+  animation-play-state: paused;
+}
+.store-whatsapp::before {
+  position: absolute;
+  padding: 25px;
+  border: 5px solid #25d366;
+  border-radius: 50%;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: pulse-border;
+  animation-timing-function: ease-out;
+  content: "";
+  opacity: 0.75;
+}
+{% endif %}
+
+{% case options.store_whatsapp_position %}
+{% when "top-right" %}
+.store-whatsapp {
+  top: 20px;
+  right: 20px;
+}
+{% when "top-left" %}
+.store-whatsapp {
+  top: 20px;
+  left: 20px;
+}
+{% when "bottom-right" %}
+.store-whatsapp {
+  right: 20px;
+  bottom: 20px;
+}
+{% when "bottom-left" %}
+.store-whatsapp {
+  bottom: 20px;
+  left: 20px;
+}
+{% endcase %}

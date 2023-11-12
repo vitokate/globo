@@ -1,0 +1,50 @@
+<div class="container-fluid py-5">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="block-header text-center">{{ component.options.title }}</h2>
+    </div>
+    {% if social.instagram.url != blank %}
+    <div id="instagram-{{ component.id }}" class="component_instagram col-12"></div>
+      <a href="{{ social.instagram.url }}" target="_blank" title="{% t 'Follow Us' %} @{{ social.instagram.handler }}" class="btn btn-outline-dark mt-5">
+        <i class="ph ph-instagram-logo"></i> {% t "Follow Us" %}
+      </a>
+    {% else %}
+    <div class="text-center mt-5 col-12">
+      <h5>{% t "You need to login in your Instagram account" %}</h5>
+      <a href="{{ store.url }}/admin/settings/general/store_info" class="btn btn-primary mt-5" target="_blank"><i class="fa-brands fa-instagram"></i> {% t "Login here" %}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% if social.instagram.url != blank %}
+<!-- Instagram code -->
+<script>
+const instagramContainer = document.getElementById('instagram-{{ component.id }}');
+instagramContainer.innerHTML = '';
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/instagram-app/media?count={{ component.options.limit }}', true);
+xhr.onreadystatechange = function() {
+  if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+    const json = JSON.parse(xhr.responseText);
+    json.posts.slice(0, {{ component.options.limit }}).forEach(post => {
+      const url = post.thumbnail_url;
+      const shortcode = post.shortcode;
+
+      const newElement = document.createElement('div');
+      newElement.className = 'insta_img lazy';
+      newElement.style.backgroundImage = `url(${url})`;
+
+      const newElementLink = document.createElement('a');
+      newElementLink.href = post.permalink;
+      newElementLink.target = '_blank';
+      newElementLink.appendChild(newElement);
+
+      instagramContainer.appendChild(newElementLink);
+    });
+  }
+};
+xhr.send();
+
+</script>
+{% endif %}

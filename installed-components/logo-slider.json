@@ -1,0 +1,496 @@
+{
+  "type": "logo-slider",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "title": "Nuestras Marcas",
+    "background": "#FFFFFF",
+    "grid": 6,
+    "loop": true,
+    "autoplay": true,
+    "speed": 3000
+  },
+  "children": [
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132147603/601181f71b7ff00004506a9d.png",
+          "alt": "ohuhu"
+        },
+        "link": "ohuhu"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132147605/5fd730f04c2ff506f0b88eb20b7f3860.jpg",
+          "alt": "Faber Castell"
+        },
+        "link": "faber-castell"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148013/images.png",
+          "alt": "Bruynzeel"
+        },
+        "link": "bruynzeel"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148015/logo_colon.png",
+          "alt": "Colon"
+        },
+        "link": "colon"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148017/1200px-Sharpie_markers_logo.svg.png",
+          "alt": "Sharpie"
+        },
+        "link": "sharpie"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148043/1caababa83149327a5e81c4a624a70c2.jpg",
+          "alt": "Paper Mate"
+        },
+        "link": "paper-mate"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148045/Monami_logo.png",
+          "alt": null
+        },
+        "link": "monami"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148047/fea63c1515d8ac144cab0aeb6287d93c.w3464.h3464.jpg",
+          "alt": null
+        },
+        "link": "himi"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148068/logo-van-gogh.jpg",
+          "alt": null
+        },
+        "link": "van-gogh"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148486/jBfpiIbye7g8ZPInFF1txSnjBVzaTOS7.jpg",
+          "alt": null
+        },
+        "link": "torre"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148488/descarga.png",
+          "alt": null
+        },
+        "link": "viarco"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148490/images%20%281%29.png",
+          "alt": null
+        },
+        "link": "brunnen"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132148492/ViViVa_Logo_dc22e983-c410-4697-a87f-25696a1a9e7c.jpg",
+          "alt": null
+        },
+        "link": "viviva-colors"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132150184/1661249071413.jpg",
+          "alt": null
+        },
+        "link": "tere-gott"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132150186/filgo_logo.png",
+          "alt": null
+        },
+        "link": "filgo"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132150188/Winsor_newton_textlogo.png",
+          "alt": null
+        },
+        "link": "winsor-newton"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132157804/descarga%20%281%29.png",
+          "alt": null
+        },
+        "link": "tinta-acuarela/drphmartins"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132157806/descarga%20%282%29.png",
+          "alt": null
+        },
+        "link": "karin"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132157808/amsterdam-all-acrylics-logo-vector.png",
+          "alt": null
+        },
+        "link": "amsterdam-1"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132157822/0313ad293dbd36b5d3f18c646e1c1e97.w600.h600.png",
+          "alt": null
+        },
+        "link": "copic"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132157824/334-3341585_felt-tip-pen-edding-1200-basic-colors-edding.png",
+          "alt": null
+        },
+        "link": "edding"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132157826/2560px-Prismacolor_logo.svg.png",
+          "alt": null
+        },
+        "link": "prismacolor"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132158298/POSCA_1.png",
+          "alt": null
+        },
+        "link": "posca"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132158300/sakura-logo-83768DBF0F-seeklogo.com.png",
+          "alt": null
+        },
+        "link": "sakura-koi"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132158302/lyra-germany-vector-logo.png",
+          "alt": null
+        },
+        "link": "lyra"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132158304/canson-logo-0.png",
+          "alt": null
+        },
+        "link": "canson"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132159867/2560px-Derwent_brand_logo.svg.png",
+          "alt": null
+        },
+        "link": "derwent"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/132160666/2560px-Tombow_pencil_logo.svg.png",
+          "alt": null
+        },
+        "link": "tombow"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/133053659/1280px-Zebra_Pen_Company_logo.svg.png",
+          "alt": null
+        },
+        "link": "zebra-mildliner"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/133053661/descarga.png",
+          "alt": null
+        },
+        "link": "princeton"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/133053663/46210e6dca8a02d2ce40b03966cd0108.webp",
+          "alt": null
+        },
+        "link": "daler-rowney"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "logos",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/133053665/descarga%20%281%29.png",
+          "alt": null
+        },
+        "link": "artel"
+      },
+      "children": [
+
+      ]
+    }
+  ]
+}

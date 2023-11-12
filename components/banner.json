@@ -1,0 +1,39 @@
+{
+  "name": "Banner",
+  "help": "",
+  "icon": "image",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "image_desktop": {
+      "name": "Image (Desktop)",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "image_mobile": {
+      "name": "Image (Mobile)",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Banner Title"
+    },
+    "link": {
+      "name": "Link",
+      "type": "link",
+      "help": "",
+      "default": null
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

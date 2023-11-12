@@ -1,0 +1,51 @@
+{%- capture product_display_type -%}
+{% if component.options.display == 'slider' %}product-slider owl-carousel{% else %}row mx-md-n2 no-gutters {% if options.product_block_2_columns %}mx-n1{% endif %}{% endif %}
+{% endcapture %}
+{%- capture product_display_grid -%}
+{% if component.options.display == 'slider' %}item{% else %}col-lg-3 {% if options.product_block_2_columns %}col-6 px-md-2 px-1{% else %}col-sm-6 px-2{% endif %} mb-2{% endif %}
+{% endcapture %}
+<div class="container py-5">
+<h2 class="block-header text-center">{{ component.options.title }}</h2>
+  <div class="{{ product_display_type }}">
+    {% for prod in products.latest limit: component.options.limit %}
+      <div class="{{ product_display_grid }}">
+        {% render 'product_block', prod: prod %}
+      </div>
+    {% else %}
+      {% for placeholder in (1..4) %}
+      <div class="{{ product_display_grid }}">
+      {% render 'placeholder_product_block' %}
+      </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+{% if component.options.display == 'slider' %}
+  <script>
+    $('#component-{{ component.id }} .product-slider').owlCarousel({
+      loop:false,
+      margin:30,
+      navText: ["<i class='ph ph-caret-left'></i>", "<i class='ph ph-caret-right'></i>"],
+      nav:true,
+      dots: true,
+      thumbs: false,
+      responsive:{
+        0:{
+          items:{% if options.product_block_2_columns %}2{% else %}1{% endif %},
+          margin:8,
+        },
+        350:{
+          items:2,
+          margin:8,
+        },
+        768:{
+          items:3,
+          margin:15
+        },
+        1000:{
+          items:4
+        }
+      }
+    })
+  </script>
+{% endif %}

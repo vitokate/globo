@@ -1,0 +1,56 @@
+<div class="item">
+  <a href="{{ store.url }}">
+    <div class="layer" style="background-color: {{ component.options.background_color }}; opacity: {{ component.options.background_opacity }}%;"></div>
+    <div class="carousel-info right">
+      <div class="carousel-info-inner px-md-0 px-4 text-left">
+        <h2 style="color:white; font-size:{{ component.options.title_size }}px;">{% t 'Welcome to' %} {{ store.name }}</h2>
+        <span class="btn btn-primary mt-3">
+            {% t 'Go to collection' %}
+        </span>
+      </div>
+    </div>
+    <picture>
+      <source media="screen and (max-width: 575px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/mobile-slider-3.jpg">
+      <source media="screen and (min-width: 576px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-3.jpg">
+      <img src="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-3.jpg" alt="{% t 'Welcome to' %} {{ store.name }}" class="lazy">
+    </picture>
+  </a>
+</div>
+
+<div class="item">
+  <a href="{{ store.url }}">
+    <div class="layer" style="background-color: {{ component.options.background_color }}; opacity: {{ component.options.background_opacity }}%;"></div>
+    <div class="carousel-info left">
+      <div class="carousel-info-inner px-md-0 px-4">
+        <h2 style="color:white;font-size:{{ component.options.title_size }}px;">{% t 'New Design' %} {{ store.name }}</h2>
+        <span class="btn btn-primary mt-3">
+            {% t 'Go to collection' %}
+        </span>
+      </div>
+    </div>
+    <picture>
+      <source media="screen and (max-width: 575px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/mobile-slider-2.jpg">
+      <source media="screen and (min-width: 576px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-2.jpg">
+      <img src="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-2.jpg" alt="{% t 'Welcome to' %} {{ store.name }}" class="lazy">
+    </picture>
+  </a>
+</div>
+
+<div class="item">
+  <a href="{{ store.url }}">
+    <div class="layer" style="background-color: {{ component.options.background_color }}; opacity: {{ component.options.background_opacity }}%;"></div>
+    <div class="carousel-info left">
+      <div class="carousel-info-inner px-md-0 px-4">
+        <h2 style="color:white;font-size:{{ component.options.title_size }}px;">{% t 'Welcome to' %} {{ store.name }}</h2>
+        <span class="btn btn-primary mt-3">
+            {% t 'Go to collection' %}
+        </span>
+      </div>
+    </div>
+    <picture>
+      <source media="screen and (max-width: 575px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/mobile-slider-1.jpg">
+      <source media="screen and (min-width: 576px)" srcset="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-1.jpg">
+      <img src="//assets.jumpseller.com/public/placeholder/themes/simple/main-slider-1.jpg" alt="{% t 'Welcome to' %} {{ store.name }}" class="lazy">
+    </picture>
+  </a>
+</div>

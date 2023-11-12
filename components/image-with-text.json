@@ -1,0 +1,64 @@
+{
+  "name": "Image with Text",
+  "help": "",
+  "icon": "image",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "image": {
+      "name": "Image",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "image_alignment": {
+      "name": "Image Alignment",
+      "type": "select",
+      "help": "",
+      "default": "Left",
+      "options": [
+        {
+          "Left": "Left"
+        },
+        {
+          "Right": "Right"
+        }
+      ]
+    },
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Section title"
+    },
+    "text": {
+      "name": "Text",
+      "type": "text",
+      "help": "",
+      "default": "You can use this section to describe a store feature, an article or a product."
+    },
+    "button_link": {
+      "name": "Button link",
+      "type": "link",
+      "help": "",
+      "default": "/"
+    },
+    "button_text": {
+      "name": "Button label",
+      "type": "input",
+      "help": "",
+      "default": "Button label"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

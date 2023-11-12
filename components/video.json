@@ -1,0 +1,63 @@
+{
+  "name": "Video",
+  "help": "",
+  "icon": "video",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "video": {
+      "name": "Embed Video Code",
+      "type": "text",
+      "help": "Copy and paste iframe from Youtube, Vimeo or another Platform.",
+      "default": ""
+    },
+    "size": {
+      "name": "Desktop Size",
+      "type": "select",
+      "help": "",
+      "default": "800px",
+      "options": [
+        {
+          "600px": "600px"
+        },
+        {
+          "700px": "700px"
+        },
+        {
+          "800px": "800px"
+        },
+        {
+          "Full size": "100%"
+        }
+      ]
+    },
+    "alignment": {
+      "name": "Alignment",
+      "type": "select",
+      "help": "",
+      "default": "m-auto",
+      "options": [
+        {
+          "Left": "mr-auto"
+        },
+        {
+          "Center": "m-auto"
+        },
+        {
+          "Right": "ml-auto"
+        }
+      ]
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

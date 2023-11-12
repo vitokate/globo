@@ -1,0 +1,93 @@
+{
+  "type": "banners",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "grid": 4,
+    "background": "#F8F9FA",
+    "hide_on_mobile": true
+  },
+  "children": [
+    {
+      "property": "banners",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image_desktop": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/131279813/BANNER%20PEQUE%C3%91O%20ACUARELA.jpg",
+          "alt": null
+        },
+        "image_mobile": {
+          "url": null,
+          "alt": null
+        },
+        "title": null,
+        "link": "acuarela"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "banners",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image_desktop": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/131279817/BANNER%20PEQUE%C3%91O%20arcillas.jpg",
+          "alt": null
+        },
+        "image_mobile": {
+          "url": null,
+          "alt": null
+        },
+        "title": null,
+        "link": "arcillas-polimericas"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "banners",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image_desktop": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/131279821/BANNER%20PEQUE%C3%91O%20Croqueras.jpg",
+          "alt": null
+        },
+        "image_mobile": {
+          "url": null,
+          "alt": null
+        },
+        "title": null,
+        "link": "papeles-y-libretas"
+      },
+      "children": [
+
+      ]
+    },
+    {
+      "property": "banners",
+      "identifier": "",
+      "visibility": true,
+      "options": {
+        "image_desktop": {
+          "url": "https://assets.jumpseller.com/store/globo/themes/654189/options/131279825/BANNER%20PEQUE%C3%91O%20Lapices.jpg",
+          "alt": null
+        },
+        "image_mobile": {
+          "url": null,
+          "alt": null
+        },
+        "title": null,
+        "link": "lapices"
+      },
+      "children": [
+
+      ]
+    }
+  ]
+}

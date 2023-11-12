@@ -1,0 +1,166 @@
+<div class="container cart revieworder py-5">
+  {% if order.products == empty %}
+  <div class="row">
+    <section class="col-12">
+      <div class="bg-info alert text-white">{% t "The shopping cart is currently empty. You can go back and start adding products." %}</div>
+      <a href="{{ store.url }}" class="btn btn-secondary" title="&larr; {% t 'Go back & Keep Shopping' %}">&larr; {% t "Go back & Keep Shopping" %}</a>
+    </section>
+  </div>
+  {% else %}
+
+  <!-- Review Order Table -->
+  <div class="row">
+    <div class="col-12">
+      <div class="cart-header text-center mb-5">
+        <a href="{{ store.url }}" title="{{ store.name }}" class="logo d-block">
+          {% if store.logo != empty %}
+          <img src="{{ store.logo }}" class="store-image" alt="{{ store.name }}" />
+          {% else %}
+          <span class="navbar-brand">{{ store.name }}</span>
+          {% endif %}
+        </a>
+        <ul class="list-inline cart-steps py-3 mt-4 m-0 border-bottom border-top">
+          <li class="list-inline-item"><a href="{{ store.url }}/cart" title="{% t 'Cart' %}">{% t "Cart" %}</a></li>
+          <li class="list-inline-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-inline-item"><a href="{{ store.url }}/checkout" title="{% t 'Checkout' %}">{% t "Checkout" %}</a></li>
+          <li class="list-inline-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-inline-item active">{% t "Order review" %}</li>
+          <li class="list-inline-item bullet"><img src="//assets.jumpseller.com/public/placeholder/themes/simple/bullet.png"></li>
+          <li class="list-inline-item">{% t "Success" %}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <form id="cart-update-form" method="post" action="{{ order.update_url }}" class="card mb-4">
+        <div class="table-responsive border rounded card-body p-0">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{% t "Product" %}</th>
+                <th class="d-none d-sm-table-cell"></th>
+                <th class="d-none d-sm-table-cell">{% t "Unit Price" %}</th>
+                <th>{% t "Qty" %}</th>
+                <th>{% t "Subtotal" %}</th>
+              </tr>
+            </thead>
+            {% for ordered_product in order.products %}
+            <tr>
+              <td class="d-none d-sm-table-cell">
+                <a href="{{ ordered_product.url }}" class="trsn" title="{{ ordered_product.name | escape }}">
+                  <img src="{{ ordered_product.image | resize: '80x80' | default: '//assets.jumpseller.com/public/placeholder/themes/simple/no-image-cart.png' }}" alt="{{ ordered_product.name | escape }}">
+                </a>
+              </td>
+              <td>
+                <h3>{{ ordered_product.name }}</h3>
+                {% for option in ordered_product.options %}
+                <span>{{ option.name }}: {{ option.value }}</span>
+                {% endfor %}
+              </td>
+              <td class="d-none d-sm-table-cell">
+                {% if ordered_product.discount > 0 %}
+                <div class="cart-product-discount">
+                  <span>
+                    {{ ordered_product.price | minus: ordered_product.discount | price }}
+                    <br>
+                    <span class="discount">({{ ordered_product.price | price }})</span>
+                  </span>
+                </div>
+                {% else %}
+                <span class="order-product-price">{{ ordered_product.price | price }}</span>
+                {% endif %}
+              </td>
+              <td>
+                <span>{{ ordered_product.qty }}</span>
+              </td>
+              <td>
+                <span class="order-product-subtotal confirm-value">{{ ordered_product.discount | times: ordered_product.qty | times: '-1' | plus: ordered_product.subtotal | price }}</span>
+              </td>
+
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </form>
+
+      <div class="row review-order-info">
+        {% if order.shipping_required %}
+        <div class="col-md-6 mb-lg-0 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div id="review_shipping_address">
+                <h2 class="card-title">{% t "Shipping Address" %}</h2>
+                <p class="address">{{ order.shipping_address.formatted | newline_to_br }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <div class="{% if order.shipping_required %}col-md-6{% else %}col-12{% endif %} mb-lg-0 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div id="review_billing_address">
+                <h2 class="card-title">{% t "Billing Address" %}</h2>
+                <p class="address">{{ order.billing_address.formatted | newline_to_br }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 sidebar">
+      <div class="card cart-totals">
+        <div class="card-body">
+          <h2 class="card-title">{% t "Summary" %}</h2>
+          <table class="table review">
+            {% if order.subtotal != order.total %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Subtotal" %}</td>
+              <td colspan="1" class="text-right">{{ order.subtotal | price }}</td>
+            </tr>
+            {% endif %}
+
+            {% if order.shipping > 0 %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Shipping" %}</td>
+              <td colspan="1" class="text-right">{{ order.shipping | price }}</td>
+            </tr>
+            {% endif %}
+
+            {% if order.discount > 0 %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Discount" %}</td>
+              <td colspan="1" class="text-right">-{{ order.discount | price }}</td>
+            </tr>
+            {% endif %}
+
+            {% if order.applied_tax > 0 %}
+            <tr class="totals">
+              <td colspan="1" class="text-left">{% t "Tax" %}</td>
+              <td colspan="1" class="text-right">{{ order.applied_tax | price }}</td>
+            </tr>
+            {% endif %}
+
+            <tr class="totals key">
+              <td colspan="1" class="text-left"><strong>{% t "Total" %}</strong></td>
+              <td colspan="1" class="text-right"><strong>{{ order.total | price }}</strong></td>
+            </tr>
+            {% if order.remaining_for_free_shipping_message != blank %}
+            <tr class="totals">
+              <td colspan="2" class="p-0">
+                <div class="alert alert-success p-2 m-0 mt-3">
+                  <i class="ph ph-truck"></i> {{ order.remaining_for_free_shipping_message }}
+                </div>
+              </td>
+            </tr>
+            {% endif %}
+          </table>
+          <form id="review_form" class="text-right" action="{{ order.place_order_url }}" method="post">
+            <input type="submit" id="place_order" class="btn btn-primary btn-block" value="{% t 'Place Order' %}" title="{% t 'Place Order' %}" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,65 @@
+{
+  "name": "Footer",
+  "help": "",
+  "icon": "",
+  "required": true,
+  "max_usage": 1,
+  "templates_in": [
+    "category",
+    "checkout__cart",
+    "contactpage",
+    "customer__account",
+    "customer__address",
+    "customer__details",
+    "customer__login",
+    "customer__reset_password",
+    "error",
+    "home",
+    "page",
+    "product",
+    "searchresults"
+  ],
+  "options": {
+    "logo": {
+      "name": "Logo Footer",
+      "type": "image",
+      "help": "",
+      "default": null
+    },
+    "background_color": {
+      "name": "Footer Background",
+      "type": "color",
+      "help": "",
+      "default": "#F9F9F9"
+    },
+    "powered_by": {
+      "name": "Display \"Powered by Jumpseller\"",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+    "footer-about": {
+      "type": "footer-about",
+      "multiple": false
+    },
+    "footer-menu-1": {
+      "type": "footer-menu-1",
+      "multiple": false
+    },
+    "footer-menu-2": {
+      "type": "footer-menu-2",
+      "multiple": false
+    },
+    "footer-newsletter": {
+      "type": "footer-newsletter",
+      "multiple": false
+    },
+    "payment-methods": {
+      "type": "payment-methods",
+      "multiple": false
+    }
+  }
+}

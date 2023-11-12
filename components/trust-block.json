@@ -1,0 +1,33 @@
+{
+  "name": "Trust Block",
+  "help": "",
+  "icon": "square",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "icon": {
+      "name": "Icon",
+      "type": "ph_icon",
+      "help": "Select an icon.",
+      "default": "ph ph-info"
+    },
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Block Title"
+    },
+    "text": {
+      "name": "Text",
+      "type": "input",
+      "help": "",
+      "default": "Trust bar block description"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

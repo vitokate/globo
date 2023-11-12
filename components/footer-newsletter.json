@@ -1,0 +1,39 @@
+{
+  "name": "Footer Newsletter",
+  "help": "",
+  "icon": "envelope",
+  "required": true,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Subscribe to Our Newsletter!"
+    },
+    "enable_subscribe": {
+      "name": "Enable Subscribe Form",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "email_placeholder": {
+      "name": "Email Placeholder",
+      "type": "input",
+      "help": "",
+      "default": "Enter your email"
+    },
+    "title_social": {
+      "name": "Social Networks Title",
+      "type": "input",
+      "help": "",
+      "default": "Follow us!"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

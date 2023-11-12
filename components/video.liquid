@@ -1,0 +1,15 @@
+<div id="video-{{ component.id }}" class="video_component py-0 m-3">
+  {% if component.options.video != blank %}
+  <div class="{{ component.options.alignment }}" style="width:{{ component.options.size }}">
+    <figure>
+      {{ component.options.video }}
+    </figure>
+  </div>
+  {% else %}
+  <div class="{{ component.options.alignment }}" style="width:{{ component.options.size }}">
+    <figure>
+      <iframe src="https://www.youtube.com/embed/NzkwfZE0Yxs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </figure>
+  </div>
+  {% endif %}
+</div>

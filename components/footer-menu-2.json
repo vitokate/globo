@@ -1,0 +1,21 @@
+{
+  "name": "Footer Menu 2",
+  "help": "",
+  "icon": "bars",
+  "required": true,
+  "max_usage": null,
+  "templates_in": [
+
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Information"
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

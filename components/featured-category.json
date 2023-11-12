@@ -1,0 +1,56 @@
+{
+  "name": "Featured Category",
+  "help": "",
+  "icon": "tag",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "category",
+    "contactpage",
+    "error",
+    "home",
+    "page",
+    "product"
+  ],
+  "options": {
+    "permalink": {
+      "name": "Featured Category",
+      "type": "category",
+      "help": "",
+      "default": null
+    },
+    "display": {
+      "name": "Choose how to display the product's gallery",
+      "type": "select",
+      "help": "",
+      "default": "slider",
+      "options": [
+        {
+          "Slider": "slider"
+        },
+        {
+          "Grid": "grid"
+        }
+      ]
+    },
+    "button": {
+      "name": "Display View All Button",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "limit": {
+      "name": "Quantity of products",
+      "type": "slider",
+      "help": "",
+      "default": 8,
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "unit": ""
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+  }
+}

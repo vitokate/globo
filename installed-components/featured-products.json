@@ -1,0 +1,14 @@
+{
+  "type": "featured-products",
+  "placement": "middle",
+  "identifier": "",
+  "visibility": true,
+  "options": {
+    "title": "Productos Destacados",
+    "display": "grid",
+    "limit": 8
+  },
+  "children": [
+
+  ]
+}

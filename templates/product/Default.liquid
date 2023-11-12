@@ -1,0 +1,737 @@
+{{ index_for_top_components }}
+
+<div class="container my-5 pt-lg-0 pt-5 product-page">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="d-md-none text-center">
+        {% if product.brand != blank %}
+          <div class="brand">
+            {{ product.brand }}
+          </div>
+        {% endif %}
+        <h2 class="product-name mb-0">{{ product.name }}</h2>
+        {% unless options.disable_prices %}
+          {% if product.discount > 0 %}
+            <span
+              class="product-form-price product-form-price-mobile form-price sale-color form-sale-tag"
+            >
+              {{- product.price | minus: product.discount | price -}}
+            </span>
+            <span class="product-form-discount text-muted">
+              {{- product.price | price -}}
+            </span>
+          {% else %}
+            <span class="product-form-price product-form-price-mobile">{{ product.price | price }}</span>
+          {% endif %}
+
+          {% if product.discount_begins and product.discount_expires %}
+            {% capture begins_date -%}<strong>{{ product.discount_begins | date: '%d-%m-%Y' }}</strong>{%- endcapture %}
+            {% capture expires_date -%}<strong>{{ product.discount_expires | date: "%d-%m-%Y" }}</strong>{%- endcapture %}
+            <p class="discount-date font-weight-lighter">
+              <small>
+                {%- t "Promotion valid from %{begins_date} to %{expires_date}", begins_date: begins_date, expires_date: expires_date -%}
+              </small>
+            </p>
+          {% endif %}
+        {% endunless %}
+      </div>
+      <div class="main-product-image">
+        {% if product.images == empty %}
+          <!-- There's no image available -->
+          <img class="img-fluid lazy w-100" src="//assets.jumpseller.com/public/placeholder/themes/simple/no-image-product.png" alt="{{ product.name | escape }}">
+          <div class="text-center mt-2">{% t "There's no product image available" %}</div>
+        {% elsif product.images.size == 1 %}
+          <!-- There's only One image -->
+          <div class="item zoom">
+            <img
+              src="{{ product.images.first | resize: '1000x1000' }}"
+              srcset="{{ product.images.first | resize: '1000x1000' }} 1x, {{ product.images.first | resize: '1200x1200' }} 2x"
+              alt="{{ product.name | escape }}"
+              class="img-fluid lazy"
+            >
+          </div>
+        {% elsif product.images.size > 1 %}
+          <div id="product-carousel" class="product-images owl-carousel product-slider" data-slider-id="1">
+            <div class="item zoom">
+              <img
+                id="first-image"
+                src="{{ product.images.first | resize: '1000x1000' }}"
+                srcset="{{ product.images.first | resize: '1000x1000' }} 1x, {{ product.images.first | resize: '1200x1200' }} 2x"
+                alt="{{ product.name | escape }}"
+                class="img-fluid lazy"
+              >
+            </div>
+            {% for image in product.images offset: 1 %}
+              <div class="item zoom" id="product-images-{{ forloop.index }}">
+                <img
+                  src="{{ image | resize: '1000x1000' }}"
+                  srcset="{{ image | resize: '1000x1000' }} 1x, {{ image | resize: '1200x1200' }} 2x"
+                  alt="{{ product.name | escape }}"
+                  class="img-fluid lazy">
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if product.images.size > 1 %}
+          <!-- Thumb Images -->
+          <div class="owl-thumbs mt-2 " data-slider-id="1">
+            {% for image in product.images %}
+              <a class="owl-thumb-item" data-image="{{ forloop.index }}" href="#">
+                <img
+                  src="{{ image | resize: '150x150' }}"
+                  srcset="{{ image | resize: '150x150' }} 1x,{{ image | resize: '200x200' }} 2x"
+                  alt="{{ product.name | escape }}"
+                  class="pb-2 pr-1 lazy"
+                >
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <form
+        id="product-form-{{ product.id }}-{{ component.id }}"
+        class="product-form form-horizontal"
+        action="{{ product.add_to_cart_url }}"
+        method="post"
+        enctype="multipart/form-data"
+        name="buy"
+      >
+        <div class="form-group d-none d-md-block">
+          {% if product.brand != blank %}
+            <div class="brand">{{ product.brand }}</div>
+          {% endif %}
+          <h1 class="page-header m-0 pt-0 text-left">{{ product.name }}</h1>
+          {% unless options.disable_prices %}
+            <div class="form-price_desktop">
+              {% if product.discount > 0 %}
+                <span
+                  class="product-form-price form-price form-sale-tag sale-color"
+                >
+                  {{- product.price | minus: product.discount | price -}}
+                </span>
+                <span class="product-form-discount text-muted">
+                  {{- product.price | price -}}
+                </span>
+              {% else %}
+                <span class="product-form-price form-price">{{ product.price | price }}</span>
+              {% endif %}
+            </div>
+            {% if product.discount_begins and product.discount_expires %}
+              {% capture begins_date -%}<strong>{{ product.discount_begins | date: '%d-%m-%Y' }}</strong>{%- endcapture %}
+              {% capture expires_date -%}<strong>{{ product.discount_expires | date: "%d-%m-%Y" }}</strong>{%- endcapture %}
+              <p class="discount-date font-weight-lighter">
+                {%- t "Promotion valid from %{begins_date} to %{expires_date}", begins_date: begins_date, expires_date: expires_date -%}
+              </p>
+            {% endif %}
+          {% endunless %}
+
+          {% if options.pp_reviews and product.reviews.count > 0 %}
+            <div class="product-rating">
+              {% render 'product_rating', prod: product %}
+              <div onClick="scrollToReviews()" class="reviews-number">
+                ({{ product.reviews.count }}
+                {% if product.reviews.count > 1 %} {% t "Reviews" %}{% else %} {% t "Review" %}{% endif %})
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        <div id="product-sku" class="sku {% if product.sku != blank and options.product_sku_visibility %}visible{% else %}hidden{% endif %} form-group">
+          <label class="form-control-label mb-0">{% t 'SKU' %}: </label>
+          <span class="sku_elem">{{ product.sku }}</span>
+        </div>
+
+        {% if options.product_stock_visibility and product.stock_unlimited == false and product.stock > 0 %}
+          <div class="form-group {% if product.status == 'available' %}visible{% else %}hidden{% endif %}">
+            <div id="stock">
+              <label class="form-control-label">{% t "Stock" %}: </label>
+              <span class="product-form-stock">{{ product.stock }}</span>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="form-group variants {% if product.options != empty %}visible{% else %}hidden{% endif %}">
+          {% for option in product.options %}
+            <label for="{{ option.id }}" class="form-control-label">{{ option.name }}</label>
+            {% case option.type %}
+            {% when 'option' %}
+              {% if options.options_display == "select" %}
+                <div class="field-group select">
+                  <select id="{{ option.id }}" name="{{ option.id }}" class="form-control prod-options">
+                    {% for value in option.values %}
+                      <option value="{{ value.id }}">{{ value.name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% else %}
+                <fieldset id="{{ option.id }}" class="field-group select-options prod-options">
+                  {% for value in option.values %}{% assign label_group = random.hex %}
+                  <div class="select-option">
+                    <input type="radio" name="{{ option.id }}" value="{{ value.id }}" id="{{ label_group }}" {% if forloop.first %}checked{% endif %}/>
+                    <label for="{{ label_group }}" class="btn btn-secondary btn-sm btn-option-product">{{ value.name }}</label>
+                  </div>
+                  {% endfor %}
+                </fieldset>
+              {% endif %}
+            {% when 'color' %}
+              <fieldset id="{{ option.id }}" class="field-group colors prod-options">
+                {% for value in option.values %}{% assign label_group = random.hex %}
+                  <div class="color-option">
+                    <input type="radio" name="{{ option.id }}" value="{{ value.id }}" id="{{ label_group }}" {% if forloop.first %}checked{% endif %}/>
+                    <label for="{{ label_group }}" title="{{ value.name }}" style="background-color: {{ value.custom }}"></label>
+                  </div>
+                {% endfor %}
+              </fieldset>
+            {% when 'input' %}
+              <div class="field-group">
+                {% for value in option.values %}
+                  <input class="form-control prod-options" type="text" id="{{ option.id }}" name="{{ option.id }}" placeholder="{{ option.placeholder }}"/>
+                {% endfor %}
+              </div>
+            {% when 'text' %}
+              <div class="field-group">
+                <textarea class="textarea form-control prod-options" id="{{ option.id }}" name="{{ option.id }}" placeholder="{{ option.placeholder }}"></textarea>
+              </div>
+            {% when 'file' %}
+              <div class="field-group">
+                {% assign file_option = true %}
+                <input class="product_option_value_file_upload prod-options" type="file" id="{{ option.id }}" name="{{ option.id }}" tabindex="-1"/>
+                <div class="file_upload_div">
+                  <input type="text" class="form-control" id="{{ option.id | append: '_filename' }}" disabled>
+                  <label for="{{ option.id }}" class="btn btn-default btn-primary" tabindex="0">
+                    {%- t "Choose File" -%}
+                    <i class="ph ph-paperclip"></i
+                  ></label>
+                </div>
+              </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+
+        {% unless options.disable_shopping_cart %}
+        <!-- Out of Stock -->
+        <div class="form-group product-stock product-out-stock {% if product.stock == 0 and product.stock_unlimited == false and product.status != 'not-available' %}visible{% else %}hidden{% endif %}">
+          <label class="form-control-label">{% t "Out of stock" %}</label>
+          <p>{% t "This product has run out of stock. You may send us an inquiry about it" %}.</p>
+          {% unless options.disable_shopping_cart %}
+            <div class="row">
+              <div class="col-md-6">
+                <a href="{{ contact.url }}" class="btn btn-primary btn-sm btn-block mb-md-0 mb-2" title="{% t 'Contact Us' %}">
+                  {%- t "Contact Us" -%}
+                </a>
+              </div>
+              <div class="col-md-6">
+                <a href="javascript:history.back()" class="btn btn-secondary btn-sm btn-block" title="{% t 'Continue Shopping' %}">
+                  {%- t "Continue Shopping" -%}
+                </a>
+              </div>
+            </div>
+          {% endunless %}
+        </div>
+
+        <!-- Not Available -->
+        <div class="form-group product-stock product-unavailable {% if product.status == 'not-available' %}visible{% else %}hidden{% endif %}">
+          <label class="form-control-label">{% t "Not Available" %}</label>
+          <p>{% t "This product is currently unavailable. You may send us an inquiry about it" %}.</p>
+          {% unless options.disable_shopping_cart %}
+            <div class="row">
+              <div class="col-md-6">
+                <a href="{{ contact.url }}" class="btn btn-primary btn-sm btn-block" title="{% t 'Contact Us' %}">
+                  {%- t "Contact Us" -%}
+                </a>
+              </div>
+              <div class="col-md-6">
+                <a
+                  href="javascript:history.back()"
+                  class="btn btn-secondary btn-sm btn-block"
+                  title="{% t 'Continue Shopping' %}"
+                > {%- t "Continue Shopping" -%}
+                </a>
+              </div>
+            </div>
+          {% endunless %}
+        </div>
+
+        <div class="form-group product-stock product-available row no-gutters {% if product.status != 'available' or product.stock == 0 and product.stock_unlimited == false %}hidden{% else %}visible{% endif %}">
+          <div class="col-lg-4 col-sm-5 text-center">
+            <label class="form-control-label label-quantity">{% t "Quantity" %}</label>
+          </div>
+          <div class="col-lg-8 col-sm-7"></div>
+          <div class="col-lg-4 col-sm-5">
+            <div class="quantity mr-sm-2 mr-0 mb-sm-0 mb-2">
+              <div class="quantity-nav quantity-button quantity-down" onclick="Jumpseller.decrementCounter('input-qty')">-</div>
+              <input type="number" class="qty form-control text-center" id="input-qty" name="qty" min="1" value="1" {% if product.stock_unlimited %}max="{{ product.stock }}"{% endif %}>
+              <div class="quantity-nav quantity-button quantity-up" onclick="Jumpseller.incrementCounter('input-qty')">+</div>
+            </div>
+          </div>
+          <div class="col-lg-8 col-sm-7">
+            {% if options.display_cart_notification and file_option != true %}
+              <input
+                type="button"
+                id="add-to-cart"
+                onclick="addToCart('{{ product.id }}', '{{ product.name | replace: "'", "" | escape }}', $('#input-qty').val(), getProductOptions());"
+                class="btn btn-primary btn-block adc-button"
+                value="{% t 'Add to Cart' %}"
+              >
+            {% else %}
+              <input type="submit" id="add-to-cart" class="btn btn-primary btn-block" value="{% t 'Add to Cart' %}">
+            {% endif %}
+          </div>
+          <div class="col-12 disclaimer text-center mt-2">
+            {% t "Only" %}
+            <strong>{{ product.stock }}</strong> {% t "units of this product remain" %}
+          </div>
+        </div>
+        {% endunless %}
+
+        {% if product.description != blank %}
+          <div class="form-group description">
+            <label class="form-control-label">{% t "Description" %}</label>
+            {{ product.description }}
+          </div>
+        {% endif %}
+
+      <section class="product-details">
+          {% capture fields_labels %}{% for field in product.product_fields %}{{ field.label }}{% endfor %}{% endcapture %}
+          {% capture contains_video_field %}{% if fields_labels contains 'Video' or fields_labels contains 'video' %}1{% else %}0{% endif %}{% endcapture %}
+
+          {% for field in product.product_fields %}
+          <div class="wrap-collabsible product-custom_field">
+            <input id="{% for cfv in field.custom_field_values %}collapsible-{{ cfv.field_id }} {% endfor %}" class="toggle" type="checkbox">
+            <label for="{% for cfv in field.custom_field_values %}collapsible-{{ cfv.field_id }} {% endfor %}" class="lbl-toggle" tabindex="0">{{ field.label }}</label>
+            <div class="collapsible-content">
+              <div class="content-inner {% if field.label == 'Video' or field.label == 'video' %}content-video{% endif %}">
+                {% for cfv in field.custom_field_values %}
+                  {% if field.label == 'Video' or field.label == 'video' %}
+                    <a data-youtube href="{{ cfv.value }}"></a>
+                  {% else %}
+                    <span data-cfvid="{{ cfv.field_id }}" class="product-custom_field_value {% if cfv.only_some_variants %}cfv_only_some_variants{% endif %}">{{ cfv.value }}</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          {% if contains_video_field %}
+          <script>
+            // Get all of the videos
+            const videos = document.querySelectorAll('[data-youtube]');
+            // Progressively enhance them
+            for (const video of videos) {
+            // Get the video ID
+            const id = new URL(video.href).searchParams.get('v');
+            // Add the ID to the data-youtube attribute
+            video.setAttribute('data-youtube', id);
+            // Add a role of button
+            video.setAttribute('role', 'button');
+            // Add a thumbnail
+              video.innerHTML =
+                `<img alt="" src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"><br>
+                ${video.textContent}`;
+
+            }
+
+            /**
+              * Handle click events on the video thumbnails
+              * @param  {Event} event The event object
+              */
+            function clickHandler (event) {
+              // Get the video link
+              let link = event.target.closest('[data-youtube]');
+              if (!link) return;
+              // Prevent the URL from redirecting users
+              event.preventDefault();
+              // Get the video ID
+              let id = link.getAttribute('data-youtube');
+              // Create the player
+              let player = document.createElement('div');
+              player.innerHTML = `<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+              // Inject the player into the UI
+              link.replaceWith(player);
+            }
+            // Detect clicks on the video thumbnails
+            document.addEventListener('click', clickHandler);
+          </script>
+          {% endif %}
+
+          <script>
+            let myLabels = document.querySelectorAll(".lbl-toggle");
+            Array.from(myLabels).forEach((label) => {
+              label.addEventListener("keydown", (e) => {
+                if (e.which === 32 || e.which === 13) {
+                  e.preventDefault();
+                  label.click();
+                }
+              });
+            });
+          </script>
+      </section>
+
+      {% unless product.attachments == empty %}
+        <div class="form-group mt-3">
+          <label class="form-control-label">{% t "Attachments" %}</label>
+          <table class="table product-form_attachments">
+            <tbody>
+              {% for attachment in product.attachments %}
+                <tr>
+                  <td align="left"><a href="{{ attachment.url }}" title="{% t 'Download' %}" >{{ attachment.name | remove: "_" }}</a></td>
+                  <td> <a target="_blank" href="{{ attachment.url }}" class="btn btn-block btn-sm btn-secondary download">{% t "Download" %}</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <script>
+        // Product page
+        $(window).on("load", function () {
+          $(".product-page .bootstrap-filestyle .btn").append(
+            '<i class="ph ph-paperclip"></i>'
+          );
+          $(".product-page .bootstrap-filestyle .btn").addClass("btn-primary");
+        });
+        </script>
+
+      {% endunless %}
+      </form>
+
+      {% if options.facebook_button_on_products or options.twitter_button_on_products or options.pinterest_button_on_products or options.tumblr_button_on_products or options.whatsapp_button_on_products %}
+      <div id="product-sharing" class="py-3 mt-2">
+        <ul class="list-inline social-networks">
+          {% if options.facebook_button_on_products %}
+            <li class="list-inline-item">
+              <a
+                href="https://www.facebook.com/sharer/sharer.php?u={{ store.base_url }}{{ product.url }}"
+                class="has-tip tip-top radius button tiny button-facebook trsn"
+                title="{% t 'Share on Facebook' %}"
+                target="_blank"
+                data-tooltip
+              >
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </li>
+          {% endif %}
+
+          {% if options.twitter_button_on_products %}
+            <li class="list-inline-item">
+              <a
+                href="https://twitter.com/share?url={{ store.base_url }}{{ product.url }}&text={% t 'Check this product' %}%20{{ product.name | escape }}"
+                class="has-tip tip-top radius button tiny button-twitter trsn"
+                title="{% t 'Share on 𝕏' %}"
+                target="_blank"
+                data-tooltip
+              >
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+            </li>
+          {% endif %}
+
+          {% if options.pinterest_button_on_products %}
+            <li class="list-inline-item">
+              <a
+                href="https://pinterest.com/pin/create/bookmarklet/?media={{ product.images.first }}&url={{ store.base_url }}{{ product.url }}&is_video=false&description={{ product.name }}: {{ product.description | strip_html }}"
+                class="has-tip tip-top radius button tiny button-pinterest trsn"
+                title="{% t 'Share on Pinterest' %}"
+                target="_blank"
+                data-tooltip
+              >
+                <i class="fa-brands fa-pinterest"></i>
+              </a>
+            </li>
+          {% endif %}
+
+          {% if options.tumblr_button_on_products %}
+            <li class="list-inline-item">
+              <a
+                class="has-tip tip-top radius button tiny button-tumblr trsn"
+                title="{% t 'Share on Tumblr' %}"
+                href="http://tumblr.com/widgets/share/tool?canonicalUrl={{ store.base_url }}{{ product.url }}"
+              >
+               <i class="fa-brands fa-tumblr"></i>
+              </a>
+            </li>
+            <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
+          {% endif %}
+
+          {% if options.whatsapp_button_on_products %}
+            <li class="list-inline-item d-md-none">
+              <a
+                class="has-tip tip-top radius button tiny button-whats trsn"
+                href="whatsapp://send?text={% t 'Check this product' %}%20{{ product.name | escape }} | {{ store.base_url }}{{ product.url }}"
+              >
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <script type="text/javascript">
+      $('#product-sharing a').click(function () {
+        return !window.open(this.href, 'Share', 'width=640,height=300');
+      });
+    </script>
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if options.pp_reviews and product.reviews.count > 0 %}
+<div class="container">
+  {% render 'product_reviews' %}
+</div>
+{% endif %}
+
+<div class="container">
+  {% render 'bought_together' %}
+</div>
+
+{% if options.related_products_visibility %}
+  {% render 'related_products' %}
+{% endif %}
+
+{{ index_for_components }}
+
+<script>
+  jQuery(document).ready(function($) {
+  $('#product-carousel').carousel({ interval: false });
+  $('.owl-thumbs > a').click(function(e) {
+    e.preventDefault();
+    $("#product-carousel").carousel(parseInt($(this).attr('data-image')) - 1);
+  });
+  $("#product-link").click(function() {
+    $(this).select();
+  });
+  $('.owl-thumbs > a').click(function() {
+    $('.owl-thumbs > a').removeClass('active');
+    $(this).toggleClass('active');
+  });
+  $(".owl-thumbs > a").first().addClass("active");
+});
+</script>
+
+<script>
+  jQuery(document).ready(function($) {
+  $('.product-images').owlCarousel({
+    loop:true,
+    items: 1,
+    dots: false,
+    margin: 0,
+    autoHeight: false,
+    nav: true,
+    lazy: true,
+    thumbs: true,
+    thumbsPrerendered: true,
+    thumbs: true,
+    thumbsPrerendered: true,
+    navText: ["<i class='ph ph-caret-left'></i>", "<i class='ph ph-caret-right'></i>"]
+  });
+  });
+</script>
+
+<script>
+function verifyQuantity() {
+  const quantityInput = document.querySelector('#input-qty');
+  const maxAmount = quantityInput.max;
+
+  if (parseInt(quantityInput.value) > parseInt(maxAmount)) {
+    document.querySelector('.disclaimer').classList.add('fade');
+    document.querySelector('.disclaimer strong').innerHTML = maxAmount;
+    quantityInput.classList.add('maxStockQty');
+    quantityInput.value = maxAmount;
+  } else {
+    if (quantityInput.value == 0) quantityInput.value = 1;
+    quantityInput.classList.remove('maxStockQty');
+    document.querySelector('#add-to-cart').disabled = false;
+    document.querySelector('.disclaimer').classList.remove('fade');
+  }
+}
+
+document.querySelector('#input-qty').addEventListener('change', verifyQuantity);
+document.querySelector('.quantity-up').addEventListener('click', verifyQuantity);
+document.querySelector('.quantity-down').addEventListener('click', verifyQuantity);
+</script>
+
+{% if product.options != empty %}
+  <script>
+    verifyQuantity();
+
+    var callbackFunction = function (event, productInfo) {
+      // if productInfo is not emtpy or null
+      if (!$.isEmptyObject(productInfo)) {
+
+        if (productInfo.image != '') {
+          // click thumb to change image
+          $(`.product-page .owl-thumbs img[src*="image/${productInfo['image_id']}"]`).parent().click();
+        }
+
+        {% if options.product_sku_visibility %}
+        if (productInfo.sku != '') {
+          $(".sku_elem").html(productInfo.sku);
+          $('#product-sku').addClass('visible');
+          $('#product-sku').removeClass('hidden');
+        }
+        {% endif %}
+
+        //update stock
+        if (productInfo.status == 'not-available') {
+          $('.product-out-stock').addClass('hidden');
+          $('.product-available').addClass('hidden');
+          $('.product-unavailable').removeClass('hidden');
+          $('#stock').html('');
+          $('#stock').parent().hide();
+        } else if (productInfo.stock == 0 && productInfo.stock_unlimited == false) {
+          $('.product-out-stock').removeClass('hidden');
+          $('.product-available').addClass('hidden');
+          $('.product-unavailable').addClass('hidden');
+          $('#stock').html('');
+          $('#stock').parent().hide();
+        } else {
+          $('.product-available').removeClass('hidden');
+          $('.product-out-stock').addClass('hidden');
+          $('.product-unavailable').addClass('hidden');
+          $('#input-qty').attr('max', productInfo.stock_unlimited ? null : productInfo.stock);
+
+          if (productInfo.stock_unlimited == false && productInfo.stock > 0) {
+            $('#stock').html(' <label class="form-control-label mb-0">{% t "Stock" %}: </label> <span class="product-form-stock">' + productInfo.stock + '</span>');
+            $('#stock').parent().show();
+            // if there is no discount
+          }
+          else {
+            $('#stock').html('');
+            $('#stock').parent().hide();
+          }
+        }
+
+        if (productInfo.discount == 0) {
+          // Update price - desktop and mobile
+          $('.product-form-price').text(productInfo.price_formatted);
+          // Remove sale tag style
+          $('.product-form-price').removeClass('form-sale-tag');
+          // Hide previous price
+          $('.product-form-discount').hide();
+        }
+        else {
+          // Update price with discount - desktop and mobile
+          $('.product-form-price').text(productInfo.price_discount_formatted);
+          // Update previous price
+          $('.product-form-discount').text('(' + productInfo.price_formatted + ')');
+          // Add sale tag style
+          $('.product-form-price').addClass('form-sale-tag');
+          // Show previous price
+          $('.product-form-discount').show();
+        }
+
+        checkCustomFields(productInfo.custom_fields);
+        checkOutOfStock(productInfo);
+        verifyQuantity();
+      }
+    };
+
+    $(document).ready(function () {
+      Jumpseller.productVariantListener(".variants select.prod-options, .variants fieldset.prod-options", { product: '{{ product | json }}', callback: callbackFunction });
+      selectInitialStock();
+      checkUploads();
+    });
+
+    function checkUploads() {
+      var file_inputs = Array.from(document.getElementsByClassName("product_option_value_file_upload"));
+      var total_size = 0;
+      var inputs_sizes;
+      (inputs_sizes = []).length = file_inputs.length;
+      inputs_sizes.fill(0);
+      for (let file of file_inputs) {
+        file.onchange = function () {
+          var index = file_inputs.indexOf(file);
+          inputs_sizes[index] = this.files[0].size;
+          total_size = inputs_sizes.reduce((a, b) => a + b, 0)
+          var input_filename = document.getElementById(this.id + "_filename");
+          if (total_size > 10485760) {
+            alert("{% t 'The sum of the size of the selected files must be lower than 10MB.' %}");
+            inputs_sizes[index] = 0;
+            this.value = "";
+            input_filename.value = "";
+          } else {
+            input_filename.value = this.files[0].name;
+          }
+        }
+      }
+    }
+
+    function setSelectedVariant(values) {
+      for (const { value } of values) {
+        const { id, option } = value;
+        $(`.variants *[id="${option}"] *[value="${id}"]`).each(function () {
+          $(this).is("input") ? $(this).prop('checked', true).trigger('change') : $(this).prop('selected', true).trigger('change')
+        });
+      }
+    }
+
+    function selectInitialStock() {
+      const productInfo = {{ product | json }};
+      const preferred = +'{{ product.selected_variant.id }}';
+      if (preferred > 0) return setSelectedVariant(productInfo.find((product) => product.variant.id == preferred).values);
+
+      for (const item of productInfo) {
+        const variant = item.variant;
+        if (variant.stock_unlimited || variant.stock != 0) {
+          return setSelectedVariant(item.values);
+        }
+      }
+    }
+
+    function checkOutOfStock(productInfo) {
+      if (!{{ options.show_out_of_stock_label }}) return;
+
+      const outOfStock = " - {% t 'Out of Stock' %}";
+      $('.variants option, .variants .colors input, .variants .select-options input').each(function () { $(this).removeClass('disabled') });
+      $('.variants option').each(function () { $(this).html($(this).html().replace(outOfStock, '')) });
+      const product = {{ product | json }};
+      const entry = product.find((entry) => entry.variant.id == productInfo.id);
+      const values = entry.values.map((v) => v.value.id);
+      const variants = product.filter((entry) => entry.variant.stock == 0 && !entry.variant.stock_unlimited && entry.values.filter((val) => values.includes(val.value.id)).length == values.length - 1)
+
+      if (productInfo.stock == 0 && !productInfo.stock_unlimited) variants.push(product.find((entry) => entry.variant.id == productInfo.id))
+
+      variants.forEach((variant) => {
+        const ids = variant.values.map((v) => v.value.id).filter((id) => !values.includes(id))
+
+        if (variant.variant.id == productInfo.id) ids.push(...variant.values.map((v) => v.value.id))
+
+        ids.forEach((id) => {
+          $('.variants option[value="' + id + '"]')?.html($('.variants option[value="' + id + '"]')?.html()?.replace(outOfStock, ''));
+          $('.variants option[value="' + id + '"], .variants input[value="' + id + '"]').addClass('disabled');
+          $('.variants option[value="' + id + '"]').html($('.variants option[value="' + id + '"]').html() + outOfStock);
+        })
+      });
+    }
+
+    function checkCustomFields(custom_fields) {
+      // Hide all variant-specific CFVs
+      $('.product-custom_field_value.cfv_only_some_variants').addClass('d-none');
+      // Show all variant-specific CFVs for this variant
+      Object.values(custom_fields || []).forEach((cfv) => {
+        $(`.product-custom_field_value.cfv_only_some_variants[data-cfvid=${cfv.id}]`).removeClass('d-none');
+      });
+      // Update visibility of individual custom fields
+      $('.product-custom_field:not(:has(.product-custom_field_value:not(.d-none)))').addClass('d-none');
+      $('.product-custom_field:has(.product-custom_field_value:not(.d-none))').removeClass('d-none');
+      // Update visibility of details section
+      $('.product-custom_fields').toggleClass('d-none', $('.product-custom_field_value:not(.d-none)').length === 0);
+    }
+  </script>
+{% endif %}
+
+<script>
+  setTimeout(function () {
+    $('.product-page .product-images').css("background-image", "none");
+  }, 500);
+</script>
+
+{{ index_for_bottom_components }}

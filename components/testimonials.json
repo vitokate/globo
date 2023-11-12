@@ -1,0 +1,72 @@
+{
+  "name": "Testimonials",
+  "help": "",
+  "icon": "quotes",
+  "required": false,
+  "max_usage": null,
+  "templates_in": [
+    "contactpage",
+    "error",
+    "home",
+    "page"
+  ],
+  "options": {
+    "title": {
+      "name": "Title",
+      "type": "input",
+      "help": "",
+      "default": "Testimonials"
+    },
+    "grid": {
+      "name": "Quantity of quotes per row",
+      "type": "slider",
+      "help": "Choose how many quotes will be displayed by row on desktop version.",
+      "default": 3,
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "unit": ""
+    },
+    "background": {
+      "name": "Background",
+      "type": "color",
+      "help": "",
+      "default": "#FFFFFF"
+    },
+    "background_quote": {
+      "name": "Quote's Background",
+      "type": "color",
+      "help": "",
+      "default": "#FFFFFF"
+    },
+    "autoplay": {
+      "name": "Activate Autoplay",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    },
+    "speed": {
+      "name": "Autoplay Timeout",
+      "type": "slider",
+      "help": "",
+      "default": 3000,
+      "min": 1000,
+      "max": 5000,
+      "step": 500,
+      "unit": "ms"
+    },
+    "pause": {
+      "name": "Activate Pause on Hover",
+      "type": "checkbox",
+      "help": "",
+      "default": true
+    }
+  },
+  "mode": "subcomponents",
+  "properties": {
+    "testimonials": {
+      "type": "testimony",
+      "multiple": true
+    }
+  }
+}
